@@ -20,37 +20,46 @@
 #include "ks0108.h"
 
 
-char numbers[] =  {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-
 
 xSemaphoreHandle xSemaphoreMuteks;
 
 
-void vTask1( void * pvParameters )
+
+
+void vInitializeTasks( void * pvParameters )
 {
-    portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
+
 	GLCD_Initialize();
 	GLCD_ClearScreen();
+	xSemaphoreMuteks = xSemaphoreCreateMutex();
+
+	for( ;; )
+    {};
+}
 
 
-	 xSemaphoreMuteks = xSemaphoreCreateMutex();
 
-	int i =0;
-    for( ;; )
+
+void vTask1( void * pvParameters )
+{
+	GLCD_Initialize();
+	GLCD_ClearScreen();
+	xSemaphoreMuteks = xSemaphoreCreateMutex();
+
+    portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
+
+	for( ;; )
     {
     	 if(xSemaphoreTake(xSemaphoreMuteks, 4) == pdTRUE)
     	 {
 			GLCD_ClearScreen();
 			GPIO_SetBits(GPIOB, GPIO_Pin_8);
-			i++;
-			if (i>10) i = 0;
 			GLCD_GoTo(2,2);
 			GLCD_WriteString("   Zadanie PIERWSZE  ");
 			GLCD_GoTo(2,2);
 			GLCD_WriteString("ok");
-	//    	vTaskDelay(1500 );
 			 xSemaphoreGive(xSemaphoreMuteks);
-			vTaskDelayUntil( &xLastWakeTime, 500 );
+			vTaskDelayUntil( &xLastWakeTime, 1000 );
 
     	 }
     }
@@ -59,17 +68,14 @@ void vTask1( void * pvParameters )
 void vTask2( void * pvParameters )
 {
 
-	 xSemaphoreMuteks = xSemaphoreCreateMutex();
-
-    portTickType xLastWakeTime;
+   portTickType xLastWakeTime;
    xLastWakeTime = xTaskGetTickCount();
-	int i =0;
+
+
     for( ;; )
     {
     	 if(xSemaphoreTake(xSemaphoreMuteks, 3) == pdTRUE)
     	    	 {
-				i++;
-				if (i>10) i = 0;
 				GLCD_ClearScreen();
 				GPIO_ResetBits(GPIOB, GPIO_Pin_8);
 				GLCD_GoTo(2,3);
@@ -77,7 +83,7 @@ void vTask2( void * pvParameters )
 				GLCD_GoTo(2,3);
 				GLCD_WriteString("ok");
 				xSemaphoreGive(xSemaphoreMuteks);
-				vTaskDelayUntil( &xLastWakeTime, 800 );
+				vTaskDelayUntil( &xLastWakeTime, 2000 );
 
     	    	 }
     }
@@ -89,14 +95,19 @@ void vTask2( void * pvParameters )
 
 
 int
-main(int argc, char* argv[])
+main()
 {
 	init();
 
 
+  xTaskCreate( vTask1, "Task1", 1000, NULL, tskIDLE_PRIORITY + 2, NULL);
+  xTaskCreate( vTask2, "Task2", 1000, NULL, tskIDLE_PRIORITY + 1, NULL);
+//  xTaskCreate( vInitializeTasks, "InitializeTasks", 100, NULL,   configMAX_PRIORITIES, NULL);
 
-  xTaskCreate( vTask1, "Task1", 1000, NULL, tskIDLE_PRIORITY + 1, NULL);
-  xTaskCreate( vTask2, "Task2", 1000, NULL, tskIDLE_PRIORITY + 2, NULL);
+
+
+
+
   vTaskStartScheduler();
 
 
