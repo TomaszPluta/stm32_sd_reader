@@ -43,7 +43,12 @@ src/main.o: ../src/main.c ../system/include/cmsis/stm32f10x.h \
  /home/tomek/stm32workspace/FreeRTOS_proj/FreeRTOS/include/queue.h \
  /home/tomek/stm32workspace/FreeRTOS_proj/my_initialize/initialize.h \
  /home/tomek/stm32workspace/FreeRTOS_proj/helpers/font5x8.h \
- /home/tomek/stm32workspace/FreeRTOS_proj/helpers/ks0108.h
+ /home/tomek/stm32workspace/FreeRTOS_proj/helpers/ks0108.h \
+ ../include/sd_stm32.h \
+ /home/tomek/stm32workspace/FreeRTOS_proj/FATFs/ff.h \
+ /home/tomek/stm32workspace/FreeRTOS_proj/FATFs/integer.h \
+ /home/tomek/stm32workspace/FreeRTOS_proj/FATFs/ffconf.h \
+ /home/tomek/stm32workspace/FreeRTOS_proj/helpers/file_system_helper.h
 
 ../system/include/cmsis/stm32f10x.h:
 
@@ -138,3 +143,13 @@ src/main.o: ../src/main.c ../system/include/cmsis/stm32f10x.h \
 /home/tomek/stm32workspace/FreeRTOS_proj/helpers/font5x8.h:
 
 /home/tomek/stm32workspace/FreeRTOS_proj/helpers/ks0108.h:
+
+../include/sd_stm32.h:
+
+/home/tomek/stm32workspace/FreeRTOS_proj/FATFs/ff.h:
+
+/home/tomek/stm32workspace/FreeRTOS_proj/FATFs/integer.h:
+
+/home/tomek/stm32workspace/FreeRTOS_proj/FATFs/ffconf.h:
+
+/home/tomek/stm32workspace/FreeRTOS_proj/helpers/file_system_helper.h:

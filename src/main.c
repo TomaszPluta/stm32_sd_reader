@@ -19,24 +19,11 @@
 #include "font5x8.h"
 #include "ks0108.h"
 
+#include "sd_stm32.h"
+
 
 
 xSemaphoreHandle xSemaphoreMuteks;
-
-
-
-
-void vInitializeTasks( void * pvParameters )
-{
-
-	GLCD_Initialize();
-	GLCD_ClearScreen();
-	xSemaphoreMuteks = xSemaphoreCreateMutex();
-
-	for( ;; )
-    {};
-}
-
 
 
 
@@ -44,6 +31,7 @@ void vTask1( void * pvParameters )
 {
 	GLCD_Initialize();
 	GLCD_ClearScreen();
+	SD_mount();
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
 
     portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
@@ -52,12 +40,14 @@ void vTask1( void * pvParameters )
     {
     	 if(xSemaphoreTake(xSemaphoreMuteks, 4) == pdTRUE)
     	 {
-			GLCD_ClearScreen();
+
 			GPIO_SetBits(GPIOB, GPIO_Pin_8);
 			GLCD_GoTo(2,2);
 			GLCD_WriteString("   Zadanie PIERWSZE  ");
 			GLCD_GoTo(2,2);
-			GLCD_WriteString("ok");
+			GLCD_WriteString("/");
+			GLCD_GoTo(2,3);
+			GLCD_WriteString("o");
 			 xSemaphoreGive(xSemaphoreMuteks);
 			vTaskDelayUntil( &xLastWakeTime, 1000 );
 
@@ -76,15 +66,55 @@ void vTask2( void * pvParameters )
     {
     	 if(xSemaphoreTake(xSemaphoreMuteks, 3) == pdTRUE)
     	    	 {
-				GLCD_ClearScreen();
+
 				GPIO_ResetBits(GPIOB, GPIO_Pin_8);
 				GLCD_GoTo(2,3);
 				GLCD_WriteString("   Zadanie DRUGIE   ");
+				GLCD_GoTo(2,2);
+				GLCD_WriteString("-");
 				GLCD_GoTo(2,3);
-				GLCD_WriteString("ok");
-				xSemaphoreGive(xSemaphoreMuteks);
-				vTaskDelayUntil( &xLastWakeTime, 2000 );
+				GLCD_WriteString(".");
 
+//				files_list_add();
+//				files_list_print();
+
+
+
+
+
+
+					static DIR katalog;
+					static FILINFO plik;
+					f_opendir(&katalog,"");
+
+
+						readed_files_t* new_file =  malloc(sizeof(readed_files_t));
+
+						f_readdir(&katalog, &plik);
+
+						new_file->name =  (char*) malloc( sizeof(plik.fname)+1);
+						strcpy(new_file->name, plik.fname);
+
+
+						char* temp_content;
+						temp_content = SD_open_file(plik.fname);
+						new_file->content =  (char*) malloc( sizeof(temp_content)+1);
+						strcpy (new_file->content, temp_content);
+
+
+						GLCD_GoTo(2,4);
+						GLCD_WriteString(plik.fname);
+						GLCD_GoTo(2,5);
+						GLCD_WriteString(temp_content);
+
+
+
+
+
+
+				xSemaphoreGive(xSemaphoreMuteks);
+
+				vTaskDelayUntil( &xLastWakeTime, 2000 );
     	    	 }
     }
 }

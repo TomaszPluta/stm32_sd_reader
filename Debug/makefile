@@ -16,6 +16,7 @@ RM := rm -rf
 -include src/subdir.mk
 -include my_initialize/subdir.mk
 -include FreeRTOS/source/subdir.mk
+-include FATFs/subdir.mk
 -include subdir.mk
 -include objects.mk
 

@@ -35,4 +35,5 @@ system/src/cmsis \
 src \
 my_initialize \
 FreeRTOS/source \
+FATFs \
 
