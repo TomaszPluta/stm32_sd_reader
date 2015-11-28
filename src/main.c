@@ -42,12 +42,10 @@ void vTask1( void * pvParameters )
     	 {
 
 			GPIO_SetBits(GPIOB, GPIO_Pin_8);
-			GLCD_GoTo(2,2);
+			GLCD_GoTo(0,0);
 			GLCD_WriteString("   Zadanie PIERWSZE  ");
 			GLCD_GoTo(2,2);
-			GLCD_WriteString("/");
-			GLCD_GoTo(2,3);
-			GLCD_WriteString("o");
+	//		GLCD_WriteString("/");
 			 xSemaphoreGive(xSemaphoreMuteks);
 			vTaskDelayUntil( &xLastWakeTime, 1000 );
 
@@ -68,19 +66,8 @@ void vTask2( void * pvParameters )
     	    	 {
 
 				GPIO_ResetBits(GPIOB, GPIO_Pin_8);
-				GLCD_GoTo(2,3);
+				GLCD_GoTo(0,0);
 				GLCD_WriteString("   Zadanie DRUGIE   ");
-				GLCD_GoTo(2,2);
-				GLCD_WriteString("-");
-				GLCD_GoTo(2,3);
-				GLCD_WriteString(".");
-
-//				files_list_add();
-//				files_list_print();
-
-
-
-
 
 
 					static DIR katalog;
@@ -88,7 +75,7 @@ void vTask2( void * pvParameters )
 					f_opendir(&katalog,"");
 
 					int result;
-					int i =0;
+					int i =1;
 					do
 					{
 						readed_files_t* new_file =  malloc(sizeof(readed_files_t));
@@ -110,8 +97,8 @@ void vTask2( void * pvParameters )
 						GLCD_GoTo(2,5);
 						GLCD_WriteString(temp_content);
 						i++;
-    	    	 } while (result != SUCCES || plik.fname[0] == 0);
-
+    	    	// } while (result != SUCCES || plik.fname[0] == 0);
+					} while (i<4);
 
 
 
