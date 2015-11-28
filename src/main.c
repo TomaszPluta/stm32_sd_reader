@@ -87,7 +87,10 @@ void vTask2( void * pvParameters )
 					static FILINFO plik;
 					f_opendir(&katalog,"");
 
-
+					int result;
+					int i =0;
+					do
+					{
 						readed_files_t* new_file =  malloc(sizeof(readed_files_t));
 
 						f_readdir(&katalog, &plik);
@@ -102,11 +105,12 @@ void vTask2( void * pvParameters )
 						strcpy (new_file->content, temp_content);
 
 
-						GLCD_GoTo(2,4);
+						GLCD_GoTo(2,i);
 						GLCD_WriteString(plik.fname);
 						GLCD_GoTo(2,5);
 						GLCD_WriteString(temp_content);
-
+						i++;
+    	    	 } while (result != SUCCES || plik.fname[0] == 0);
 
 
 
