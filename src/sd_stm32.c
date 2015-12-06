@@ -16,12 +16,12 @@ void SD_mount ()
 			fresult = f_mount(0, &g_sFatFs);
 			if (fresult==0) {
 
-			   GLCD_GoTo(0,0);
-			   GLCD_WriteString("SD OK      |    ok");
+//			   GLCD_GoTo(0,0);
+//			   GLCD_WriteString("SD OK      |    ok");
 			} else {
 
-				   GLCD_GoTo(0,0);
-			 GLCD_WriteString(" NIE Zamontowal");
+//				   GLCD_GoTo(0,0);
+//			 GLCD_WriteString(" NIE Zamontowal");
 			}
 }
 
