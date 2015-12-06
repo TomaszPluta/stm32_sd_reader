@@ -13,6 +13,33 @@ void GLCD_Delay(void)
   asm("nop");asm("nop");asm("nop");asm("nop");
   asm("nop");asm("nop");asm("nop");asm("nop");
   asm("nop");asm("nop");asm("nop");asm("nop");
+
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+  asm("nop");asm("nop");asm("nop");asm("nop");
+
+
 }
 //-------------------------------------------------------------------------------------------------
 // Enalbe Controller (0-2)
@@ -142,6 +169,40 @@ GLCD_Delay();
 GLCD_DisableController(screen_x / 64);
 screen_x++;
 }
+
+
+//void GLCD_WriteData(unsigned char dataToWrite)
+//{
+//while(GLCD_ReadStatus(screen_x / 64)&DISPLAY_STATUS_BUSY);
+//
+//GPIO_StructInit(&GPIO_InitStructure);
+//GPIO_InitStructure.GPIO_Pin = (0xFF << KS0108_D0);
+//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+//GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
+//
+//GPIO_ResetBits(KS0108_PORT, KS0108_RW);
+//GLCD_Delay();
+//GPIO_SetBits(KS0108_PORT, KS0108_RS);
+//GLCD_Delay();
+//KS0108_PORT->BSRR = CLR_BITS(~((dataToWrite << KS0108_D0)) & KS0108_DATA_PINS) |
+//					SET_BITS((dataToWrite << KS0108_D0) & KS0108_DATA_PINS);
+////if (dataToWrite !=0)
+////	GPIO_SetBits(KS0108_PORT, (dataToWrite << KS0108_D0));
+////dataToWrite ^= 0xFF;
+////if (dataToWrite != 0xff)
+////	GPIO_ResetBits(KS0108_PORT, (dataToWrite << KS0108_D0));
+//GLCD_Delay();
+//GLCD_EnableController(screen_x / 64);
+//GLCD_Delay();
+//GPIO_SetBits(KS0108_PORT, KS0108_EN);
+//GLCD_Delay();
+//GPIO_ResetBits(KS0108_PORT, KS0108_EN);
+//GLCD_Delay();
+//GLCD_DisableController(screen_x / 64);
+//screen_x++;
+//}
+
+
 //-------------------------------------------------------------------------------------------------
 //
 //-------------------------------------------------------------------------------------------------
@@ -241,9 +302,26 @@ GLCD_WriteData(0);
 //-------------------------------------------------------------------------------------------------
 void GLCD_WriteString(char * stringToWrite)
 {
-while(*stringToWrite)
-  GLCD_WriteChar(*stringToWrite++);
+	int i = 0;
+while(*stringToWrite && screen_x < 121)
+{
+ 	GLCD_WriteChar(*stringToWrite++);
+ 	i++;
 }
+}
+
+
+//void GLCD_WriteString(char * stringToWrite)
+//{
+//	int i = 0;
+//while(*stringToWrite && i<21){
+// 	GLCD_WriteChar(*stringToWrite++);
+// 	i++;
+//	}
+//}
+
+
+
 //-------------------------------------------------------------------------------------------------
 // Sets or clears pixel at (x,y)
 //-------------------------------------------------------------------------------------------------

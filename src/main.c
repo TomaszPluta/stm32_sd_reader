@@ -41,37 +41,56 @@ void vTask1( )
 	GLCD_ClearScreen();
 	SD_mount();
 
-	char* napis;
-	char* secondLine;
-	char* otherLines;
+	char* firstLineLcd;
+	char* secondLineLcd;
+	char* otherLinesLcd;
     portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
 
 	for( ;; )
     {
 
-    		 if (xQueueReceive(xQuFirstLineLCD, &napis, (portTickType) 1))
+    		 if (xQueueReceive(xQuFirstLineLCD, &firstLineLcd, (portTickType) 1))
     		 {
 				 GLCD_GoTo(0,0);
-			 	 GLCD_WriteString(napis);
+			 	 GLCD_WriteString(firstLineLcd);
 			     xSemaphoreGive(xSemaphoreMuteks);
 
-			if ( xQueueReceive(xQuSecondLineLCD, &secondLine, (portTickType) 1))
+			if ( xQueueReceive(xQuSecondLineLCD, &secondLineLcd, (portTickType) 1))
 			{
 					GLCD_GoTo(0,1);
-					GLCD_WriteString(secondLine);
+					GLCD_WriteString(secondLineLcd);
 					xSemaphoreGive(xSemaphoreMuteks);
 			}
 
-			if ( xQueueReceive(xQuOtherLinesLCD, &otherLines, (portTickType) 1))
+			if ( xQueueReceive(xQuOtherLinesLCD, &otherLinesLcd, (portTickType) 1))
 			{
+				char * buffLine3 = otherLinesLcd;
+				char * buffLine4 = &otherLinesLcd[21];
+				char * buffLine5 = &otherLinesLcd[42];
+				char * buffLine6 = &otherLinesLcd[63];
+				char * buffLine7 = &otherLinesLcd[84];
+				char * buffLine8 = &otherLinesLcd[106];
+
+
+
 				GLCD_GoTo(0,2);
-				GLCD_WriteString(otherLines);
+				GLCD_WriteString(buffLine3);
+				GLCD_GoTo(0,3);
+				GLCD_WriteString(buffLine4);
+				GLCD_GoTo(0,4);
+				GLCD_WriteString(buffLine5);
+				GLCD_GoTo(0,5);
+				GLCD_WriteString(buffLine6);
+				GLCD_GoTo(0,6);
+				GLCD_WriteString(buffLine7);
+				GLCD_GoTo(0,7);
+				GLCD_WriteString(buffLine8);
 			}
 
 
 
     	 	 }
-			vTaskDelayUntil( &xLastWakeTime, 1000 );
+			vTaskDelayUntil( &xLastWakeTime, 500 );
     }
 }
 
@@ -95,32 +114,26 @@ void vTask2()
 
 					static DIR katalog;
 					static FILINFO plik;
-				//	f_opendir(&katalog,"");
-//
-//				//	int result;
-//					int i =1;
-//					do
-//					{
-//
-//						f_readdir(&katalog, &plik);
-//
-//					//	new_file->name =  (char*) malloc( sizeof(plik.fname)+1);
-//					//	strcpy(new_file->name, plik.fname);
-//
-//
-////						char* temp_content;
-////						temp_content = SD_open_file(plik.fname);
-////						new_file->content =  (char*) malloc( sizeof(temp_content)+1);
-////						strcpy (new_file->content, temp_content);
-//
-//
-////						GLCD_GoTo(2,i);
-////						GLCD_WriteString(plik.fname);
-////						GLCD_GoTo(2,5);
-////						GLCD_WriteString(temp_content);
-//						i++;
-//    	    	// } while (result != SUCCES || plik.fname[0] == 0);
-//					} while (i<5);
+					f_opendir(&katalog,"");
+
+				//	int result;
+					int i =1;
+					do
+					{
+
+						f_readdir(&katalog, &plik);
+
+					//	new_file->name =  (char*) malloc( sizeof(plik.fname)+1);
+					//	strcpy(new_file->name, plik.fname);
+
+
+//						char* temp_content;
+//						temp_content = SD_open_file(plik.fname);
+//						new_file->content =  (char*) malloc( sizeof(temp_content)+1);
+//						strcpy (new_file->content, temp_content);
+						i++;
+    	    	// } while (result != SUCCES || plik.fname[0] == 0);
+					} while (i<5);
 
 		//		xSemaphoreGive(xSemaphoreMuteks);
 				xQueueSend(xQuSecondLineLCD, (void *) &taskSD, (portTickType) 5);
@@ -144,6 +157,8 @@ void vTaskCheckKey (void)
 
     portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
 
+    taskKey = "123456789a123456789b123456789c123456789d23456789e123456789f123456789g123456789h123456789i123456789j23456789g123456789h123456789i";
+
 	for( ;; )
     {
 //		 if(xSemaphoreTake(xSemaphoreMuteks, 10) == pdTRUE)
@@ -163,9 +178,10 @@ void vTaskCheckKey (void)
 //				GLCD_WriteString("   Klawisz zwolniony  ");
 			}
 
-			 xQueueSend(xQuSecondLineLCD, (void *) &taskKey, (portTickType) 5);
+
+			 xQueueSend(xQuOtherLinesLCD, (void *) &taskKey, (portTickType) 5);
   //  		 xSemaphoreGive(xSemaphoreMuteks);
-    		 vTaskDelayUntil( &xLastWakeTime, 1600 );
+    		 vTaskDelayUntil( &xLastWakeTime, 600 );
 
     	 }
     }
