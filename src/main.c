@@ -24,7 +24,7 @@
 
 
 xSemaphoreHandle xSemaphoreMuteks;
-
+QueueHandle_t xQueueLCD;
 
 
 void vTask1( void * pvParameters )
@@ -33,7 +33,7 @@ void vTask1( void * pvParameters )
 	GLCD_ClearScreen();
 	SD_mount();
 
-
+	char* napis;
     portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
 
 	for( ;; )
@@ -41,11 +41,12 @@ void vTask1( void * pvParameters )
     	 if(xSemaphoreTake(xSemaphoreMuteks, 4) == pdTRUE)
     	 {
 
+    		 xQueueReceive(xQueueLCD, &napis, (portTickType) 10);
 	//		GPIO_SetBits(GPIOB, GPIO_Pin_8);
 			GLCD_GoTo(0,0);
 			GLCD_WriteString("   Zadanie PIERWSZE  ");
 			GLCD_GoTo(2,2);
-	//		GLCD_WriteString("/");
+			GLCD_WriteString(napis);
 			 xSemaphoreGive(xSemaphoreMuteks);
 			vTaskDelayUntil( &xLastWakeTime, 1000 );
 
@@ -58,6 +59,10 @@ void vTask2( void * pvParameters )
 
    portTickType xLastWakeTime;
    xLastWakeTime = xTaskGetTickCount();
+ //  readed_files_t* new_file =  malloc(sizeof(readed_files_t));
+
+	char *  tescik;
+zrobic tablice charow i do niej wpisywac nazwy plikow
 
 
     for( ;; )
@@ -78,7 +83,6 @@ void vTask2( void * pvParameters )
 					int i =1;
 					do
 					{
-					//	readed_files_t* new_file =  malloc(sizeof(readed_files_t));
 
 						f_readdir(&katalog, &plik);
 
@@ -92,8 +96,8 @@ void vTask2( void * pvParameters )
 //						strcpy (new_file->content, temp_content);
 
 
-						GLCD_GoTo(2,i);
-						GLCD_WriteString(plik.fname);
+//						GLCD_GoTo(2,i);
+//						GLCD_WriteString(plik.fname);
 //						GLCD_GoTo(2,5);
 //						GLCD_WriteString(temp_content);
 						i++;
@@ -103,7 +107,15 @@ void vTask2( void * pvParameters )
 
 
 
+
+
 				xSemaphoreGive(xSemaphoreMuteks);
+				//tescik = plik.fname;
+
+				//char * test = "1234567890123";
+
+ to nizej nie dziala, bo nazwa pliku jest na stosie. chyba
+				xQueueSend(xQueueLCD, (void *) &plik.fname[0], (portTickType) 10);
 
 				vTaskDelayUntil( &xLastWakeTime, 2000 );
     	    	 }
@@ -189,7 +201,7 @@ main()
 
 
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
-
+	xQueueLCD = xQueueCreate(8, sizeof(u32));
 
   vTaskStartScheduler();
 
