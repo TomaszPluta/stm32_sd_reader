@@ -64,27 +64,27 @@ void vTask1( )
 
 			if ( xQueueReceive(xQuOtherLinesLCD, &otherLinesLcd, (portTickType) 1))
 			{
-				char * buffLine3 = otherLinesLcd;
-				char * buffLine4 = &otherLinesLcd[21];
-				char * buffLine5 = &otherLinesLcd[42];
-				char * buffLine6 = &otherLinesLcd[63];
-				char * buffLine7 = &otherLinesLcd[84];
-				char * buffLine8 = &otherLinesLcd[106];
+				const int startLineOffset = 2;
+				const int numberOfLines = 6;
+				const int charsInLine = 21;
+				int i;
+				for (i=0; i<numberOfLines; i++){
+					GLCD_GoTo(0,i+startLineOffset);
+					GLCD_WriteString((char *)&otherLinesLcd[0+(charsInLine*i)]);
+				}
 
-
-
-				GLCD_GoTo(0,2);
-				GLCD_WriteString(buffLine3);
-				GLCD_GoTo(0,3);
-				GLCD_WriteString(buffLine4);
-				GLCD_GoTo(0,4);
-				GLCD_WriteString(buffLine5);
-				GLCD_GoTo(0,5);
-				GLCD_WriteString(buffLine6);
-				GLCD_GoTo(0,6);
-				GLCD_WriteString(buffLine7);
-				GLCD_GoTo(0,7);
-				GLCD_WriteString(buffLine8);
+//				GLCD_GoTo(0,2);
+//				GLCD_WriteString((char *) &otherLinesLcd[0]);
+//				GLCD_GoTo(0,3);
+//				GLCD_WriteString((char *) &otherLinesLcd[21]);
+//				GLCD_GoTo(0,4);
+//				GLCD_WriteString((char *) &otherLinesLcd[42]);
+//				GLCD_GoTo(0,5);
+//				GLCD_WriteString((char *) &otherLinesLcd[63]);
+//				GLCD_GoTo(0,6);
+//				GLCD_WriteString((char *) &otherLinesLcd[84]);
+//				GLCD_GoTo(0,7);
+//				GLCD_WriteString((char *) &otherLinesLcd[106]);
 			}
 
 
@@ -157,7 +157,7 @@ void vTaskCheckKey (void)
 
     portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
 
-    taskKey = "123456789a123456789b123456789c123456789d23456789e123456789f123456789g123456789h123456789i123456789j23456789g123456789h123456789i";
+    taskKey = "123456789a123456789b123456789c123456789d123456789e123456789f123456789g123456789h123456789i123456789j123456789g123456789h123456789i";
 
 	for( ;; )
     {
