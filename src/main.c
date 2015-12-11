@@ -30,7 +30,7 @@ QueueHandle_t xQuOtherLinesLCD;
 
 const char * test1 = "01234";
 const char * test2 = "56789";
-
+int systemTime;
 
 const char * taskSD = "task sd";
 const char * taskKey = "task key";
@@ -49,10 +49,18 @@ void vTask1( )
 	for( ;; )
     {
 
-    		 if (xQueueReceive(xQuFirstLineLCD, &firstLineLcd, (portTickType) 1))
+    		if (xQueueReceive(xQuFirstLineLCD, &firstLineLcd, (portTickType) 5))
     		 {
 				 GLCD_GoTo(0,0);
-			 	 GLCD_WriteString(firstLineLcd);
+				volatile  int prepare = (int)  firstLineLcd;
+				volatile  int system = prepare;
+				while (system > 128)
+					system = system/10;
+				if (system <48)
+					system += 48;
+				prepare =  atoi (&firstLineLcd);
+				volatile char * systemTime   = (char*) &system ;
+			 	 GLCD_WriteString(systemTime);
 			     xSemaphoreGive(xSemaphoreMuteks);
 
 			if ( xQueueReceive(xQuSecondLineLCD, &secondLineLcd, (portTickType) 1))
@@ -72,24 +80,8 @@ void vTask1( )
 					GLCD_GoTo(0,i+startLineOffset);
 					GLCD_WriteString((char *)&otherLinesLcd[0+(charsInLine*i)]);
 				}
-
-//				GLCD_GoTo(0,2);
-//				GLCD_WriteString((char *) &otherLinesLcd[0]);
-//				GLCD_GoTo(0,3);
-//				GLCD_WriteString((char *) &otherLinesLcd[21]);
-//				GLCD_GoTo(0,4);
-//				GLCD_WriteString((char *) &otherLinesLcd[42]);
-//				GLCD_GoTo(0,5);
-//				GLCD_WriteString((char *) &otherLinesLcd[63]);
-//				GLCD_GoTo(0,6);
-//				GLCD_WriteString((char *) &otherLinesLcd[84]);
-//				GLCD_GoTo(0,7);
-//				GLCD_WriteString((char *) &otherLinesLcd[106]);
 			}
-
-
-
-    	 	 }
+   	 	 }
 			vTaskDelayUntil( &xLastWakeTime, 500 );
     }
 }
@@ -137,7 +129,6 @@ void vTask2()
 
 		//		xSemaphoreGive(xSemaphoreMuteks);
 				xQueueSend(xQuSecondLineLCD, (void *) &taskSD, (portTickType) 5);
-				xQueueSend(xQuFirstLineLCD, (void *) &test2, (portTickType) 5);
 				vTaskDelayUntil( &xLastWakeTime, 2000 );
     	    	// }
     }
@@ -161,9 +152,6 @@ void vTaskCheckKey (void)
 
 	for( ;; )
     {
-//		 if(xSemaphoreTake(xSemaphoreMuteks, 10) == pdTRUE)
-//    	 {
-
     		 if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9))
     		 {
     			 GPIO_ResetBits(GPIOB, GPIO_Pin_8);
@@ -180,38 +168,30 @@ void vTaskCheckKey (void)
 
 
 			 xQueueSend(xQuOtherLinesLCD, (void *) &taskKey, (portTickType) 5);
-  //  		 xSemaphoreGive(xSemaphoreMuteks);
     		 vTaskDelayUntil( &xLastWakeTime, 600 );
 
     	 }
     }
 
-//
-//void vSystemUpTime (void)
-//{
-//	GLCD_Initialize();
-//	GLCD_ClearScreen();
-//	SD_mount();
-//	xSemaphoreMuteks = xSemaphoreCreateMutex();
-//
-//    portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
-//
-//	for( ;; )
-//    {
-//    	 if(xSemaphoreTake(xSemaphoreMuteks, 4) == pdTRUE)
-//    	 {
-//
-//			GPIO_SetBits(GPIOB, GPIO_Pin_9);
-//			GLCD_GoTo(0,0);
-//			GLCD_WriteString("   Zadanie PIERWSZE  ");
-//			GLCD_GoTo(2,2);
-//	//		GLCD_WriteString("/");
-//			 xSemaphoreGive(xSemaphoreMuteks);
-//			vTaskDelayUntil( &xLastWakeTime, 1000 );
-//
-//    	 }
-//    }
-//}
+
+void vSystemUpTime (void)
+{
+	GLCD_Initialize();
+	GLCD_ClearScreen();
+
+    portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
+
+    for( ;; )
+    {
+            systemTime = (int*) xTaskGetTickCount();
+            systemTime =  itoa ((int*) xTaskGetTickCount());
+			xQueueSend(xQuFirstLineLCD, (void *) &systemTime, (portTickType) 1);
+			vTaskDelayUntil( &xLastWakeTime, 100 );
+
+
+			balaga, po prostu wyslac np liczbe i dopiero ja przerobic, to trzeba do tego dostosowac kolejke
+    }
+}
 
 
 int
@@ -220,10 +200,10 @@ main()
 	init();
 
 
-  xTaskCreate( vTask1, "Task1", 3000, NULL, tskIDLE_PRIORITY + 4, NULL);
-  xTaskCreate( vTask2, "Task2", 500, NULL, tskIDLE_PRIORITY + 1, NULL);
-  xTaskCreate( vTaskCheckKey, "vTaskCheckKey", 200, NULL,   tskIDLE_PRIORITY + 2, NULL);
-
+    xTaskCreate( vTask1, "Task1", 3000, NULL, tskIDLE_PRIORITY + 3, NULL);
+    xTaskCreate( vTask2, "Task2", 500, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate( vTaskCheckKey, "vTaskCheckKey", 200, NULL,   tskIDLE_PRIORITY + 2, NULL);
+    xTaskCreate( vSystemUpTime, "vSystemUpTime", 200, NULL,   tskIDLE_PRIORITY + 4, NULL);
 
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
 	xQuFirstLineLCD = xQueueCreate(4, sizeof(u32));
