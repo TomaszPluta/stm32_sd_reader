@@ -30,7 +30,7 @@ QueueHandle_t xQuOtherLinesLCD;
 
 const char * test1 = "01234";
 const char * test2 = "56789";
-int systemTime;
+char * systemTime;
 
 const char * taskSD = "task sd";
 const char * taskKey = "task key";
@@ -52,15 +52,15 @@ void vTask1( )
     		if (xQueueReceive(xQuFirstLineLCD, &firstLineLcd, (portTickType) 5))
     		 {
 				 GLCD_GoTo(0,0);
-				volatile  int prepare = (int)  firstLineLcd;
-				volatile  int system = prepare;
-				while (system > 128)
-					system = system/10;
-				if (system <48)
-					system += 48;
-				prepare =  atoi (&firstLineLcd);
-				volatile char * systemTime   = (char*) &system ;
-			 	 GLCD_WriteString(systemTime);
+//				volatile  int prepare = (int)  firstLineLcd;
+				volatile  char * system = firstLineLcd;
+//				while (system > 128)
+//					system = system/10;
+//				if (system <48)
+//					system += 48;
+//				prepare =  atoi (&firstLineLcd);
+//				volatile char * systemTime   = (char*) &system ;
+			 	 GLCD_WriteString(system);
 			     xSemaphoreGive(xSemaphoreMuteks);
 
 			if ( xQueueReceive(xQuSecondLineLCD, &secondLineLcd, (portTickType) 1))
@@ -179,17 +179,51 @@ void vSystemUpTime (void)
 	GLCD_Initialize();
 	GLCD_ClearScreen();
 
-    portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
+    portTickType xLastWakeTime;
+    xLastWakeTime = xTaskGetTickCount();
 
     for( ;; )
     {
-            systemTime = (int*) xTaskGetTickCount();
-            systemTime =  itoa ((int*) xTaskGetTickCount());
-			xQueueSend(xQuFirstLineLCD, (void *) &systemTime, (portTickType) 1);
+            //systemTime = (int*) xTaskGetTickCount();
+            // itoa ((int*) xTaskGetTickCount(), systemTime, 10 );
+
+    		char * pointerToString;
+    		int upTime = xLastWakeTime / 1000;
+
+    		char timeChar[9] = {0};
+
+
+
+//    		pobierac czas w sekundach z timera, nie w tickach
+
+    		int secH, secL, minH, minL, hourH, hourL;
+
+    		minH = ((upTime)/600) +48;
+    		minL = ((upTime)/60) +48;
+    		if (minL >= 60)
+    			minL = 0;
+
+			secH = (((upTime)%100)/10) +48;
+			secL = ((upTime)%10) +48;
+    		if (secH >= 60)
+    			secH = 0;
+
+
+    		timeChar[0] = ((upTime)/600) +48;
+    		timeChar[1] = ((upTime)/60) +48;
+    		timeChar[2] = ':' ;
+    		timeChar[3] = (((upTime)%100)/10) +48;
+    		timeChar[4] = ((upTime)%10) +48;
+
+
+
+    		pointerToString = &timeChar;
+
+			xQueueSend(xQuFirstLineLCD, (void *) &pointerToString, (portTickType) 1);
 			vTaskDelayUntil( &xLastWakeTime, 100 );
 
 
-			balaga, po prostu wyslac np liczbe i dopiero ja przerobic, to trzeba do tego dostosowac kolejke
+
     }
 }
 
