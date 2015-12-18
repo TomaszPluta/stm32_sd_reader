@@ -99,17 +99,15 @@ char * SD_open_file (char *fileName)
 {
 	FRESULT fresult;
 	FIL     plik;
-    char    bufor[20]={0};
+    char    bufor[128]={0};
     UINT    odczytanychBajtow=0;
     UINT    bajtowDoOdczytu=0;
 
 	   fresult = f_open(&plik,fileName, FA_READ);
 	   bajtowDoOdczytu=f_size(&plik);
-	   if (bajtowDoOdczytu>16) {bajtowDoOdczytu=16;}
+	   if (bajtowDoOdczytu>127) {bajtowDoOdczytu=127;}
 	   fresult = f_read(&plik, bufor, bajtowDoOdczytu, &odczytanychBajtow);
 	   bufor[bajtowDoOdczytu]=0;
-	   	 	GLCD_GoTo(0,7);
- 	 	 	GLCD_WriteString(bufor);
 	   fresult = f_close (&plik);
 	//   char * content = NULL;
 	 //  strcpy(content, bufor);

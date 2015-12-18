@@ -292,6 +292,10 @@ for(j = 0; j < KS0108_SCREEN_HEIGHT/8; j++)
 void GLCD_WriteChar(char charToWrite)
 {
 char i;
+if (charToWrite == 10){
+	screen_y++;
+	return;
+}
 charToWrite -= 32;
 for(i = 0; i < 5; i++)
   GLCD_WriteData(GLCD_ReadByteFromROMMemory((char *)(font5x8 + (5 * charToWrite) + i)));
@@ -309,6 +313,21 @@ while(*stringToWrite && screen_x < 121)
  	i++;
 }
 }
+
+
+
+
+
+/*
+void GLCD_WriteString(char * stringToWrite)
+{
+	int i = 0;
+while(*stringToWrite && screen_x < 121)
+{
+ 	GLCD_WriteChar(*stringToWrite++);
+ 	i++;
+}
+}*/
 
 
 //void GLCD_WriteString(char * stringToWrite)

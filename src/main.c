@@ -24,6 +24,8 @@
 
 
 xSemaphoreHandle xSemaphoreMuteks;
+xSemaphoreHandle xSemaphoreKeyPressed;
+
 QueueHandle_t xQuFirstLineLCD;
 QueueHandle_t xQuSecondLineLCD;
 QueueHandle_t xQuOtherLinesLCD;
@@ -52,16 +54,11 @@ void vTask1( )
     		if (xQueueReceive(xQuFirstLineLCD, &firstLineLcd, (portTickType) 5))
     		 {
 				 GLCD_GoTo(0,0);
-//				volatile  int prepare = (int)  firstLineLcd;
+				 GLCD_WriteString("UPTIME: ");
 				volatile  char * system = firstLineLcd;
-//				while (system > 128)
-//					system = system/10;
-//				if (system <48)
-//					system += 48;
-//				prepare =  atoi (&firstLineLcd);
-//				volatile char * systemTime   = (char*) &system ;
+				GLCD_GoTo(75,0);
 			 	 GLCD_WriteString(system);
-			     xSemaphoreGive(xSemaphoreMuteks);
+			     xSemaphoreGive(xSemaphoreMuteks);///?? wtf
 
 			if ( xQueueReceive(xQuSecondLineLCD, &secondLineLcd, (portTickType) 1))
 			{
@@ -91,44 +88,44 @@ void vTask2()
 
    portTickType xLastWakeTime;
    xLastWakeTime = xTaskGetTickCount();
- //  readed_files_t* new_file =  malloc(sizeof(readed_files_t));
 
+   char* file_name  =  pvPortMalloc(40*sizeof(char));
+   char* file_content =  pvPortMalloc(128* sizeof(char));
+ //  char temp_content[128]  = {0};
+
+   int result =0;
+   static DIR katalog;
+   static FILINFO plik;
+
+   	   f_opendir(&katalog,"");
+   	   f_readdir(&katalog, &plik);
 
     for( ;; )
     {
-    //	 if(xSemaphoreTake(xSemaphoreMuteks, 3) == pdTRUE)
-    //	    	 {
+					//strcpy(file_name, plik.fname);
+				//	strncpy (file_name, plik.fname,12);
+    				strncpy (file_name, plik.fname,12);
 
-	//			GPIO_ResetBits(GPIOB, GPIO_Pin_8);
-	//			GLCD_GoTo(1,0);
-	//			GLCD_WriteString("   Zadanie DRUGIE   ");
-
-
-					static DIR katalog;
-					static FILINFO plik;
-					f_opendir(&katalog,"");
-
-				//	int result;
-					int i =1;
-					do
-					{
-
-						f_readdir(&katalog, &plik);
-
-					//	new_file->name =  (char*) malloc( sizeof(plik.fname)+1);
-					//	strcpy(new_file->name, plik.fname);
-
-
-//						char* temp_content;
 //						temp_content = SD_open_file(plik.fname);
 //						new_file->content =  (char*) malloc( sizeof(temp_content)+1);
 //						strcpy (new_file->content, temp_content);
-						i++;
-    	    	// } while (result != SUCCES || plik.fname[0] == 0);
-					} while (i<5);
 
-		//		xSemaphoreGive(xSemaphoreMuteks);
-				xQueueSend(xQuSecondLineLCD, (void *) &taskSD, (portTickType) 5);
+
+//					if (result != SUCCES || plik.fname[0] == 0);
+//					} while (i<5)
+
+
+
+					if  (xSemaphoreTake(xSemaphoreKeyPressed,0)){
+						f_readdir(&katalog, &plik);
+					}
+
+				//	temp_content[0] = SD_open_file(file_name);
+					strncpy (file_content,  SD_open_file(file_name),128);
+
+
+				xQueueSend(xQuSecondLineLCD, (void *) &file_name, (portTickType) 5);
+				xQueueSend(xQuOtherLinesLCD, (void *) &file_content, (portTickType) 5);
 				vTaskDelayUntil( &xLastWakeTime, 2000 );
     	    	// }
     }
@@ -146,10 +143,14 @@ void vTaskCheckKey (void)
 	GLCD_ClearScreen();
 
 
-    portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
+
+
+
+    portTickType xLastWakeTime;
+    xLastWakeTime = xTaskGetTickCount();
 
     taskKey = "123456789a123456789b123456789c123456789d123456789e123456789f123456789g123456789h123456789i123456789j123456789g123456789h123456789i";
-
+    taskKey = "task2: keys_handling         ";
 	for( ;; )
     {
     		 if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9))
@@ -157,18 +158,21 @@ void vTaskCheckKey (void)
     			 GPIO_ResetBits(GPIOB, GPIO_Pin_8);
 //				GLCD_GoTo(0,6);
 //				GLCD_WriteString("   Klawisz wcisnieto  ");
+
     		 }
 			else
 			{
 				GPIO_SetBits(GPIOB, GPIO_Pin_8);
-
+   			 xSemaphoreGive(xSemaphoreKeyPressed);
 //				GLCD_GoTo(0,6);
 //				GLCD_WriteString("   Klawisz zwolniony  ");
 			}
 
 
-			 xQueueSend(xQuOtherLinesLCD, (void *) &taskKey, (portTickType) 5);
-    		 vTaskDelayUntil( &xLastWakeTime, 600 );
+
+
+//			 xQueueSend(xQuSecondLineLCD, (void *) &taskKey, (portTickType) 5);
+    		 vTaskDelayUntil( &xLastWakeTime, 200 );
 
     	 }
     }
@@ -181,6 +185,8 @@ void vSystemUpTime (void)
 
     portTickType xLastWakeTime;
     xLastWakeTime = xTaskGetTickCount();
+	char timeChar[9] = {0};
+    int asciOffset =48;
 
     for( ;; )
     {
@@ -190,32 +196,49 @@ void vSystemUpTime (void)
     		char * pointerToString;
     		int upTime = xLastWakeTime / 1000;
 
-    		char timeChar[9] = {0};
+
+    		// ustawianie czasu na  semaforach: jesli jest binarny to zwieksz
 
 
 
-//    		pobierac czas w sekundach z timera, nie w tickach
 
     		int secH, secL, minH, minL, hourH, hourL;
 
-    		minH = ((upTime)/600) +48;
-    		minL = ((upTime)/60) +48;
-    		if (minL >= 60)
-    			minL = 0;
 
-			secH = (((upTime)%100)/10) +48;
-			secL = ((upTime)%10) +48;
-    		if (secH >= 60)
-    			secH = 0;
+    		hourH = ((upTime)/36000);
+			hourL =((upTime)/3600);
+			while (hourL > 9)
+				hourL = hourL / 10;
 
 
-    		timeChar[0] = ((upTime)/600) +48;
-    		timeChar[1] = ((upTime)/60) +48;
+    		minH = ((upTime)/600);
+    		minL = ((upTime)/60);
+    		while (minH > 6)
+    			minH = minH / 10;
+
+    		while (minL > 9)
+    			minL = minL / 10;
+
+
+
+			secH = (((upTime)%60)/10);
+    		while (secH > 6)
+    			secH = secH / 10;
+
+			secL = ((upTime)%60);
+    		while (secL > 9)
+    			secL = secL % 10;
+
+
+
+    		timeChar[0] = hourH  + asciOffset;
+    		timeChar[1] = hourL  + asciOffset;
     		timeChar[2] = ':' ;
-    		timeChar[3] = (((upTime)%100)/10) +48;
-    		timeChar[4] = ((upTime)%10) +48;
-
-
+    		timeChar[3] = minH + asciOffset;
+    		timeChar[4] = minL + asciOffset;
+    		timeChar[5] = ':' ;
+    		timeChar[6] = secH  + asciOffset;
+    		timeChar[7] = secL  + asciOffset;
 
     		pointerToString = &timeChar;
 
@@ -240,6 +263,7 @@ main()
     xTaskCreate( vSystemUpTime, "vSystemUpTime", 200, NULL,   tskIDLE_PRIORITY + 4, NULL);
 
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
+	xSemaphoreKeyPressed = xSemaphoreCreateBinary();
 	xQuFirstLineLCD = xQueueCreate(4, sizeof(u32));
 	xQuSecondLineLCD = xQueueCreate(4, sizeof(u32));
 	xQuOtherLinesLCD = xQueueCreate(4, sizeof(u32));
