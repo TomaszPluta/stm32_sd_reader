@@ -286,6 +286,21 @@ for(j = 0; j < KS0108_SCREEN_HEIGHT/8; j++)
  		GLCD_WriteData(0x00);
 	}
 }
+
+void GLCD_ClearLine(int line)
+{
+	if (line <0 || line >8)
+	{
+		return;
+	}
+
+unsigned char i;
+	GLCD_GoTo(0,line);
+	for(i = 0; i < KS0108_SCREEN_WIDTH; i++)
+ 		GLCD_WriteData(0x00);
+}
+
+
 //-------------------------------------------------------------------------------------------------
 // Writes char to screen memory
 //-------------------------------------------------------------------------------------------------
@@ -294,7 +309,7 @@ void GLCD_WriteChar(char charToWrite)
 char i;
 if (charToWrite == 10){
 	screen_y++;
-	return;
+	charToWrite = ' ';
 }
 charToWrite -= 32;
 for(i = 0; i < 5; i++)
