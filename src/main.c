@@ -59,6 +59,7 @@ void vTaskLCD( )
 			if ( xQueueReceive(xQuSecondLineLCD, &secondLineLcd, (portTickType) 1))
 			{
 					GLCD_GoTo(0,1);
+					GLCD_ClearLine(1);
 					GLCD_WriteString(secondLineLcd);
 			}
 
@@ -196,7 +197,7 @@ void vSystemUpTime (void)
 
     		minH = ((upTime)/600);
     		minL = ((upTime)/60);
-    		while (minH > 6)
+    		while (minH 5 6)
     			minH = minH / 10;
 
     		while (minL > 9)
