@@ -23,10 +23,13 @@
 
 
 
+
+
 xSemaphoreHandle xSemaphoreMuteks;
 xSemaphoreHandle xSemaphoreKeyPressed;
 
 QueueHandle_t xQuFirstLineLCD;
+QueueHandle_t xQueueLCD;
 QueueHandle_t xQuSecondLineLCD;
 QueueHandle_t xQuOtherLinesLCD;
 
@@ -46,36 +49,48 @@ void vTaskLCD( )
 	char* firstLineLcd;
 	char* secondLineLcd;
 	char* otherLinesLcd;
+	dataToDisplay_t *dataToDisplay;
     portTickType xLastWakeTime;   xLastWakeTime = xTaskGetTickCount();
 
 	for( ;; )
     {
-    		if (xQueueReceive(xQuFirstLineLCD, &firstLineLcd, (portTickType) 5))
-    		 {
-				 GLCD_GoTo(0,0);
-				 GLCD_WriteString("UPTIME: ");
-				 GLCD_GoTo(75,0);
-			 	 GLCD_WriteString(firstLineLcd);
-			if ( xQueueReceive(xQuSecondLineLCD, &secondLineLcd, (portTickType) 1))
-			{
-					GLCD_GoTo(0,1);
-					GLCD_ClearLine(1);
-					GLCD_WriteString(secondLineLcd);
-			}
 
-			if ( xQueueReceive(xQuOtherLinesLCD, &otherLinesLcd, (portTickType) 1))
-			{
-				const int startLineOffset = 2;
-				const int numberOfLines = 6;
-				const int charsInLine = 21;
-				int i;
-				for (i=0; i<numberOfLines; i++){
-					GLCD_ClearLine(i+startLineOffset);
-					GLCD_GoTo(0,i+startLineOffset);
-					GLCD_WriteString((char *)&otherLinesLcd[0+(charsInLine*i)]);
-				}
-			}
-   	 	 }
+		if (xQueueReceive(xQueueLCD, &dataToDisplay, (portTickType) 0)){
+
+				int line = dataToDisplay->line;
+				GLCD_ClearLine(line);
+				GLCD_GoTo(0, line);
+				GLCD_WriteString(dataToDisplay->data);
+
+		     }
+
+//
+//    		if (xQueueReceive(xQuFirstLineLCD, &firstLineLcd, (portTickType) 5))
+//    		 {
+//				 GLCD_GoTo(0,0);
+//				 GLCD_WriteString("UPTIME: ");
+//				 GLCD_GoTo(75,0);
+//			 	 GLCD_WriteString(firstLineLcd);
+//			if ( xQueueReceive(xQuSecondLineLCD, &secondLineLcd, (portTickType) 1))
+//			{
+//					GLCD_GoTo(0,1);
+//					GLCD_ClearLine(1);
+//					GLCD_WriteString(secondLineLcd);
+//			}
+//
+//			if ( xQueueReceive(xQuOtherLinesLCD, &otherLinesLcd, (portTickType) 1))
+//			{
+//				const int startLineOffset = 2;
+//				const int numberOfLines = 6;
+//				const int charsInLine = 21;
+//				int i;
+//				for (i=0; i<numberOfLines; i++){
+//					GLCD_ClearLine(i+startLineOffset);
+//					GLCD_GoTo(0,i+startLineOffset);
+//					GLCD_WriteString((char *)&otherLinesLcd[0+(charsInLine*i)]);
+//				}
+//			}
+//   	 	 }
 			vTaskDelayUntil( &xLastWakeTime, 300 );
     }
 }
@@ -89,6 +104,12 @@ void vTaskSD()
    char* file_name  =  pvPortMalloc(40*sizeof(char));
    char* file_content =  pvPortMalloc(128* sizeof(char));
  //  char temp_content[128]  = {0};
+
+
+   dataToDisplay_t * dataToSend  =  pvPortMalloc(sizeof(dataToDisplay_t));
+   dataToSend->data = pvPortMalloc(40*sizeof(char));
+ //  dataToSend->line = pvPortMalloc(sizeof(int));
+
 
    int result =0;
    static DIR katalog;
@@ -107,7 +128,9 @@ void vTaskSD()
 //						new_file->content =  (char*) malloc( sizeof(temp_content)+1);
 //						strcpy (new_file->content, temp_content);
 
-    				strncpy (file_name, plik.fname,12);
+ //   				strncpy (file_name, plik.fname,12);
+    				strncpy (dataToSend->data, plik.fname,12);
+    				dataToSend->line =3;
 
 					if (plik.fname[0] == 0){
 					   	   f_opendir(&katalog,"");
@@ -124,9 +147,10 @@ void vTaskSD()
 
 					strncpy (file_content,  SD_open_file(file_name),128);
 
+				xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 5);
 
-				xQueueSend(xQuSecondLineLCD, (void *) &file_name, (portTickType) 5);
-				xQueueSend(xQuOtherLinesLCD, (void *) &file_content, (portTickType) 5);
+//				xQueueSend(xQuSecondLineLCD, (void *) &file_name, (portTickType) 5);
+//				xQueueSend(xQuOtherLinesLCD, (void *) &file_content, (portTickType) 5);
 				vTaskDelayUntil( &xLastWakeTime, 800 );
     	    	// }
     }
@@ -197,7 +221,7 @@ void vSystemUpTime (void)
 
     		minH = ((upTime)/600);
     		minL = ((upTime)/60);
-    		while (minH 5 6)
+    		while (minH > 5)
     			minH = minH / 10;
 
     		while (minL > 9)
@@ -222,9 +246,7 @@ void vSystemUpTime (void)
     		timeChar[7] = secL  + asciOffset;
     		timeChar[8] = 0;
 
-//    		pointerToString = &timeChar;
-
-			xQueueSend(xQuFirstLineLCD, (void *) &timeChar, (portTickType) 1);
+//    		xQueueSend(xQuFirstLineLCD, (void *) &timeChar, (portTickType) 1);
 			vTaskDelayUntil( &xLastWakeTime, 100 );
 
     }
@@ -245,9 +267,11 @@ main()
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
 	xSemaphoreKeyPressed = xSemaphoreCreateBinary();
 //	xSemaphoreKeyPressed = xSemaphoreCreateCounting(5,0);
-	xQuFirstLineLCD = xQueueCreate(4, sizeof(u32));
-	xQuSecondLineLCD = xQueueCreate(4, sizeof(u32));
-	xQuOtherLinesLCD = xQueueCreate(4, sizeof(u32));
+//	xQuFirstLineLCD = xQueueCreate(4, sizeof(u32));
+//	xQuSecondLineLCD = xQueueCreate(4, sizeof(u32));
+//	xQuOtherLinesLCD = xQueueCreate(4, sizeof(u32));
+	xQueueLCD = xQueueCreate(8, sizeof(dataToDisplay_t));
+
 
   vTaskStartScheduler();
 

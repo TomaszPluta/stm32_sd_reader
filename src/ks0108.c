@@ -330,9 +330,6 @@ while(*stringToWrite && screen_x < 121)
 }
 
 
-
-
-
 /*
 void GLCD_WriteString(char * stringToWrite)
 {
@@ -386,6 +383,8 @@ for(j = 0; j < dy / 8; j++)
     GLCD_WriteData(GLCD_ReadByteFromROMMemory(bmp++));
   }
 }
+
+
 //-------------------------------------------------------------------------------------------------
 // End of file KS0108.c
 //-------------------------------------------------------------------------------------------------

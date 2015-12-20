@@ -51,4 +51,12 @@ void GLCD_WriteString(char * stringToWrite);
 void GLCD_SetPixel(unsigned char x, unsigned char y, unsigned char color);
 void GLCD_Bitmap(char * bmp, unsigned char x, unsigned char y, unsigned char dx, unsigned char dy);
 
+
+
+ typedef struct dataToDisplay_t{
+	int line;
+	char* data;
+}dataToDisplay_t;
+
+
 #endif
