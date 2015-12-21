@@ -101,14 +101,17 @@ void vTaskSD()
    portTickType xLastWakeTime;
    xLastWakeTime = xTaskGetTickCount();
 
-   char* file_name  =  pvPortMalloc(40*sizeof(char));
-   char* file_content =  pvPortMalloc(128* sizeof(char));
+//   char* file_name  =  pvPortMalloc(40*sizeof(char));//
+//   char* file_content =  pvPortMalloc(128* sizeof(char));//
  //  char temp_content[128]  = {0};
 
 
-   dataToDisplay_t * dataToSend  =  pvPortMalloc(sizeof(dataToDisplay_t));
-   dataToSend->data = pvPortMalloc(40*sizeof(char));
- //  dataToSend->line = pvPortMalloc(sizeof(int));
+   dataToDisplay_t * FileNameToLCD  =  pvPortMalloc(sizeof(dataToDisplay_t));
+   FileNameToLCD->data = pvPortMalloc(40*sizeof(char));
+
+   dataToDisplay_t * FileContentToLCD  =  pvPortMalloc(sizeof(dataToDisplay_t));
+   FileContentToLCD->data = pvPortMalloc(128*sizeof(char));
+
 
 
    int result =0;
@@ -129,13 +132,13 @@ void vTaskSD()
 //						strcpy (new_file->content, temp_content);
 
  //   				strncpy (file_name, plik.fname,12);
-    				strncpy (dataToSend->data, plik.fname,12);
-    				dataToSend->line =3;
+    				strncpy (FileNameToLCD->data, plik.fname,12);
+    				FileNameToLCD->line =1;
 
 					if (plik.fname[0] == 0){
 					   	   f_opendir(&katalog,"");
 					   	   f_readdir(&katalog, &plik);
-		    			   strncpy (file_name, plik.fname,12);
+		    			   strncpy (FileNameToLCD->data, plik.fname,12);
 					}
 
 
@@ -145,14 +148,29 @@ void vTaskSD()
 					}
 
 
-					strncpy (file_content,  SD_open_file(file_name),128);
+				strncpy (FileContentToLCD->data,  SD_open_file(plik.fname),128);
+				FileContentToLCD->line =2;
 
-				xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 5);
 
-//				xQueueSend(xQuSecondLineLCD, (void *) &file_name, (portTickType) 5);
-//				xQueueSend(xQuOtherLinesLCD, (void *) &file_content, (portTickType) 5);
+						//			{
+						//				const int startLineOffset = 2;
+						//				const int numberOfLines = 6;
+						//				const int charsInLine = 21;
+						//				int i;
+						//				for (i=0; i<numberOfLines; i++){
+						//					GLCD_ClearLine(i+startLineOffset);
+						//					GLCD_GoTo(0,i+startLineOffset);
+						//					GLCD_WriteString((char *)&otherLinesLcd[0+(charsInLine*i)]);
+						//				}
+						//			}
+
+
+
+				xQueueSend(xQueueLCD, (void *) &FileNameToLCD, (portTickType) 5);
+				xQueueSend(xQueueLCD, (void *) &FileContentToLCD, (portTickType) 5);
+
 				vTaskDelayUntil( &xLastWakeTime, 800 );
-    	    	// }
+
     }
 }
 
@@ -205,6 +223,13 @@ void vSystemUpTime (void)
     char *timeChar =  pvPortMalloc(9*sizeof(char));
     int asciOffset =48;
 
+	char * uptime = pvPortMalloc(21*sizeof(char));
+	char * napis =  "UPTIME:     ";
+
+    dataToDisplay_t * dataToSend  =  pvPortMalloc(sizeof(dataToDisplay_t));
+    dataToSend->data = pvPortMalloc(40*sizeof(char));
+
+
     for( ;; )
     {
     		char * pointerToString;
@@ -246,8 +271,15 @@ void vSystemUpTime (void)
     		timeChar[7] = secL  + asciOffset;
     		timeChar[8] = 0;
 
-//    		xQueueSend(xQuFirstLineLCD, (void *) &timeChar, (portTickType) 1);
-			vTaskDelayUntil( &xLastWakeTime, 100 );
+
+    		dataToSend->line = 0;
+    		dataToSend->data = timeChar;
+
+   		sprintf(uptime, "%s %s", napis, timeChar);
+
+  		dataToSend->data = uptime;
+    	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
+		vTaskDelayUntil( &xLastWakeTime, 1000 );
 
     }
 }
@@ -259,8 +291,8 @@ main()
 	init();
 
 
-    xTaskCreate( vTaskLCD, "Task1", 3000, NULL, tskIDLE_PRIORITY + 3, NULL);
-    xTaskCreate( vTaskSD, "Task2", 500, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate( vTaskLCD, "LCD", 3000, NULL, tskIDLE_PRIORITY + 3, NULL);
+    xTaskCreate( vTaskSD, "SD", 500, NULL, tskIDLE_PRIORITY + 1, NULL);
     xTaskCreate( vTaskCheckKey, "vTaskCheckKey", 200, NULL,   tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate( vSystemUpTime, "vSystemUpTime", 200, NULL,   tskIDLE_PRIORITY + 4, NULL);
 
