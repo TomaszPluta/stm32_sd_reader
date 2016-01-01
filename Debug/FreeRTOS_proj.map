@@ -9,7 +9,7 @@ Archive member included because of file (symbol)
 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memcpy.o)
                               ./FreeRTOS/source/queue.o (memcpy)
 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memset.o)
-                              ./src/sd_stm32.o (memset)
+                              ./src/main.o (memset)
 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-freer.o)
                               /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-malloc.o) (_free_r)
 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-mallocr.o)
@@ -85,13 +85,13 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/misc.o
  .bss           0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/misc.o
  .text.NVIC_PriorityGroupConfig
-                0x0000000000000000       0x40 ./system/src/stm32f1-stdperiph/misc.o
+                0x0000000000000000       0x54 ./system/src/stm32f1-stdperiph/misc.o
  .text.NVIC_Init
-                0x0000000000000000       0x98 ./system/src/stm32f1-stdperiph/misc.o
+                0x0000000000000000       0xfc ./system/src/stm32f1-stdperiph/misc.o
  .text.NVIC_SystemLPConfig
-                0x0000000000000000       0x48 ./system/src/stm32f1-stdperiph/misc.o
+                0x0000000000000000       0x70 ./system/src/stm32f1-stdperiph/misc.o
  .text.SysTick_CLKSourceConfig
-                0x0000000000000000       0x3c ./system/src/stm32f1-stdperiph/misc.o
+                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/misc.o
  .group         0x0000000000000000        0x8 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .group         0x0000000000000000        0x8 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .group         0x0000000000000000        0x8 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
@@ -126,57 +126,57 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .bss           0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .text.FLASH_HalfCycleAccessCmd
-                0x0000000000000000       0x30 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+                0x0000000000000000       0x44 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .text.FLASH_Unlock
-                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_UnlockBank1
-                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_Lock
-                0x0000000000000000       0x10 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_LockBank1
-                0x0000000000000000       0x10 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_GetUserOptionByte
-                0x0000000000000000        0xc ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_GetWriteProtectionOptionByte
-                0x0000000000000000        0xc ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_GetReadOutProtectionStatus
-                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_GetPrefetchBufferStatus
-                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_ITConfig
-                0x0000000000000000       0x48 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_GetFlagStatus
-                0x0000000000000000       0x60 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_ClearFlag
                 0x0000000000000000       0x24 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_GetStatus
-                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_GetBank1Status
-                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_WaitForLastOperation
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_UnlockBank1
+                0x0000000000000000       0x24 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_Lock
+                0x0000000000000000       0x1c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_LockBank1
+                0x0000000000000000       0x1c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .text.FLASH_ErasePage
-                0x0000000000000000       0x5c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_EraseAllPages
-                0x0000000000000000       0x3c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_EraseOptionBytes
-                0x0000000000000000       0x98 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_ProgramWord
                 0x0000000000000000       0x88 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_ProgramHalfWord
-                0x0000000000000000       0x54 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_ProgramOptionByteData
-                0x0000000000000000       0x6c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_EnableWriteProtection
-                0x0000000000000000       0xb0 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_ReadOutProtection
-                0x0000000000000000       0xac ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_UserOptionByteConfig
-                0x0000000000000000       0x90 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .text.FLASH_WaitForLastBank1Operation
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_EraseAllPages
+                0x0000000000000000       0x5c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .text.FLASH_EraseAllBank1Pages
-                0x0000000000000000       0x3c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+                0x0000000000000000       0x5c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_EraseOptionBytes
+                0x0000000000000000       0xd4 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_ProgramWord
+                0x0000000000000000       0xb8 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_ProgramHalfWord
+                0x0000000000000000       0x80 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_ProgramOptionByteData
+                0x0000000000000000       0xa0 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_EnableWriteProtection
+                0x0000000000000000      0x12c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_ReadOutProtection
+                0x0000000000000000       0xf0 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_UserOptionByteConfig
+                0x0000000000000000       0xd8 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_GetUserOptionByte
+                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_GetWriteProtectionOptionByte
+                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_GetReadOutProtectionStatus
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_GetPrefetchBufferStatus
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_ITConfig
+                0x0000000000000000       0x6c ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_GetFlagStatus
+                0x0000000000000000       0x94 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_ClearFlag
+                0x0000000000000000       0x38 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_GetStatus
+                0x0000000000000000       0x58 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_GetBank1Status
+                0x0000000000000000       0x58 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_WaitForLastOperation
+                0x0000000000000000       0x44 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .text.FLASH_WaitForLastBank1Operation
+                0x0000000000000000       0x44 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .debug_macro   0x0000000000000000       0x50 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .debug_macro   0x0000000000000000       0x3a ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
@@ -239,27 +239,27 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .bss           0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_DeInit
-                0x0000000000000000      0x110 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000      0x128 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_AFIODeInit
-                0x0000000000000000       0x14 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_ReadOutputDataBit
-                0x0000000000000000       0xb8 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000      0x10c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_ReadOutputData
-                0x0000000000000000       0x54 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000       0x78 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_WriteBit
-                0x0000000000000000       0xc4 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000      0x11c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_PinLockConfig
-                0x0000000000000000       0x6c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000       0xb0 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_EventOutputConfig
-                0x0000000000000000       0x40 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000       0xdc ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_EventOutputCmd
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_PinRemapConfig
-                0x0000000000000000      0x1d0 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000      0x2fc ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_EXTILineConfig
-                0x0000000000000000       0x54 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000      0x124 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .text.GPIO_ETH_MediaInterfaceConfig
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .debug_macro   0x0000000000000000       0x50 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
  .debug_macro   0x0000000000000000       0x3a ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
@@ -322,50 +322,50 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
  .data          0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
  .bss           0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_AdjustHSICalibrationValue
-                0x0000000000000000       0x2c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_HSICmd
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_ITConfig
-                0x0000000000000000       0x48 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_USBCLKConfig
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_ADCCLKConfig
-                0x0000000000000000       0x38 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_LSEConfig
-                0x0000000000000000       0x40 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_LSICmd
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_RTCCLKConfig
-                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_RTCCLKCmd
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_GetClocksFreq
-                0x0000000000000000       0xbc ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_AHBPeriphClockCmd
-                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_APB1PeriphClockCmd
-                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_APB2PeriphResetCmd
-                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_APB1PeriphResetCmd
-                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_BackupResetCmd
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_ClockSecuritySystemCmd
-                0x0000000000000000       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_MCOConfig
-                0x0000000000000000       0x30 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_ClearFlag
-                0x0000000000000000       0x10 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_GetITStatus
-                0x0000000000000000       0x40 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .text.RCC_ClearITPendingBit
-                0x0000000000000000       0x24 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .data.ADCPrescTable
-                0x0000000000000000        0x4 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
  .data.APBAHBPrescTable
                 0x0000000000000000       0x10 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .data.ADCPrescTable
+                0x0000000000000000        0x4 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_AdjustHSICalibrationValue
+                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_HSICmd
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_ITConfig
+                0x0000000000000000       0x7c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_USBCLKConfig
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_ADCCLKConfig
+                0x0000000000000000       0x60 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_LSEConfig
+                0x0000000000000000       0x5c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_LSICmd
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_RTCCLKConfig
+                0x0000000000000000       0x44 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_RTCCLKCmd
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_GetClocksFreq
+                0x0000000000000000      0x164 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_AHBPeriphClockCmd
+                0x0000000000000000       0x70 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_APB1PeriphClockCmd
+                0x0000000000000000       0x70 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_APB2PeriphResetCmd
+                0x0000000000000000       0x70 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_APB1PeriphResetCmd
+                0x0000000000000000       0x70 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_BackupResetCmd
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_ClockSecuritySystemCmd
+                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_MCOConfig
+                0x0000000000000000       0x48 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_ClearFlag
+                0x0000000000000000       0x1c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_GetITStatus
+                0x0000000000000000       0x64 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .text.RCC_ClearITPendingBit
+                0x0000000000000000       0x38 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
  .debug_macro   0x0000000000000000       0x50 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
  .debug_macro   0x0000000000000000       0x3a ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
@@ -429,38 +429,38 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .bss           0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .text.SPI_I2S_DeInit
-                0x0000000000000000       0x88 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x0000000000000000       0x98 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .text.I2S_Init
-                0x0000000000000000      0x160 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x0000000000000000      0x264 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .text.SPI_StructInit
-                0x0000000000000000       0x18 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x0000000000000000       0x48 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .text.I2S_StructInit
-                0x0000000000000000       0x14 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.I2S_Cmd  0x0000000000000000       0x50 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_I2S_ITConfig
-                0x0000000000000000       0x74 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_I2S_DMACmd
-                0x0000000000000000       0x6c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_NSSInternalSoftwareConfig
-                0x0000000000000000       0x68 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_DataSizeConfig
-                0x0000000000000000       0x58 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_TransmitCRC
                 0x0000000000000000       0x38 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_CalculateCRC
-                0x0000000000000000       0x58 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_GetCRC
-                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_GetCRCPolynomial
-                0x0000000000000000       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_BiDirectionalLineConfig
-                0x0000000000000000       0x68 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_I2S_ClearFlag
-                0x0000000000000000       0x44 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .text.SPI_I2S_GetITStatus
+ .text.I2S_Cmd  0x0000000000000000       0x78 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_I2S_ITConfig
+                0x0000000000000000       0xc0 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_I2S_DMACmd
+                0x0000000000000000       0xa8 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_NSSInternalSoftwareConfig
+                0x0000000000000000       0x8c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_DataSizeConfig
                 0x0000000000000000       0x7c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_TransmitCRC
+                0x0000000000000000       0x50 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_CalculateCRC
+                0x0000000000000000       0x84 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_GetCRC
+                0x0000000000000000       0x78 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_GetCRCPolynomial
+                0x0000000000000000       0x48 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_BiDirectionalLineConfig
+                0x0000000000000000       0x8c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_I2S_ClearFlag
+                0x0000000000000000       0x60 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .text.SPI_I2S_GetITStatus
+                0x0000000000000000       0xd4 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .text.SPI_I2S_ClearITPendingBit
-                0x0000000000000000       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x0000000000000000       0x70 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .debug_macro   0x0000000000000000       0x50 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .debug_macro   0x0000000000000000       0x3a ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
@@ -520,11 +520,15 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./system/src/newlib/_cxx.o
  .bss           0x0000000000000000        0x0 ./system/src/newlib/_cxx.o
  .text._ZN9__gnu_cxx27__verbose_terminate_handlerEv
-                0x0000000000000000        0x8 ./system/src/newlib/_cxx.o
+                0x0000000000000000       0x14 ./system/src/newlib/_cxx.o
  .text.__cxa_pure_virtual
-                0x0000000000000000        0x8 ./system/src/newlib/_cxx.o
- .debug_info    0x0000000000000000      0x597 ./system/src/newlib/_cxx.o
- .debug_abbrev  0x0000000000000000      0x1a7 ./system/src/newlib/_cxx.o
+                0x0000000000000000       0x14 ./system/src/newlib/_cxx.o
+ .rodata._ZZN9__gnu_cxx27__verbose_terminate_handlerEvE8__func__
+                0x0000000000000000       0x1c ./system/src/newlib/_cxx.o
+ .rodata._ZZ18__cxa_pure_virtualE8__func__
+                0x0000000000000000       0x13 ./system/src/newlib/_cxx.o
+ .debug_info    0x0000000000000000      0x591 ./system/src/newlib/_cxx.o
+ .debug_abbrev  0x0000000000000000      0x19e ./system/src/newlib/_cxx.o
  .debug_aranges
                 0x0000000000000000       0x28 ./system/src/newlib/_cxx.o
  .debug_ranges  0x0000000000000000       0x18 ./system/src/newlib/_cxx.o
@@ -556,9 +560,9 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 ./system/src/newlib/_cxx.o
  .debug_macro   0x0000000000000000      0x4f7 ./system/src/newlib/_cxx.o
  .debug_line    0x0000000000000000      0x2a8 ./system/src/newlib/_cxx.o
- .debug_str     0x0000000000000000     0x7457 ./system/src/newlib/_cxx.o
+ .debug_str     0x0000000000000000     0x7458 ./system/src/newlib/_cxx.o
  .comment       0x0000000000000000       0x71 ./system/src/newlib/_cxx.o
- .debug_frame   0x0000000000000000       0x40 ./system/src/newlib/_cxx.o
+ .debug_frame   0x0000000000000000       0x50 ./system/src/newlib/_cxx.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./system/src/newlib/_cxx.o
  .group         0x0000000000000000        0x8 ./system/src/newlib/_exit.o
@@ -657,13 +661,13 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./system/src/newlib/_startup.o
  .bss           0x0000000000000000        0x0 ./system/src/newlib/_startup.o
  .text.__initialize_data
-                0x0000000000000000       0x10 ./system/src/newlib/_startup.o
+                0x0000000000000000       0x34 ./system/src/newlib/_startup.o
  .text.__initialize_bss
-                0x0000000000000000       0x10 ./system/src/newlib/_startup.o
+                0x0000000000000000       0x2c ./system/src/newlib/_startup.o
  .text.__run_init_array
-                0x0000000000000000       0x48 ./system/src/newlib/_startup.o
+                0x0000000000000000       0x6c ./system/src/newlib/_startup.o
  .text.__run_fini_array
-                0x0000000000000000       0x24 ./system/src/newlib/_startup.o
+                0x0000000000000000       0x3c ./system/src/newlib/_startup.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/newlib/_startup.o
  .debug_macro   0x0000000000000000      0x34e ./system/src/newlib/_startup.o
  .debug_macro   0x0000000000000000       0x58 ./system/src/newlib/_startup.o
@@ -714,8 +718,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./system/src/newlib/_syscalls.o
  .data          0x0000000000000000        0x0 ./system/src/newlib/_syscalls.o
  .bss           0x0000000000000000        0x0 ./system/src/newlib/_syscalls.o
- .text.raise    0x0000000000000000       0x10 ./system/src/newlib/_syscalls.o
- .text.kill     0x0000000000000000       0x10 ./system/src/newlib/_syscalls.o
+ .text.raise    0x0000000000000000       0x20 ./system/src/newlib/_syscalls.o
+ .text.kill     0x0000000000000000       0x20 ./system/src/newlib/_syscalls.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/newlib/_syscalls.o
  .debug_macro   0x0000000000000000       0x58 ./system/src/newlib/_syscalls.o
  .debug_macro   0x0000000000000000       0x22 ./system/src/newlib/_syscalls.o
@@ -764,7 +768,7 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./system/src/newlib/assert.o
  .bss           0x0000000000000000        0x0 ./system/src/newlib/assert.o
  .text.__assert_func
-                0x0000000000000000        0x8 ./system/src/newlib/assert.o
+                0x0000000000000000       0x24 ./system/src/newlib/assert.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/newlib/assert.o
  .debug_macro   0x0000000000000000       0x58 ./system/src/newlib/assert.o
  .debug_macro   0x0000000000000000       0x22 ./system/src/newlib/assert.o
@@ -800,7 +804,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x11 ./system/src/diag/Trace.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/diag/Trace.o
  .debug_line    0x0000000000000000       0x3b ./system/src/diag/Trace.o
- .debug_str     0x0000000000000000     0x24dd ./system/src/diag/Trace.o
+ .debug_str     0x0000000000000000     0x24de ./system/src/diag/Trace.o
  .comment       0x0000000000000000       0x71 ./system/src/diag/Trace.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./system/src/diag/Trace.o
@@ -815,7 +819,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x11 ./system/src/diag/trace_impl.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/diag/trace_impl.o
  .debug_line    0x0000000000000000       0x40 ./system/src/diag/trace_impl.o
- .debug_str     0x0000000000000000     0x24e2 ./system/src/diag/trace_impl.o
+ .debug_str     0x0000000000000000     0x24e3 ./system/src/diag/trace_impl.o
  .comment       0x0000000000000000       0x71 ./system/src/diag/trace_impl.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./system/src/diag/trace_impl.o
@@ -915,13 +919,15 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./system/src/cortexm/_reset_hardware.o
  .data          0x0000000000000000        0x0 ./system/src/cortexm/_reset_hardware.o
  .bss           0x0000000000000000        0x0 ./system/src/cortexm/_reset_hardware.o
+ .text.NVIC_SystemReset
+                0x0000000000000000       0x28 ./system/src/cortexm/_reset_hardware.o
  .text.__reset_hardware
-                0x0000000000000000       0x20 ./system/src/cortexm/_reset_hardware.o
- .debug_info    0x0000000000000000      0x295 ./system/src/cortexm/_reset_hardware.o
- .debug_abbrev  0x0000000000000000       0xea ./system/src/cortexm/_reset_hardware.o
+                0x0000000000000000        0x8 ./system/src/cortexm/_reset_hardware.o
+ .debug_info    0x0000000000000000      0x28e ./system/src/cortexm/_reset_hardware.o
+ .debug_abbrev  0x0000000000000000       0xf1 ./system/src/cortexm/_reset_hardware.o
  .debug_aranges
-                0x0000000000000000       0x20 ./system/src/cortexm/_reset_hardware.o
- .debug_ranges  0x0000000000000000       0x10 ./system/src/cortexm/_reset_hardware.o
+                0x0000000000000000       0x28 ./system/src/cortexm/_reset_hardware.o
+ .debug_ranges  0x0000000000000000       0x18 ./system/src/cortexm/_reset_hardware.o
  .debug_macro   0x0000000000000000      0x15c ./system/src/cortexm/_reset_hardware.o
  .debug_macro   0x0000000000000000      0x880 ./system/src/cortexm/_reset_hardware.o
  .debug_macro   0x0000000000000000       0x50 ./system/src/cortexm/_reset_hardware.o
@@ -953,10 +959,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x34 ./system/src/cortexm/_reset_hardware.o
  .debug_macro   0x0000000000000000       0x8b ./system/src/cortexm/_reset_hardware.o
  .debug_macro   0x0000000000000000       0x35 ./system/src/cortexm/_reset_hardware.o
- .debug_line    0x0000000000000000      0x32b ./system/src/cortexm/_reset_hardware.o
- .debug_str     0x0000000000000000    0x4df45 ./system/src/cortexm/_reset_hardware.o
+ .debug_line    0x0000000000000000      0x349 ./system/src/cortexm/_reset_hardware.o
+ .debug_str     0x0000000000000000    0x4df46 ./system/src/cortexm/_reset_hardware.o
  .comment       0x0000000000000000       0x71 ./system/src/cortexm/_reset_hardware.o
- .debug_frame   0x0000000000000000       0x20 ./system/src/cortexm/_reset_hardware.o
+ .debug_frame   0x0000000000000000       0x44 ./system/src/cortexm/_reset_hardware.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./system/src/cortexm/_reset_hardware.o
  .group         0x0000000000000000        0x8 ./system/src/cortexm/exception_handlers.o
@@ -1162,8 +1168,8 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./src/BlinkLed.o
  .text.blink_led_init
                 0x0000000000000000       0x3c ./src/BlinkLed.o
- .debug_info    0x0000000000000000      0x2b9 ./src/BlinkLed.o
- .debug_abbrev  0x0000000000000000      0x15b ./src/BlinkLed.o
+ .debug_info    0x0000000000000000      0x213 ./src/BlinkLed.o
+ .debug_abbrev  0x0000000000000000      0x112 ./src/BlinkLed.o
  .debug_aranges
                 0x0000000000000000       0x20 ./src/BlinkLed.o
  .debug_ranges  0x0000000000000000       0x10 ./src/BlinkLed.o
@@ -1200,9 +1206,9 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 ./src/BlinkLed.o
  .debug_macro   0x0000000000000000       0x28 ./src/BlinkLed.o
  .debug_line    0x0000000000000000      0x30d ./src/BlinkLed.o
- .debug_str     0x0000000000000000    0x4e118 ./src/BlinkLed.o
+ .debug_str     0x0000000000000000    0x4e0db ./src/BlinkLed.o
  .comment       0x0000000000000000       0x71 ./src/BlinkLed.o
- .debug_frame   0x0000000000000000       0x30 ./src/BlinkLed.o
+ .debug_frame   0x0000000000000000       0x34 ./src/BlinkLed.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./src/BlinkLed.o
  .group         0x0000000000000000        0x8 ./src/Timer.o
@@ -1239,18 +1245,21 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/Timer.o
  .data          0x0000000000000000        0x0 ./src/Timer.o
  .bss           0x0000000000000000        0x0 ./src/Timer.o
+ .text.NVIC_SetPriority
+                0x0000000000000000       0x54 ./src/Timer.o
+ .text.SysTick_Config
+                0x0000000000000000       0x44 ./src/Timer.o
  .text.timer_start
-                0x0000000000000000       0x3c ./src/Timer.o
+                0x0000000000000000       0x20 ./src/Timer.o
  .text.timer_sleep
-                0x0000000000000000       0x14 ./src/Timer.o
+                0x0000000000000000       0x28 ./src/Timer.o
  .text.timer_tick
-                0x0000000000000000       0x14 ./src/Timer.o
- .debug_info    0x0000000000000000      0x5ff ./src/Timer.o
- .debug_abbrev  0x0000000000000000      0x1aa ./src/Timer.o
- .debug_loc     0x0000000000000000       0x59 ./src/Timer.o
+                0x0000000000000000       0x24 ./src/Timer.o
+ .debug_info    0x0000000000000000      0x5da ./src/Timer.o
+ .debug_abbrev  0x0000000000000000      0x1ab ./src/Timer.o
  .debug_aranges
-                0x0000000000000000       0x30 ./src/Timer.o
- .debug_ranges  0x0000000000000000       0x20 ./src/Timer.o
+                0x0000000000000000       0x40 ./src/Timer.o
+ .debug_ranges  0x0000000000000000       0x30 ./src/Timer.o
  .debug_macro   0x0000000000000000      0x175 ./src/Timer.o
  .debug_macro   0x0000000000000000      0x880 ./src/Timer.o
  .debug_macro   0x0000000000000000       0x50 ./src/Timer.o
@@ -1283,10 +1292,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x8b ./src/Timer.o
  .debug_macro   0x0000000000000000       0x35 ./src/Timer.o
  .debug_macro   0x0000000000000000       0x10 ./src/Timer.o
- .debug_line    0x0000000000000000      0x373 ./src/Timer.o
- .debug_str     0x0000000000000000    0x4e33a ./src/Timer.o
+ .debug_line    0x0000000000000000      0x3a0 ./src/Timer.o
+ .debug_str     0x0000000000000000    0x4e33b ./src/Timer.o
  .comment       0x0000000000000000       0x71 ./src/Timer.o
- .debug_frame   0x0000000000000000       0x40 ./src/Timer.o
+ .debug_frame   0x0000000000000000       0xc0 ./src/Timer.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./src/Timer.o
  COMMON         0x0000000000000000        0x4 ./src/Timer.o
@@ -1301,7 +1310,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x11 ./src/_write.o
  .debug_macro   0x0000000000000000      0x880 ./src/_write.o
  .debug_line    0x0000000000000000       0x30 ./src/_write.o
- .debug_str     0x0000000000000000     0x24d2 ./src/_write.o
+ .debug_str     0x0000000000000000     0x24d3 ./src/_write.o
  .comment       0x0000000000000000       0x71 ./src/_write.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./src/_write.o
@@ -1340,13 +1349,13 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./src/ks0108.o
  .bss           0x0000000000000000        0x0 ./src/ks0108.o
  .text.GLCD_ReadData
-                0x0000000000000000       0x84 ./src/ks0108.o
+                0x0000000000000000       0xa8 ./src/ks0108.o
  .text.GLCD_TextGoTo
-                0x0000000000000000       0x14 ./src/ks0108.o
+                0x0000000000000000       0x2c ./src/ks0108.o
  .text.GLCD_SetPixel
-                0x0000000000000000       0x58 ./src/ks0108.o
+                0x0000000000000000       0x98 ./src/ks0108.o
  .text.GLCD_Bitmap
-                0x0000000000000000       0x4c ./src/ks0108.o
+                0x0000000000000000       0x74 ./src/ks0108.o
  .debug_macro   0x0000000000000000      0x880 ./src/ks0108.o
  .debug_macro   0x0000000000000000       0x50 ./src/ks0108.o
  .debug_macro   0x0000000000000000       0x3a ./src/ks0108.o
@@ -1451,9 +1460,12 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/main.o
  .data          0x0000000000000000        0x0 ./src/main.o
  .bss           0x0000000000000000        0x0 ./src/main.o
- .data.taskSD   0x0000000000000000        0x4 ./src/main.o
+ .rodata.font5x8
+                0x0000000000000000      0x1e0 ./src/main.o
  .data.test1    0x0000000000000000        0x4 ./src/main.o
  .data.test2    0x0000000000000000        0x4 ./src/main.o
+ .data.taskSD   0x0000000000000000        0x4 ./src/main.o
+ .data.taskKey  0x0000000000000000        0x4 ./src/main.o
  .debug_macro   0x0000000000000000      0x880 ./src/main.o
  .debug_macro   0x0000000000000000       0x58 ./src/main.o
  .debug_macro   0x0000000000000000       0x22 ./src/main.o
@@ -1565,13 +1577,12 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./src/sd_stm32.o
  .bss           0x0000000000000000        0x0 ./src/sd_stm32.o
  .text.files_list_add
-                0x0000000000000000       0x10 ./src/sd_stm32.o
+                0x0000000000000000       0x34 ./src/sd_stm32.o
  .text.files_list_print
-                0x0000000000000000       0x20 ./src/sd_stm32.o
+                0x0000000000000000       0x40 ./src/sd_stm32.o
+ .rodata        0x0000000000000000        0x1 ./src/sd_stm32.o
  .text.print_files
-                0x0000000000000000       0x74 ./src/sd_stm32.o
- .rodata.str1.4
-                0x0000000000000000        0x1 ./src/sd_stm32.o
+                0x0000000000000000       0xac ./src/sd_stm32.o
  .bss.katalog.7869
                 0x0000000000000000       0x1c ./src/sd_stm32.o
  .bss.plik.7870
@@ -1778,7 +1789,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x8c ./FreeRTOS/source/croutine.o
  .debug_macro   0x0000000000000000       0x43 ./FreeRTOS/source/croutine.o
  .debug_line    0x0000000000000000      0x166 ./FreeRTOS/source/croutine.o
- .debug_str     0x0000000000000000     0x6770 ./FreeRTOS/source/croutine.o
+ .debug_str     0x0000000000000000     0x6771 ./FreeRTOS/source/croutine.o
  .comment       0x0000000000000000       0x71 ./FreeRTOS/source/croutine.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./FreeRTOS/source/croutine.o
@@ -1811,34 +1822,33 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./FreeRTOS/source/event_groups.o
  .data          0x0000000000000000        0x0 ./FreeRTOS/source/event_groups.o
  .bss           0x0000000000000000        0x0 ./FreeRTOS/source/event_groups.o
- .text.prvTestWaitCondition
-                0x0000000000000000       0x1c ./FreeRTOS/source/event_groups.o
  .text.xEventGroupCreate
-                0x0000000000000000       0x1c ./FreeRTOS/source/event_groups.o
- .text.xEventGroupWaitBits
-                0x0000000000000000       0xa0 ./FreeRTOS/source/event_groups.o
- .text.xEventGroupClearBits
-                0x0000000000000000       0x1c ./FreeRTOS/source/event_groups.o
- .text.xEventGroupGetBitsFromISR
-                0x0000000000000000       0x14 ./FreeRTOS/source/event_groups.o
- .text.xEventGroupSetBits
-                0x0000000000000000       0x70 ./FreeRTOS/source/event_groups.o
+                0x0000000000000000       0x30 ./FreeRTOS/source/event_groups.o
  .text.xEventGroupSync
-                0x0000000000000000       0x84 ./FreeRTOS/source/event_groups.o
- .text.vEventGroupDelete
+                0x0000000000000000       0xe0 ./FreeRTOS/source/event_groups.o
+ .text.xEventGroupWaitBits
+                0x0000000000000000      0x104 ./FreeRTOS/source/event_groups.o
+ .text.xEventGroupClearBits
+                0x0000000000000000       0x34 ./FreeRTOS/source/event_groups.o
+ .text.xEventGroupGetBitsFromISR
                 0x0000000000000000       0x28 ./FreeRTOS/source/event_groups.o
+ .text.xEventGroupSetBits
+                0x0000000000000000       0xdc ./FreeRTOS/source/event_groups.o
+ .text.vEventGroupDelete
+                0x0000000000000000       0x40 ./FreeRTOS/source/event_groups.o
  .text.vEventGroupSetBitsCallback
-                0x0000000000000000        0x8 ./FreeRTOS/source/event_groups.o
+                0x0000000000000000       0x18 ./FreeRTOS/source/event_groups.o
  .text.vEventGroupClearBitsCallback
-                0x0000000000000000        0x8 ./FreeRTOS/source/event_groups.o
+                0x0000000000000000       0x18 ./FreeRTOS/source/event_groups.o
+ .text.prvTestWaitCondition
+                0x0000000000000000       0x44 ./FreeRTOS/source/event_groups.o
  .text.uxEventGroupGetNumber
-                0x0000000000000000        0xc ./FreeRTOS/source/event_groups.o
- .debug_info    0x0000000000000000      0x928 ./FreeRTOS/source/event_groups.o
- .debug_abbrev  0x0000000000000000      0x23b ./FreeRTOS/source/event_groups.o
- .debug_loc     0x0000000000000000      0x6b6 ./FreeRTOS/source/event_groups.o
+                0x0000000000000000       0x2c ./FreeRTOS/source/event_groups.o
+ .debug_info    0x0000000000000000      0x65e ./FreeRTOS/source/event_groups.o
+ .debug_abbrev  0x0000000000000000      0x13a ./FreeRTOS/source/event_groups.o
  .debug_aranges
                 0x0000000000000000       0x70 ./FreeRTOS/source/event_groups.o
- .debug_ranges  0x0000000000000000       0x78 ./FreeRTOS/source/event_groups.o
+ .debug_ranges  0x0000000000000000       0x60 ./FreeRTOS/source/event_groups.o
  .debug_macro   0x0000000000000000      0x1a9 ./FreeRTOS/source/event_groups.o
  .debug_macro   0x0000000000000000      0x880 ./FreeRTOS/source/event_groups.o
  .debug_macro   0x0000000000000000       0x58 ./FreeRTOS/source/event_groups.o
@@ -1866,10 +1876,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0xc0 ./FreeRTOS/source/event_groups.o
  .debug_macro   0x0000000000000000       0x8c ./FreeRTOS/source/event_groups.o
  .debug_macro   0x0000000000000000       0x91 ./FreeRTOS/source/event_groups.o
- .debug_line    0x0000000000000000      0x3e4 ./FreeRTOS/source/event_groups.o
- .debug_str     0x0000000000000000     0x92a0 ./FreeRTOS/source/event_groups.o
+ .debug_line    0x0000000000000000      0x3d4 ./FreeRTOS/source/event_groups.o
+ .debug_str     0x0000000000000000     0x919a ./FreeRTOS/source/event_groups.o
  .comment       0x0000000000000000       0x71 ./FreeRTOS/source/event_groups.o
- .debug_frame   0x0000000000000000      0x128 ./FreeRTOS/source/event_groups.o
+ .debug_frame   0x0000000000000000      0x1a4 ./FreeRTOS/source/event_groups.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./FreeRTOS/source/event_groups.o
  .group         0x0000000000000000        0x8 ./FreeRTOS/source/heap_3.o
@@ -1901,9 +1911,9 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./FreeRTOS/source/heap_3.o
  .bss           0x0000000000000000        0x0 ./FreeRTOS/source/heap_3.o
  .text.vPortInitialiseBlocks
-                0x0000000000000000        0xc ./FreeRTOS/source/heap_3.o
+                0x0000000000000000       0x18 ./FreeRTOS/source/heap_3.o
  .text.xPortGetFreeHeapSize
-                0x0000000000000000       0x10 ./FreeRTOS/source/heap_3.o
+                0x0000000000000000       0x1c ./FreeRTOS/source/heap_3.o
  .debug_macro   0x0000000000000000      0x880 ./FreeRTOS/source/heap_3.o
  .debug_macro   0x0000000000000000       0x58 ./FreeRTOS/source/heap_3.o
  .debug_macro   0x0000000000000000       0x22 ./FreeRTOS/source/heap_3.o
@@ -1995,7 +2005,7 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./FreeRTOS/source/port.o
  .bss           0x0000000000000000        0x0 ./FreeRTOS/source/port.o
  .text.vPortEndScheduler
-                0x0000000000000000        0x4 ./FreeRTOS/source/port.o
+                0x0000000000000000        0xc ./FreeRTOS/source/port.o
  .debug_macro   0x0000000000000000      0x880 ./FreeRTOS/source/port.o
  .debug_macro   0x0000000000000000      0x16d ./FreeRTOS/source/port.o
  .debug_macro   0x0000000000000000      0x34e ./FreeRTOS/source/port.o
@@ -2038,38 +2048,38 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./FreeRTOS/source/queue.o
  .data          0x0000000000000000        0x0 ./FreeRTOS/source/queue.o
  .bss           0x0000000000000000        0x0 ./FreeRTOS/source/queue.o
- .text.xQueueCreateCountingSemaphore
-                0x0000000000000000       0x18 ./FreeRTOS/source/queue.o
  .text.xQueueGiveMutexRecursive
-                0x0000000000000000       0x30 ./FreeRTOS/source/queue.o
- .text.xQueueGenericSendFromISR
-                0x0000000000000000       0x70 ./FreeRTOS/source/queue.o
- .text.xQueueGiveFromISR
-                0x0000000000000000       0x5c ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x4c ./FreeRTOS/source/queue.o
  .text.xQueueTakeMutexRecursive
-                0x0000000000000000       0x34 ./FreeRTOS/source/queue.o
- .text.xQueueReceiveFromISR
-                0x0000000000000000       0x60 ./FreeRTOS/source/queue.o
- .text.xQueuePeekFromISR
+                0x0000000000000000       0x54 ./FreeRTOS/source/queue.o
+ .text.xQueueCreateCountingSemaphore
                 0x0000000000000000       0x2c ./FreeRTOS/source/queue.o
+ .text.xQueueGenericSendFromISR
+                0x0000000000000000       0x88 ./FreeRTOS/source/queue.o
+ .text.xQueueGiveFromISR
+                0x0000000000000000       0x80 ./FreeRTOS/source/queue.o
+ .text.xQueueReceiveFromISR
+                0x0000000000000000       0x84 ./FreeRTOS/source/queue.o
+ .text.xQueuePeekFromISR
+                0x0000000000000000       0x4c ./FreeRTOS/source/queue.o
  .text.uxQueueMessagesWaiting
-                0x0000000000000000       0x14 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x20 ./FreeRTOS/source/queue.o
  .text.uxQueueSpacesAvailable
-                0x0000000000000000       0x18 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x2c ./FreeRTOS/source/queue.o
  .text.uxQueueMessagesWaitingFromISR
-                0x0000000000000000        0x4 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x1c ./FreeRTOS/source/queue.o
  .text.vQueueDelete
-                0x0000000000000000        0x8 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x18 ./FreeRTOS/source/queue.o
  .text.uxQueueGetQueueNumber
-                0x0000000000000000        0x4 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x18 ./FreeRTOS/source/queue.o
  .text.vQueueSetQueueNumber
-                0x0000000000000000        0x4 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x1c ./FreeRTOS/source/queue.o
  .text.ucQueueGetQueueType
-                0x0000000000000000        0x8 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x1c ./FreeRTOS/source/queue.o
  .text.xQueueIsQueueEmptyFromISR
-                0x0000000000000000        0xc ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x28 ./FreeRTOS/source/queue.o
  .text.xQueueIsQueueFullFromISR
-                0x0000000000000000       0x10 ./FreeRTOS/source/queue.o
+                0x0000000000000000       0x2c ./FreeRTOS/source/queue.o
  .debug_macro   0x0000000000000000      0x880 ./FreeRTOS/source/queue.o
  .debug_macro   0x0000000000000000       0x58 ./FreeRTOS/source/queue.o
  .debug_macro   0x0000000000000000       0x22 ./FreeRTOS/source/queue.o
@@ -2130,58 +2140,58 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./FreeRTOS/source/tasks.o
  .data          0x0000000000000000        0x0 ./FreeRTOS/source/tasks.o
  .bss           0x0000000000000000        0x0 ./FreeRTOS/source/tasks.o
- .text.prvTaskIsTaskSuspended
-                0x0000000000000000       0x38 ./FreeRTOS/source/tasks.o
- .text.prvTaskCheckFreeStackSpace
-                0x0000000000000000       0x14 ./FreeRTOS/source/tasks.o
- .text.prvListTaskWithinSingleList
-                0x0000000000000000       0x88 ./FreeRTOS/source/tasks.o
  .text.vTaskDelete
-                0x0000000000000000       0x9c ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0xd4 ./FreeRTOS/source/tasks.o
+ .text.vTaskDelay
+                0x0000000000000000       0x74 ./FreeRTOS/source/tasks.o
  .text.uxTaskPriorityGet
-                0x0000000000000000       0x1c ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0x34 ./FreeRTOS/source/tasks.o
  .text.uxTaskPriorityGetFromISR
-                0x0000000000000000       0x1c ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0x38 ./FreeRTOS/source/tasks.o
  .text.vTaskPrioritySet
-                0x0000000000000000       0xc8 ./FreeRTOS/source/tasks.o
+                0x0000000000000000      0x134 ./FreeRTOS/source/tasks.o
+ .text.vTaskSuspend
+                0x0000000000000000       0xe0 ./FreeRTOS/source/tasks.o
+ .text.prvTaskIsTaskSuspended
+                0x0000000000000000       0x5c ./FreeRTOS/source/tasks.o
  .text.vTaskResume
-                0x0000000000000000       0x68 ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0x90 ./FreeRTOS/source/tasks.o
  .text.xTaskResumeFromISR
-                0x0000000000000000       0x84 ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0xac ./FreeRTOS/source/tasks.o
  .text.vTaskEndScheduler
                 0x0000000000000000       0x18 ./FreeRTOS/source/tasks.o
  .text.xTaskGetTickCountFromISR
-                0x0000000000000000        0xc ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0x24 ./FreeRTOS/source/tasks.o
  .text.uxTaskGetNumberOfTasks
-                0x0000000000000000        0xc ./FreeRTOS/source/tasks.o
- .text.vTaskDelay
-                0x0000000000000000       0x54 ./FreeRTOS/source/tasks.o
- .text.uxTaskGetSystemState
-                0x0000000000000000       0x9c ./FreeRTOS/source/tasks.o
- .text.vTaskSuspend
-                0x0000000000000000       0xa8 ./FreeRTOS/source/tasks.o
- .text.vTaskPlaceOnUnorderedEventList
-                0x0000000000000000       0x64 ./FreeRTOS/source/tasks.o
- .text.xTaskRemoveFromUnorderedEventList
-                0x0000000000000000       0x5c ./FreeRTOS/source/tasks.o
- .text.uxTaskGetTaskNumber
-                0x0000000000000000        0xc ./FreeRTOS/source/tasks.o
- .text.vTaskSetTaskNumber
-                0x0000000000000000        0x8 ./FreeRTOS/source/tasks.o
- .text.xTaskGetCurrentTaskHandle
-                0x0000000000000000        0xc ./FreeRTOS/source/tasks.o
- .text.uxTaskResetEventItemValue
                 0x0000000000000000       0x18 ./FreeRTOS/source/tasks.o
+ .text.uxTaskGetSystemState
+                0x0000000000000000       0xf8 ./FreeRTOS/source/tasks.o
+ .text.vTaskPlaceOnUnorderedEventList
+                0x0000000000000000       0x90 ./FreeRTOS/source/tasks.o
+ .text.xTaskRemoveFromUnorderedEventList
+                0x0000000000000000       0x94 ./FreeRTOS/source/tasks.o
+ .text.uxTaskGetTaskNumber
+                0x0000000000000000       0x2c ./FreeRTOS/source/tasks.o
+ .text.vTaskSetTaskNumber
+                0x0000000000000000       0x24 ./FreeRTOS/source/tasks.o
+ .text.prvListTaskWithinSingleList
+                0x0000000000000000      0x118 ./FreeRTOS/source/tasks.o
+ .text.prvTaskCheckFreeStackSpace
+                0x0000000000000000       0x38 ./FreeRTOS/source/tasks.o
+ .text.xTaskGetCurrentTaskHandle
+                0x0000000000000000       0x20 ./FreeRTOS/source/tasks.o
+ .text.uxTaskResetEventItemValue
+                0x0000000000000000       0x30 ./FreeRTOS/source/tasks.o
  .text.ulTaskNotifyTake
-                0x0000000000000000       0xa8 ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0xd8 ./FreeRTOS/source/tasks.o
  .text.xTaskNotifyWait
-                0x0000000000000000       0xc8 ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0xfc ./FreeRTOS/source/tasks.o
  .text.xTaskGenericNotify
-                0x0000000000000000       0xa8 ./FreeRTOS/source/tasks.o
+                0x0000000000000000      0x100 ./FreeRTOS/source/tasks.o
  .text.xTaskNotifyFromISR
-                0x0000000000000000       0xcc ./FreeRTOS/source/tasks.o
+                0x0000000000000000      0x11c ./FreeRTOS/source/tasks.o
  .text.vTaskNotifyGiveFromISR
-                0x0000000000000000       0x88 ./FreeRTOS/source/tasks.o
+                0x0000000000000000       0xc0 ./FreeRTOS/source/tasks.o
  .debug_macro   0x0000000000000000      0x880 ./FreeRTOS/source/tasks.o
  .debug_macro   0x0000000000000000       0x58 ./FreeRTOS/source/tasks.o
  .debug_macro   0x0000000000000000       0x22 ./FreeRTOS/source/tasks.o
@@ -2273,7 +2283,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0xb0 ./FreeRTOS/source/timers.o
  .debug_macro   0x0000000000000000       0x91 ./FreeRTOS/source/timers.o
  .debug_line    0x0000000000000000      0x277 ./FreeRTOS/source/timers.o
- .debug_str     0x0000000000000000     0x971c ./FreeRTOS/source/timers.o
+ .debug_str     0x0000000000000000     0x971d ./FreeRTOS/source/timers.o
  .comment       0x0000000000000000       0x71 ./FreeRTOS/source/timers.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./FreeRTOS/source/timers.o
@@ -2285,21 +2295,21 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./FATFs/ff.o
  .bss           0x0000000000000000        0x0 ./FATFs/ff.o
  .text.dir_remove
-                0x0000000000000000       0x2c ./FATFs/ff.o
- .text.f_write  0x0000000000000000      0x1dc ./FATFs/ff.o
- .text.f_lseek  0x0000000000000000      0x18c ./FATFs/ff.o
- .text.f_stat   0x0000000000000000       0x40 ./FATFs/ff.o
+                0x0000000000000000       0x54 ./FATFs/ff.o
+ .text.f_write  0x0000000000000000      0x314 ./FATFs/ff.o
+ .text.f_lseek  0x0000000000000000      0x2b4 ./FATFs/ff.o
+ .text.f_stat   0x0000000000000000       0x70 ./FATFs/ff.o
  .text.f_getfree
-                0x0000000000000000       0xf0 ./FATFs/ff.o
+                0x0000000000000000      0x19c ./FATFs/ff.o
  .text.f_truncate
-                0x0000000000000000       0x98 ./FATFs/ff.o
+                0x0000000000000000      0x11c ./FATFs/ff.o
  .text.f_unlink
-                0x0000000000000000       0xb8 ./FATFs/ff.o
- .text.f_mkdir  0x0000000000000000      0x19c ./FATFs/ff.o
- .text.f_chmod  0x0000000000000000       0x58 ./FATFs/ff.o
- .text.f_utime  0x0000000000000000       0x58 ./FATFs/ff.o
+                0x0000000000000000      0x180 ./FATFs/ff.o
+ .text.f_mkdir  0x0000000000000000      0x2d8 ./FATFs/ff.o
+ .text.f_chmod  0x0000000000000000       0xac ./FATFs/ff.o
+ .text.f_utime  0x0000000000000000       0xb4 ./FATFs/ff.o
  .text.f_rename
-                0x0000000000000000      0x120 ./FATFs/ff.o
+                0x0000000000000000      0x214 ./FATFs/ff.o
  .debug_macro   0x0000000000000000      0x880 ./FATFs/ff.o
  .debug_macro   0x0000000000000000       0x91 ./FATFs/ff.o
  .debug_macro   0x0000000000000000       0xf9 ./FATFs/ff.o
@@ -2339,7 +2349,7 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./FATFs/sd_stm32.o
  .bss           0x0000000000000000        0x0 ./FATFs/sd_stm32.o
  .text.disk_timerproc
-                0x0000000000000000       0x30 ./FATFs/sd_stm32.o
+                0x0000000000000000       0x48 ./FATFs/sd_stm32.o
  .debug_macro   0x0000000000000000      0x880 ./FATFs/sd_stm32.o
  .debug_macro   0x0000000000000000       0x50 ./FATFs/sd_stm32.o
  .debug_macro   0x0000000000000000       0x3a ./FATFs/sd_stm32.o
@@ -2509,7 +2519,7 @@ END GROUP
                 0x0000000020004c48                PROVIDE (_Heap_Begin, _end_noinit)
                 0x0000000020004c00                PROVIDE (_Heap_Limit, (__stack - __Main_Stack_Size))
 
-.isr_vector     0x0000000008000000      0x298
+.isr_vector     0x0000000008000000      0x340
  FILL mask 0xff
                 0x0000000008000000                __vectors_start = ABSOLUTE (.)
                 0x0000000008000000                __vectors_start__ = ABSOLUTE (.)
@@ -2519,663 +2529,658 @@ END GROUP
  *(.cfmconfig)
  *(.after_vectors .after_vectors.*)
  .after_vectors
-                0x000000000800010c      0x114 ./system/src/newlib/_startup.o
+                0x000000000800010c      0x178 ./system/src/newlib/_startup.o
                 0x000000000800010c                _start
  .after_vectors
-                0x0000000008000220       0x74 ./system/src/cortexm/exception_handlers.o
-                0x0000000008000220                Reset_Handler
-                0x0000000008000228                NMI_Handler
-                0x000000000800022c                HardFault_Handler
-                0x0000000008000240                HardFault_Handler_C
-                0x0000000008000244                MemManage_Handler
-                0x0000000008000248                BusFault_Handler
-                0x000000000800025c                BusFault_Handler_C
-                0x0000000008000260                UsageFault_Handler
-                0x0000000008000274                UsageFault_Handler_C
-                0x000000000800027c                DebugMon_Handler
+                0x0000000008000284       0xb4 ./system/src/cortexm/exception_handlers.o
+                0x0000000008000284                Reset_Handler
+                0x000000000800028c                NMI_Handler
+                0x0000000008000294                HardFault_Handler
+                0x00000000080002a8                HardFault_Handler_C
+                0x00000000080002b8                MemManage_Handler
+                0x00000000080002c0                BusFault_Handler
+                0x00000000080002d4                BusFault_Handler_C
+                0x00000000080002e4                UsageFault_Handler
+                0x00000000080002f8                UsageFault_Handler_C
+                0x0000000008000310                DebugMon_Handler
  .after_vectors
-                0x0000000008000294        0x4 ./system/src/cmsis/vectors_stm32f10x.o
-                0x0000000008000294                EXTI2_IRQHandler
-                0x0000000008000294                TIM8_TRG_COM_IRQHandler
-                0x0000000008000294                TIM8_CC_IRQHandler
-                0x0000000008000294                TIM1_CC_IRQHandler
-                0x0000000008000294                TIM6_IRQHandler
-                0x0000000008000294                PVD_IRQHandler
-                0x0000000008000294                SDIO_IRQHandler
-                0x0000000008000294                CAN2_RX1_IRQHandler
-                0x0000000008000294                EXTI3_IRQHandler
-                0x0000000008000294                TIM8_TRG_COM_TIM14_IRQHandler
-                0x0000000008000294                TIM1_UP_TIM10_IRQHandler
-                0x0000000008000294                TIM8_UP_TIM13_IRQHandler
-                0x0000000008000294                EXTI0_IRQHandler
-                0x0000000008000294                I2C2_EV_IRQHandler
-                0x0000000008000294                CAN1_RX0_IRQHandler
-                0x0000000008000294                TIM1_UP_TIM16_IRQHandler
-                0x0000000008000294                CAN2_SCE_IRQHandler
-                0x0000000008000294                ADC1_2_IRQHandler
-                0x0000000008000294                SPI1_IRQHandler
-                0x0000000008000294                TAMPER_IRQHandler
-                0x0000000008000294                TIM6_DAC_IRQHandler
-                0x0000000008000294                TIM1_BRK_TIM9_IRQHandler
-                0x0000000008000294                CAN2_RX0_IRQHandler
-                0x0000000008000294                TIM8_UP_IRQHandler
-                0x0000000008000294                DMA2_Channel2_IRQHandler
-                0x0000000008000294                DMA1_Channel4_IRQHandler
-                0x0000000008000294                USART3_IRQHandler
-                0x0000000008000294                RTC_IRQHandler
-                0x0000000008000294                DMA1_Channel7_IRQHandler
-                0x0000000008000294                CAN1_RX1_IRQHandler
-                0x0000000008000294                UART5_IRQHandler
-                0x0000000008000294                ADC3_IRQHandler
-                0x0000000008000294                TIM4_IRQHandler
-                0x0000000008000294                DMA2_Channel1_IRQHandler
-                0x0000000008000294                I2C1_EV_IRQHandler
-                0x0000000008000294                DMA1_Channel6_IRQHandler
-                0x0000000008000294                UART4_IRQHandler
-                0x0000000008000294                DMA2_Channel4_IRQHandler
-                0x0000000008000294                TIM3_IRQHandler
-                0x0000000008000294                RCC_IRQHandler
-                0x0000000008000294                TIM8_BRK_TIM12_IRQHandler
-                0x0000000008000294                TIM1_TRG_COM_IRQHandler
-                0x0000000008000294                DMA1_Channel1_IRQHandler
-                0x0000000008000294                Default_Handler
-                0x0000000008000294                CEC_IRQHandler
-                0x0000000008000294                EXTI15_10_IRQHandler
-                0x0000000008000294                TIM14_IRQHandler
-                0x0000000008000294                TIM13_IRQHandler
-                0x0000000008000294                TIM12_IRQHandler
-                0x0000000008000294                TIM7_IRQHandler
-                0x0000000008000294                CAN2_TX_IRQHandler
-                0x0000000008000294                TIM5_IRQHandler
-                0x0000000008000294                EXTI9_5_IRQHandler
-                0x0000000008000294                ETH_WKUP_IRQHandler
-                0x0000000008000294                SPI2_IRQHandler
-                0x0000000008000294                CAN1_TX_IRQHandler
-                0x0000000008000294                DMA2_Channel5_IRQHandler
-                0x0000000008000294                DMA1_Channel5_IRQHandler
-                0x0000000008000294                EXTI4_IRQHandler
-                0x0000000008000294                USB_LP_CAN1_RX0_IRQHandler
-                0x0000000008000294                TIM1_TRG_COM_TIM17_IRQHandler
-                0x0000000008000294                USB_HP_CAN1_TX_IRQHandler
-                0x0000000008000294                DMA1_Channel3_IRQHandler
-                0x0000000008000294                FSMC_IRQHandler
-                0x0000000008000294                ETH_IRQHandler
-                0x0000000008000294                TIM1_UP_IRQHandler
-                0x0000000008000294                WWDG_IRQHandler
-                0x0000000008000294                TIM2_IRQHandler
-                0x0000000008000294                OTG_FS_WKUP_IRQHandler
-                0x0000000008000294                TIM1_TRG_COM_TIM11_IRQHandler
-                0x0000000008000294                TIM1_BRK_IRQHandler
-                0x0000000008000294                EXTI1_IRQHandler
-                0x0000000008000294                RTCAlarm_IRQHandler
-                0x0000000008000294                DMA2_Channel4_5_IRQHandler
-                0x0000000008000294                USART2_IRQHandler
-                0x0000000008000294                I2C2_ER_IRQHandler
-                0x0000000008000294                DMA1_Channel2_IRQHandler
-                0x0000000008000294                TIM8_BRK_IRQHandler
-                0x0000000008000294                CAN1_SCE_IRQHandler
-                0x0000000008000294                FLASH_IRQHandler
-                0x0000000008000294                USART1_IRQHandler
-                0x0000000008000294                OTG_FS_IRQHandler
-                0x0000000008000294                SPI3_IRQHandler
-                0x0000000008000294                I2C1_ER_IRQHandler
-                0x0000000008000294                USBWakeUp_IRQHandler
-                0x0000000008000294                DMA2_Channel3_IRQHandler
-                0x0000000008000294                TIM1_BRK_TIM15_IRQHandler
+                0x0000000008000338        0x8 ./system/src/cmsis/vectors_stm32f10x.o
+                0x0000000008000338                EXTI2_IRQHandler
+                0x0000000008000338                TIM8_TRG_COM_IRQHandler
+                0x0000000008000338                TIM8_CC_IRQHandler
+                0x0000000008000338                TIM1_CC_IRQHandler
+                0x0000000008000338                TIM6_IRQHandler
+                0x0000000008000338                PVD_IRQHandler
+                0x0000000008000338                SDIO_IRQHandler
+                0x0000000008000338                CAN2_RX1_IRQHandler
+                0x0000000008000338                EXTI3_IRQHandler
+                0x0000000008000338                TIM8_TRG_COM_TIM14_IRQHandler
+                0x0000000008000338                TIM1_UP_TIM10_IRQHandler
+                0x0000000008000338                TIM8_UP_TIM13_IRQHandler
+                0x0000000008000338                EXTI0_IRQHandler
+                0x0000000008000338                I2C2_EV_IRQHandler
+                0x0000000008000338                CAN1_RX0_IRQHandler
+                0x0000000008000338                TIM1_UP_TIM16_IRQHandler
+                0x0000000008000338                CAN2_SCE_IRQHandler
+                0x0000000008000338                ADC1_2_IRQHandler
+                0x0000000008000338                SPI1_IRQHandler
+                0x0000000008000338                TAMPER_IRQHandler
+                0x0000000008000338                TIM6_DAC_IRQHandler
+                0x0000000008000338                TIM1_BRK_TIM9_IRQHandler
+                0x0000000008000338                CAN2_RX0_IRQHandler
+                0x0000000008000338                TIM8_UP_IRQHandler
+                0x0000000008000338                DMA2_Channel2_IRQHandler
+                0x0000000008000338                DMA1_Channel4_IRQHandler
+                0x0000000008000338                USART3_IRQHandler
+                0x0000000008000338                RTC_IRQHandler
+                0x0000000008000338                DMA1_Channel7_IRQHandler
+                0x0000000008000338                CAN1_RX1_IRQHandler
+                0x0000000008000338                UART5_IRQHandler
+                0x0000000008000338                ADC3_IRQHandler
+                0x0000000008000338                TIM4_IRQHandler
+                0x0000000008000338                DMA2_Channel1_IRQHandler
+                0x0000000008000338                I2C1_EV_IRQHandler
+                0x0000000008000338                DMA1_Channel6_IRQHandler
+                0x0000000008000338                UART4_IRQHandler
+                0x0000000008000338                DMA2_Channel4_IRQHandler
+                0x0000000008000338                TIM3_IRQHandler
+                0x0000000008000338                RCC_IRQHandler
+                0x0000000008000338                TIM8_BRK_TIM12_IRQHandler
+                0x0000000008000338                TIM1_TRG_COM_IRQHandler
+                0x0000000008000338                DMA1_Channel1_IRQHandler
+                0x0000000008000338                Default_Handler
+                0x0000000008000338                CEC_IRQHandler
+                0x0000000008000338                EXTI15_10_IRQHandler
+                0x0000000008000338                TIM14_IRQHandler
+                0x0000000008000338                TIM13_IRQHandler
+                0x0000000008000338                TIM12_IRQHandler
+                0x0000000008000338                TIM7_IRQHandler
+                0x0000000008000338                CAN2_TX_IRQHandler
+                0x0000000008000338                TIM5_IRQHandler
+                0x0000000008000338                EXTI9_5_IRQHandler
+                0x0000000008000338                ETH_WKUP_IRQHandler
+                0x0000000008000338                SPI2_IRQHandler
+                0x0000000008000338                CAN1_TX_IRQHandler
+                0x0000000008000338                DMA2_Channel5_IRQHandler
+                0x0000000008000338                DMA1_Channel5_IRQHandler
+                0x0000000008000338                EXTI4_IRQHandler
+                0x0000000008000338                USB_LP_CAN1_RX0_IRQHandler
+                0x0000000008000338                TIM1_TRG_COM_TIM17_IRQHandler
+                0x0000000008000338                USB_HP_CAN1_TX_IRQHandler
+                0x0000000008000338                DMA1_Channel3_IRQHandler
+                0x0000000008000338                FSMC_IRQHandler
+                0x0000000008000338                ETH_IRQHandler
+                0x0000000008000338                TIM1_UP_IRQHandler
+                0x0000000008000338                WWDG_IRQHandler
+                0x0000000008000338                TIM2_IRQHandler
+                0x0000000008000338                OTG_FS_WKUP_IRQHandler
+                0x0000000008000338                TIM1_TRG_COM_TIM11_IRQHandler
+                0x0000000008000338                TIM1_BRK_IRQHandler
+                0x0000000008000338                EXTI1_IRQHandler
+                0x0000000008000338                RTCAlarm_IRQHandler
+                0x0000000008000338                DMA2_Channel4_5_IRQHandler
+                0x0000000008000338                USART2_IRQHandler
+                0x0000000008000338                I2C2_ER_IRQHandler
+                0x0000000008000338                DMA1_Channel2_IRQHandler
+                0x0000000008000338                TIM8_BRK_IRQHandler
+                0x0000000008000338                CAN1_SCE_IRQHandler
+                0x0000000008000338                FLASH_IRQHandler
+                0x0000000008000338                USART1_IRQHandler
+                0x0000000008000338                OTG_FS_IRQHandler
+                0x0000000008000338                SPI3_IRQHandler
+                0x0000000008000338                I2C1_ER_IRQHandler
+                0x0000000008000338                USBWakeUp_IRQHandler
+                0x0000000008000338                DMA2_Channel3_IRQHandler
+                0x0000000008000338                TIM1_BRK_TIM15_IRQHandler
 
-.inits          0x0000000008000298       0x28
-                0x0000000008000298                __data_regions_array_start = .
-                0x0000000008000298        0x4 LONG 0x8004ec4 LOADADDR (.data)
-                0x000000000800029c        0x4 LONG 0x20000000 ADDR (.data)
-                0x00000000080002a0        0x4 LONG 0x20000098 (ADDR (.data) + SIZEOF (.data))
-                0x00000000080002a4        0x4 LONG 0x8004ec4 LOADADDR (.data_CCMRAM)
-                0x00000000080002a8        0x4 LONG 0x0 ADDR (.data_CCMRAM)
-                0x00000000080002ac        0x4 LONG 0x0 (ADDR (.data_CCMRAM) + SIZEOF (.data_CCMRAM))
-                0x00000000080002b0                __data_regions_array_end = .
-                0x00000000080002b0                __bss_regions_array_start = .
-                0x00000000080002b0        0x4 LONG 0x20000098 ADDR (.bss)
-                0x00000000080002b4        0x4 LONG 0x20004c48 (ADDR (.bss) + SIZEOF (.bss))
-                0x00000000080002b8        0x4 LONG 0x0 ADDR (.bss_CCMRAM)
-                0x00000000080002bc        0x4 LONG 0x0 (ADDR (.bss_CCMRAM) + SIZEOF (.bss_CCMRAM))
-                0x00000000080002c0                __bss_regions_array_end = .
+.inits          0x0000000008000340       0x28
+                0x0000000008000340                __data_regions_array_start = .
+                0x0000000008000340        0x4 LONG 0x8007178 LOADADDR (.data)
+                0x0000000008000344        0x4 LONG 0x20000000 ADDR (.data)
+                0x0000000008000348        0x4 LONG 0x20000094 (ADDR (.data) + SIZEOF (.data))
+                0x000000000800034c        0x4 LONG 0x8007178 LOADADDR (.data_CCMRAM)
+                0x0000000008000350        0x4 LONG 0x0 ADDR (.data_CCMRAM)
+                0x0000000008000354        0x4 LONG 0x0 (ADDR (.data_CCMRAM) + SIZEOF (.data_CCMRAM))
+                0x0000000008000358                __data_regions_array_end = .
+                0x0000000008000358                __bss_regions_array_start = .
+                0x0000000008000358        0x4 LONG 0x20000094 ADDR (.bss)
+                0x000000000800035c        0x4 LONG 0x20004c48 (ADDR (.bss) + SIZEOF (.bss))
+                0x0000000008000360        0x4 LONG 0x0 ADDR (.bss_CCMRAM)
+                0x0000000008000364        0x4 LONG 0x0 (ADDR (.bss_CCMRAM) + SIZEOF (.bss_CCMRAM))
+                0x0000000008000368                __bss_regions_array_end = .
  *(.init)
  *(.fini)
-                0x00000000080002c0                . = ALIGN (0x4)
-                0x00000000080002c0                PROVIDE (__preinit_array_start, .)
+                0x0000000008000368                . = ALIGN (0x4)
+                0x0000000008000368                PROVIDE (__preinit_array_start, .)
  *(.preinit_array_sysinit .preinit_array_sysinit.*)
  *(.preinit_array_platform .preinit_array_platform.*)
  *(.preinit_array .preinit_array.*)
-                0x00000000080002c0                PROVIDE (__preinit_array_end, .)
-                0x00000000080002c0                . = ALIGN (0x4)
-                0x00000000080002c0                PROVIDE (__init_array_start, .)
+                0x0000000008000368                PROVIDE (__preinit_array_end, .)
+                0x0000000008000368                . = ALIGN (0x4)
+                0x0000000008000368                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array)
-                0x00000000080002c0                PROVIDE (__init_array_end, .)
-                0x00000000080002c0                . = ALIGN (0x4)
-                0x00000000080002c0                PROVIDE (__fini_array_start, .)
+                0x0000000008000368                PROVIDE (__init_array_end, .)
+                0x0000000008000368                . = ALIGN (0x4)
+                0x0000000008000368                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array)
-                0x00000000080002c0                PROVIDE (__fini_array_end, .)
+                0x0000000008000368                PROVIDE (__fini_array_end, .)
 
 .flashtext
  *(.flashtext .flashtext.*)
 
-.text           0x00000000080002c0     0x4c01
+.text           0x0000000008000368     0x6e0d
  *(.text .text.*)
  .text.NVIC_SetVectorTable
-                0x00000000080002c0       0x44 ./system/src/stm32f1-stdperiph/misc.o
-                0x00000000080002c0                NVIC_SetVectorTable
+                0x0000000008000368       0x58 ./system/src/stm32f1-stdperiph/misc.o
+                0x0000000008000368                NVIC_SetVectorTable
  .text.FLASH_SetLatency
-                0x0000000008000304       0x28 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
-                0x0000000008000304                FLASH_SetLatency
+                0x00000000080003c0       0x54 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+                0x00000000080003c0                FLASH_SetLatency
  .text.FLASH_PrefetchBufferCmd
-                0x000000000800032c       0x30 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
-                0x000000000800032c                FLASH_PrefetchBufferCmd
+                0x0000000008000414       0x44 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+                0x0000000008000414                FLASH_PrefetchBufferCmd
  .text.GPIO_Init
-                0x000000000800035c      0x12c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                0x000000000800035c                GPIO_Init
+                0x0000000008000458      0x254 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000008000458                GPIO_Init
  .text.GPIO_StructInit
-                0x0000000008000488       0x10 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                0x0000000008000488                GPIO_StructInit
+                0x00000000080006ac       0x28 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x00000000080006ac                GPIO_StructInit
  .text.GPIO_ReadInputDataBit
-                0x0000000008000498       0xb8 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                0x0000000008000498                GPIO_ReadInputDataBit
+                0x00000000080006d4      0x10c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x00000000080006d4                GPIO_ReadInputDataBit
  .text.GPIO_ReadInputData
-                0x0000000008000550       0x54 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                0x0000000008000550                GPIO_ReadInputData
+                0x00000000080007e0       0x78 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x00000000080007e0                GPIO_ReadInputData
  .text.GPIO_SetBits
-                0x00000000080005a4       0x60 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                0x00000000080005a4                GPIO_SetBits
+                0x0000000008000858       0x8c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000008000858                GPIO_SetBits
  .text.GPIO_ResetBits
-                0x0000000008000604       0x60 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                0x0000000008000604                GPIO_ResetBits
+                0x00000000080008e4       0x8c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x00000000080008e4                GPIO_ResetBits
  .text.GPIO_Write
-                0x0000000008000664       0x54 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                0x0000000008000664                GPIO_Write
+                0x0000000008000970       0x7c ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                0x0000000008000970                GPIO_Write
  .text.RCC_DeInit
-                0x00000000080006b8       0x40 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x00000000080006b8                RCC_DeInit
+                0x00000000080009ec       0x5c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x00000000080009ec                RCC_DeInit
  .text.RCC_HSEConfig
-                0x00000000080006f8       0x5c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x00000000080006f8                RCC_HSEConfig
- .text.RCC_PLLConfig
-                0x0000000008000754       0x98 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x0000000008000754                RCC_PLLConfig
- .text.RCC_PLLCmd
-                0x00000000080007ec       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x00000000080007ec                RCC_PLLCmd
- .text.RCC_SYSCLKConfig
-                0x000000000800080c       0x28 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x000000000800080c                RCC_SYSCLKConfig
- .text.RCC_GetSYSCLKSource
-                0x0000000008000834       0x10 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x0000000008000834                RCC_GetSYSCLKSource
- .text.RCC_HCLKConfig
-                0x0000000008000844       0x48 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x0000000008000844                RCC_HCLKConfig
- .text.RCC_PCLK1Config
-                0x000000000800088c       0x40 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x000000000800088c                RCC_PCLK1Config
- .text.RCC_PCLK2Config
-                0x00000000080008cc       0x40 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x00000000080008cc                RCC_PCLK2Config
- .text.RCC_APB2PeriphClockCmd
-                0x000000000800090c       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x000000000800090c                RCC_APB2PeriphClockCmd
- .text.RCC_GetFlagStatus
-                0x0000000008000958       0x70 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x0000000008000958                RCC_GetFlagStatus
+                0x0000000008000a48       0x7c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000a48                RCC_HSEConfig
  .text.RCC_WaitForHSEStartUp
-                0x00000000080009c8       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                0x00000000080009c8                RCC_WaitForHSEStartUp
+                0x0000000008000ac4       0x50 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000ac4                RCC_WaitForHSEStartUp
+ .text.RCC_PLLConfig
+                0x0000000008000b14       0xdc ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000b14                RCC_PLLConfig
+ .text.RCC_PLLCmd
+                0x0000000008000bf0       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000bf0                RCC_PLLCmd
+ .text.RCC_SYSCLKConfig
+                0x0000000008000c24       0x54 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000c24                RCC_SYSCLKConfig
+ .text.RCC_GetSYSCLKSource
+                0x0000000008000c78       0x20 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000c78                RCC_GetSYSCLKSource
+ .text.RCC_HCLKConfig
+                0x0000000008000c98       0x78 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000c98                RCC_HCLKConfig
+ .text.RCC_PCLK1Config
+                0x0000000008000d10       0x68 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000d10                RCC_PCLK1Config
+ .text.RCC_PCLK2Config
+                0x0000000008000d78       0x68 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000d78                RCC_PCLK2Config
+ .text.RCC_APB2PeriphClockCmd
+                0x0000000008000de0       0x70 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000de0                RCC_APB2PeriphClockCmd
+ .text.RCC_GetFlagStatus
+                0x0000000008000e50       0xc0 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                0x0000000008000e50                RCC_GetFlagStatus
  .text.SPI_Init
-                0x00000000080009fc      0x12c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
-                0x00000000080009fc                SPI_Init
- .text.SPI_Cmd  0x0000000008000b28       0x58 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
-                0x0000000008000b28                SPI_Cmd
+                0x0000000008000f10      0x1d0 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x0000000008000f10                SPI_Init
+ .text.SPI_Cmd  0x00000000080010e0       0x84 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x00000000080010e0                SPI_Cmd
  .text.SPI_I2S_SendData
-                0x0000000008000b80       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
-                0x0000000008000b80                SPI_I2S_SendData
+                0x0000000008001164       0x4c ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x0000000008001164                SPI_I2S_SendData
  .text.SPI_I2S_ReceiveData
-                0x0000000008000bb4       0x34 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
-                0x0000000008000bb4                SPI_I2S_ReceiveData
+                0x00000000080011b0       0x48 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x00000000080011b0                SPI_I2S_ReceiveData
  .text.SPI_SSOutputCmd
-                0x0000000008000be8       0x58 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
-                0x0000000008000be8                SPI_SSOutputCmd
+                0x00000000080011f8       0x84 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x00000000080011f8                SPI_SSOutputCmd
  .text.SPI_I2S_GetFlagStatus
-                0x0000000008000c40       0x68 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
-                0x0000000008000c40                SPI_I2S_GetFlagStatus
- .text._exit    0x0000000008000ca8        0x4 ./system/src/newlib/_exit.o
-                0x0000000008000ca8                _exit
- .text.abort    0x0000000008000cac        0x8 ./system/src/newlib/_exit.o
-                0x0000000008000cac                abort
- .text._sbrk    0x0000000008000cb4       0x44 ./system/src/newlib/_sbrk.o
-                0x0000000008000cb4                _sbrk
+                0x000000000800127c       0xa0 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                0x000000000800127c                SPI_I2S_GetFlagStatus
+ .text._exit    0x000000000800131c        0xc ./system/src/newlib/_exit.o
+                0x000000000800131c                _exit
+ .text.abort    0x0000000008001328       0x14 ./system/src/newlib/_exit.o
+                0x0000000008001328                abort
+ .text._sbrk    0x000000000800133c       0x68 ./system/src/newlib/_sbrk.o
+                0x000000000800133c                _sbrk
  .text.__initialize_args
-                0x0000000008000cf8       0x10 ./system/src/newlib/_syscalls.o
-                0x0000000008000cf8                __initialize_args
+                0x00000000080013a4       0x28 ./system/src/newlib/_syscalls.o
+                0x00000000080013a4                __initialize_args
  .text.assert_failed
-                0x0000000008000d08        0x8 ./system/src/newlib/assert.o
-                0x0000000008000d08                assert_failed
+                0x00000000080013cc       0x18 ./system/src/newlib/assert.o
+                0x00000000080013cc                assert_failed
  .text.__initialize_hardware_early
-                0x0000000008000d10       0x18 ./system/src/cortexm/_initialize_hardware.o
-                0x0000000008000d10                __initialize_hardware_early
+                0x00000000080013e4       0x18 ./system/src/cortexm/_initialize_hardware.o
+                0x00000000080013e4                __initialize_hardware_early
  .text.__initialize_hardware
-                0x0000000008000d28        0x8 ./system/src/cortexm/_initialize_hardware.o
-                0x0000000008000d28                __initialize_hardware
- .text.SetSysClockTo72
-                0x0000000008000d30       0xc4 ./system/src/cmsis/system_stm32f10x.o
- .text.SetSysClock
-                0x0000000008000df4        0x8 ./system/src/cmsis/system_stm32f10x.o
+                0x00000000080013fc        0xc ./system/src/cortexm/_initialize_hardware.o
+                0x00000000080013fc                __initialize_hardware
  .text.SystemInit
-                0x0000000008000dfc       0x50 ./system/src/cmsis/system_stm32f10x.o
-                0x0000000008000dfc                SystemInit
+                0x0000000008001408       0x68 ./system/src/cmsis/system_stm32f10x.o
+                0x0000000008001408                SystemInit
  .text.SystemCoreClockUpdate
-                0x0000000008000e4c       0x94 ./system/src/cmsis/system_stm32f10x.o
-                0x0000000008000e4c                SystemCoreClockUpdate
+                0x0000000008001470       0xdc ./system/src/cmsis/system_stm32f10x.o
+                0x0000000008001470                SystemCoreClockUpdate
+ .text.SetSysClock
+                0x000000000800154c        0xc ./system/src/cmsis/system_stm32f10x.o
+ .text.SetSysClockTo72
+                0x0000000008001558      0x100 ./system/src/cmsis/system_stm32f10x.o
  .text.GLCD_Delay
-                0x0000000008000ee0       0xc4 ./src/ks0108.o
-                0x0000000008000ee0                GLCD_Delay
+                0x0000000008001658       0xcc ./src/ks0108.o
+                0x0000000008001658                GLCD_Delay
  .text.GLCD_EnableController
-                0x0000000008000fa4       0x38 ./src/ks0108.o
-                0x0000000008000fa4                GLCD_EnableController
+                0x0000000008001724       0x48 ./src/ks0108.o
+                0x0000000008001724                GLCD_EnableController
  .text.GLCD_DisableController
-                0x0000000008000fdc       0x38 ./src/ks0108.o
-                0x0000000008000fdc                GLCD_DisableController
+                0x000000000800176c       0x48 ./src/ks0108.o
+                0x000000000800176c                GLCD_DisableController
  .text.GLCD_ReadStatus
-                0x0000000008001014       0x70 ./src/ks0108.o
-                0x0000000008001014                GLCD_ReadStatus
+                0x00000000080017b4       0x80 ./src/ks0108.o
+                0x00000000080017b4                GLCD_ReadStatus
  .text.GLCD_WriteCommand
-                0x0000000008001084       0x88 ./src/ks0108.o
-                0x0000000008001084                GLCD_WriteCommand
+                0x0000000008001834       0xac ./src/ks0108.o
+                0x0000000008001834                GLCD_WriteCommand
  .text.GLCD_WriteData
-                0x000000000800110c       0xa0 ./src/ks0108.o
-                0x000000000800110c                GLCD_WriteData
+                0x00000000080018e0       0xc8 ./src/ks0108.o
+                0x00000000080018e0                GLCD_WriteData
  .text.GLCD_InitializePorts
-                0x00000000080011ac       0x40 ./src/ks0108.o
-                0x00000000080011ac                GLCD_InitializePorts
+                0x00000000080019a8       0x44 ./src/ks0108.o
+                0x00000000080019a8                GLCD_InitializePorts
  .text.GLCD_ReadByteFromROMMemory
-                0x00000000080011ec        0x4 ./src/ks0108.o
-                0x00000000080011ec                GLCD_ReadByteFromROMMemory
+                0x00000000080019ec       0x1c ./src/ks0108.o
+                0x00000000080019ec                GLCD_ReadByteFromROMMemory
  .text.GLCD_Initialize
-                0x00000000080011f0       0x1c ./src/ks0108.o
-                0x00000000080011f0                GLCD_Initialize
+                0x0000000008001a08       0x2c ./src/ks0108.o
+                0x0000000008001a08                GLCD_Initialize
  .text.GLCD_GoTo
-                0x000000000800120c       0x58 ./src/ks0108.o
-                0x000000000800120c                GLCD_GoTo
+                0x0000000008001a34       0x94 ./src/ks0108.o
+                0x0000000008001a34                GLCD_GoTo
  .text.GLCD_ClearScreen
-                0x0000000008001264       0x2c ./src/ks0108.o
-                0x0000000008001264                GLCD_ClearScreen
+                0x0000000008001ac8       0x44 ./src/ks0108.o
+                0x0000000008001ac8                GLCD_ClearScreen
  .text.GLCD_ClearLine
-                0x0000000008001290       0x28 ./src/ks0108.o
-                0x0000000008001290                GLCD_ClearLine
+                0x0000000008001b0c       0x44 ./src/ks0108.o
+                0x0000000008001b0c                GLCD_ClearLine
  .text.GLCD_WriteChar
-                0x00000000080012b8       0x48 ./src/ks0108.o
-                0x00000000080012b8                GLCD_WriteChar
+                0x0000000008001b50       0x7c ./src/ks0108.o
+                0x0000000008001b50                GLCD_WriteChar
  .text.GLCD_WriteString
-                0x0000000008001300       0x20 ./src/ks0108.o
-                0x0000000008001300                GLCD_WriteString
+                0x0000000008001bcc       0x40 ./src/ks0108.o
+                0x0000000008001bcc                GLCD_WriteString
  .text.vTaskLCD
-                0x0000000008001320       0x50 ./src/main.o
-                0x0000000008001320                vTaskLCD
- .text.vTaskSD  0x0000000008001370      0x130 ./src/main.o
-                0x0000000008001370                vTaskSD
+                0x0000000008001c0c       0x68 ./src/main.o
+                0x0000000008001c0c                vTaskLCD
+ .text.vTaskSD  0x0000000008001c74      0x1bc ./src/main.o
+                0x0000000008001c74                vTaskSD
  .text.vTaskCheckKey
-                0x00000000080014a0       0x64 ./src/main.o
-                0x00000000080014a0                vTaskCheckKey
+                0x0000000008001e30       0x58 ./src/main.o
+                0x0000000008001e30                vTaskCheckKey
  .text.vSystemUpTime
-                0x0000000008001504      0x16c ./src/main.o
-                0x0000000008001504                vSystemUpTime
- .text.main     0x0000000008001670       0xc0 ./src/main.o
-                0x0000000008001670                main
+                0x0000000008001e88      0x24c ./src/main.o
+                0x0000000008001e88                vSystemUpTime
+ .text.main     0x00000000080020d4       0xdc ./src/main.o
+                0x00000000080020d4                main
  .text.SD_mount
-                0x0000000008001730       0x10 ./src/sd_stm32.o
-                0x0000000008001730                SD_mount
+                0x00000000080021b0       0x1c ./src/sd_stm32.o
+                0x00000000080021b0                SD_mount
  .text.SD_open_file
-                0x0000000008001740       0x48 ./src/sd_stm32.o
-                0x0000000008001740                SD_open_file
+                0x00000000080021cc       0xa4 ./src/sd_stm32.o
+                0x00000000080021cc                SD_open_file
+ .text.NVIC_SetPriority
+                0x0000000008002270       0x54 ./my_initialize/initialize.o
+ .text.init     0x00000000080022c4       0x18 ./my_initialize/initialize.o
+                0x00000000080022c4                init
  .text.GPIO_Config
-                0x0000000008001788       0xb0 ./my_initialize/initialize.o
-                0x0000000008001788                GPIO_Config
- .text.NVIC_Config
-                0x0000000008001838       0x10 ./my_initialize/initialize.o
-                0x0000000008001838                NVIC_Config
- .text.SPI_Config
-                0x0000000008001848       0x5c ./my_initialize/initialize.o
-                0x0000000008001848                SPI_Config
- .text.SysTick_Config_Mod
-                0x00000000080018a4       0x54 ./my_initialize/initialize.o
-                0x00000000080018a4                SysTick_Config_Mod
+                0x00000000080022dc       0xa4 ./my_initialize/initialize.o
+                0x00000000080022dc                GPIO_Config
  .text.RCC_Config
-                0x00000000080018f8       0x80 ./my_initialize/initialize.o
-                0x00000000080018f8                RCC_Config
- .text.init     0x0000000008001978       0x14 ./my_initialize/initialize.o
-                0x0000000008001978                init
+                0x0000000008002380       0x98 ./my_initialize/initialize.o
+                0x0000000008002380                RCC_Config
+ .text.NVIC_Config
+                0x0000000008002418       0x10 ./my_initialize/initialize.o
+                0x0000000008002418                NVIC_Config
+ .text.SPI_Config
+                0x0000000008002428       0x54 ./my_initialize/initialize.o
+                0x0000000008002428                SPI_Config
+ .text.SysTick_Config_Mod
+                0x000000000800247c       0x7c ./my_initialize/initialize.o
+                0x000000000800247c                SysTick_Config_Mod
  .text.pvPortMalloc
-                0x000000000800198c       0x5c ./FreeRTOS/source/heap_3.o
-                0x000000000800198c                pvPortMalloc
+                0x00000000080024f8       0x8c ./FreeRTOS/source/heap_3.o
+                0x00000000080024f8                pvPortMalloc
  .text.vPortFree
-                0x00000000080019e8        0x4 ./FreeRTOS/source/heap_3.o
-                0x00000000080019e8                vPortFree
+                0x0000000008002584       0x14 ./FreeRTOS/source/heap_3.o
+                0x0000000008002584                vPortFree
  .text.vListInitialise
-                0x00000000080019ec       0x18 ./FreeRTOS/source/list.o
-                0x00000000080019ec                vListInitialise
+                0x0000000008002598       0x40 ./FreeRTOS/source/list.o
+                0x0000000008002598                vListInitialise
  .text.vListInitialiseItem
-                0x0000000008001a04        0x8 ./FreeRTOS/source/list.o
-                0x0000000008001a04                vListInitialiseItem
+                0x00000000080025d8       0x18 ./FreeRTOS/source/list.o
+                0x00000000080025d8                vListInitialiseItem
  .text.vListInsertEnd
-                0x0000000008001a0c       0x18 ./FreeRTOS/source/list.o
-                0x0000000008001a0c                vListInsertEnd
+                0x00000000080025f0       0x48 ./FreeRTOS/source/list.o
+                0x00000000080025f0                vListInsertEnd
  .text.vListInsert
-                0x0000000008001a24       0x34 ./FreeRTOS/source/list.o
-                0x0000000008001a24                vListInsert
+                0x0000000008002638       0x70 ./FreeRTOS/source/list.o
+                0x0000000008002638                vListInsert
  .text.uxListRemove
-                0x0000000008001a58       0x24 ./FreeRTOS/source/list.o
-                0x0000000008001a58                uxListRemove
- .text.prvPortStartFirstTask
-                0x0000000008001a7c       0x20 ./FreeRTOS/source/port.o
+                0x00000000080026a8       0x54 ./FreeRTOS/source/list.o
+                0x00000000080026a8                uxListRemove
  .text.pxPortInitialiseStack
-                0x0000000008001a9c       0x20 ./FreeRTOS/source/port.o
-                0x0000000008001a9c                pxPortInitialiseStack
- .text.SVC_Handler
-                0x0000000008001abc       0x24 ./FreeRTOS/source/port.o
-                0x0000000008001abc                SVC_Handler
- .text.vPortYield
-                0x0000000008001ae0       0x18 ./FreeRTOS/source/port.o
-                0x0000000008001ae0                vPortYield
- .text.ulPortSetInterruptMask
-                0x0000000008001af8       0x10 ./FreeRTOS/source/port.o
-                0x0000000008001af8                ulPortSetInterruptMask
+                0x00000000080026fc       0x58 ./FreeRTOS/source/port.o
+                0x00000000080026fc                pxPortInitialiseStack
  .text.prvTaskExitError
-                0x0000000008001b08        0x8 ./FreeRTOS/source/port.o
- .text.vPortEnterCritical
-                0x0000000008001b10       0x1c ./FreeRTOS/source/port.o
-                0x0000000008001b10                vPortEnterCritical
- .text.vPortClearInterruptMask
-                0x0000000008001b2c        0x8 ./FreeRTOS/source/port.o
-                0x0000000008001b2c                vPortClearInterruptMask
- .text.vPortExitCritical
-                0x0000000008001b34       0x18 ./FreeRTOS/source/port.o
-                0x0000000008001b34                vPortExitCritical
- .text.PendSV_Handler
-                0x0000000008001b4c       0x44 ./FreeRTOS/source/port.o
-                0x0000000008001b4c                PendSV_Handler
- .text.SysTick_Handler
-                0x0000000008001b90       0x20 ./FreeRTOS/source/port.o
-                0x0000000008001b90                SysTick_Handler
- .text.vPortSetupTimerInterrupt
-                0x0000000008001bb0       0x18 ./FreeRTOS/source/port.o
-                0x0000000008001bb0                vPortSetupTimerInterrupt
+                0x0000000008002754        0xc ./FreeRTOS/source/port.o
+ .text.SVC_Handler
+                0x0000000008002760       0x24 ./FreeRTOS/source/port.o
+                0x0000000008002760                SVC_Handler
+ .text.prvPortStartFirstTask
+                0x0000000008002784       0x20 ./FreeRTOS/source/port.o
  .text.xPortStartScheduler
-                0x0000000008001bc8       0x30 ./FreeRTOS/source/port.o
-                0x0000000008001bc8                xPortStartScheduler
- .text.prvIsQueueFull
-                0x0000000008001bf8       0x20 ./FreeRTOS/source/queue.o
- .text.prvIsQueueEmpty
-                0x0000000008001c18       0x1c ./FreeRTOS/source/queue.o
- .text.prvCopyDataToQueue
-                0x0000000008001c34       0x7c ./FreeRTOS/source/queue.o
- .text.prvCopyDataFromQueue
-                0x0000000008001cb0       0x24 ./FreeRTOS/source/queue.o
- .text.prvUnlockQueue
-                0x0000000008001cd4       0x64 ./FreeRTOS/source/queue.o
+                0x00000000080027a4       0x3c ./FreeRTOS/source/port.o
+                0x00000000080027a4                xPortStartScheduler
+ .text.vPortYield
+                0x00000000080027e0       0x20 ./FreeRTOS/source/port.o
+                0x00000000080027e0                vPortYield
+ .text.vPortEnterCritical
+                0x0000000008002800       0x20 ./FreeRTOS/source/port.o
+                0x0000000008002800                vPortEnterCritical
+ .text.vPortExitCritical
+                0x0000000008002820       0x24 ./FreeRTOS/source/port.o
+                0x0000000008002820                vPortExitCritical
+ .text.ulPortSetInterruptMask
+                0x0000000008002844       0x14 ./FreeRTOS/source/port.o
+                0x0000000008002844                ulPortSetInterruptMask
+ .text.vPortClearInterruptMask
+                0x0000000008002858        0x8 ./FreeRTOS/source/port.o
+                0x0000000008002858                vPortClearInterruptMask
+ .text.PendSV_Handler
+                0x0000000008002860       0x44 ./FreeRTOS/source/port.o
+                0x0000000008002860                PendSV_Handler
+ .text.SysTick_Handler
+                0x00000000080028a4       0x28 ./FreeRTOS/source/port.o
+                0x00000000080028a4                SysTick_Handler
+ .text.vPortSetupTimerInterrupt
+                0x00000000080028cc       0x24 ./FreeRTOS/source/port.o
+                0x00000000080028cc                vPortSetupTimerInterrupt
  .text.xQueueGenericReset
-                0x0000000008001d38       0x5c ./FreeRTOS/source/queue.o
-                0x0000000008001d38                xQueueGenericReset
+                0x00000000080028f0       0xa4 ./FreeRTOS/source/queue.o
+                0x00000000080028f0                xQueueGenericReset
  .text.xQueueGenericCreate
-                0x0000000008001d94       0x40 ./FreeRTOS/source/queue.o
-                0x0000000008001d94                xQueueGenericCreate
- .text.xQueueGenericSend
-                0x0000000008001dd4       0xd8 ./FreeRTOS/source/queue.o
-                0x0000000008001dd4                xQueueGenericSend
+                0x0000000008002994       0x84 ./FreeRTOS/source/queue.o
+                0x0000000008002994                xQueueGenericCreate
  .text.xQueueCreateMutex
-                0x0000000008001eac       0x4c ./FreeRTOS/source/queue.o
-                0x0000000008001eac                xQueueCreateMutex
+                0x0000000008002a18       0x84 ./FreeRTOS/source/queue.o
+                0x0000000008002a18                xQueueCreateMutex
+ .text.xQueueGenericSend
+                0x0000000008002a9c      0x124 ./FreeRTOS/source/queue.o
+                0x0000000008002a9c                xQueueGenericSend
  .text.xQueueGenericReceive
-                0x0000000008001ef8      0x100 ./FreeRTOS/source/queue.o
-                0x0000000008001ef8                xQueueGenericReceive
- .text.prvResetNextTaskUnblockTime
-                0x0000000008001ff8       0x34 ./FreeRTOS/source/tasks.o
- .text.prvDeleteTCB
-                0x000000000800202c       0x14 ./FreeRTOS/source/tasks.o
- .text.prvAllocateTCBAndStack
-                0x0000000008002040       0x3c ./FreeRTOS/source/tasks.o
- .text.prvInitialiseTCBVariables
-                0x000000000800207c       0x50 ./FreeRTOS/source/tasks.o
- .text.prvInitialiseTaskLists
-                0x00000000080020cc       0x68 ./FreeRTOS/source/tasks.o
- .text.prvAddCurrentTaskToDelayedList
-                0x0000000008002134       0x54 ./FreeRTOS/source/tasks.o
+                0x0000000008002bc0      0x170 ./FreeRTOS/source/queue.o
+                0x0000000008002bc0                xQueueGenericReceive
+ .text.prvCopyDataToQueue
+                0x0000000008002d30       0xdc ./FreeRTOS/source/queue.o
+ .text.prvCopyDataFromQueue
+                0x0000000008002e0c       0x4c ./FreeRTOS/source/queue.o
+ .text.prvUnlockQueue
+                0x0000000008002e58       0x98 ./FreeRTOS/source/queue.o
+ .text.prvIsQueueEmpty
+                0x0000000008002ef0       0x2c ./FreeRTOS/source/queue.o
+ .text.prvIsQueueFull
+                0x0000000008002f1c       0x30 ./FreeRTOS/source/queue.o
  .text.xTaskGenericCreate
-                0x0000000008002188       0xf4 ./FreeRTOS/source/tasks.o
-                0x0000000008002188                xTaskGenericCreate
- .text.vTaskStartScheduler
-                0x000000000800227c       0x48 ./FreeRTOS/source/tasks.o
-                0x000000000800227c                vTaskStartScheduler
- .text.vTaskSuspendAll
-                0x00000000080022c4       0x10 ./FreeRTOS/source/tasks.o
-                0x00000000080022c4                vTaskSuspendAll
- .text.xTaskGetTickCount
-                0x00000000080022d4        0xc ./FreeRTOS/source/tasks.o
-                0x00000000080022d4                xTaskGetTickCount
- .text.xTaskIncrementTick
-                0x00000000080022e0      0x10c ./FreeRTOS/source/tasks.o
-                0x00000000080022e0                xTaskIncrementTick
- .text.xTaskResumeAll
-                0x00000000080023ec       0xd0 ./FreeRTOS/source/tasks.o
-                0x00000000080023ec                xTaskResumeAll
+                0x0000000008002f4c      0x140 ./FreeRTOS/source/tasks.o
+                0x0000000008002f4c                xTaskGenericCreate
  .text.vTaskDelayUntil
-                0x00000000080024bc       0x80 ./FreeRTOS/source/tasks.o
-                0x00000000080024bc                vTaskDelayUntil
- .text.prvCheckTasksWaitingTermination
-                0x000000000800253c       0x54 ./FreeRTOS/source/tasks.o
- .text.prvIdleTask
-                0x0000000008002590       0x18 ./FreeRTOS/source/tasks.o
+                0x000000000800308c       0xb8 ./FreeRTOS/source/tasks.o
+                0x000000000800308c                vTaskDelayUntil
+ .text.vTaskStartScheduler
+                0x0000000008003144       0x54 ./FreeRTOS/source/tasks.o
+                0x0000000008003144                vTaskStartScheduler
+ .text.vTaskSuspendAll
+                0x0000000008003198       0x1c ./FreeRTOS/source/tasks.o
+                0x0000000008003198                vTaskSuspendAll
+ .text.xTaskResumeAll
+                0x00000000080031b4      0x100 ./FreeRTOS/source/tasks.o
+                0x00000000080031b4                xTaskResumeAll
+ .text.xTaskGetTickCount
+                0x00000000080032b4       0x20 ./FreeRTOS/source/tasks.o
+                0x00000000080032b4                xTaskGetTickCount
+ .text.xTaskIncrementTick
+                0x00000000080032d4      0x160 ./FreeRTOS/source/tasks.o
+                0x00000000080032d4                xTaskIncrementTick
  .text.vTaskSwitchContext
-                0x00000000080025a8       0x78 ./FreeRTOS/source/tasks.o
-                0x00000000080025a8                vTaskSwitchContext
+                0x0000000008003434       0x8c ./FreeRTOS/source/tasks.o
+                0x0000000008003434                vTaskSwitchContext
  .text.vTaskPlaceOnEventList
-                0x0000000008002620       0x5c ./FreeRTOS/source/tasks.o
-                0x0000000008002620                vTaskPlaceOnEventList
+                0x00000000080034c0       0x80 ./FreeRTOS/source/tasks.o
+                0x00000000080034c0                vTaskPlaceOnEventList
  .text.xTaskRemoveFromEventList
-                0x000000000800267c       0x78 ./FreeRTOS/source/tasks.o
-                0x000000000800267c                xTaskRemoveFromEventList
+                0x0000000008003540       0xac ./FreeRTOS/source/tasks.o
+                0x0000000008003540                xTaskRemoveFromEventList
  .text.vTaskSetTimeOutState
-                0x00000000080026f4       0x18 ./FreeRTOS/source/tasks.o
-                0x00000000080026f4                vTaskSetTimeOutState
+                0x00000000080035ec       0x2c ./FreeRTOS/source/tasks.o
+                0x00000000080035ec                vTaskSetTimeOutState
  .text.xTaskCheckForTimeOut
-                0x000000000800270c       0x58 ./FreeRTOS/source/tasks.o
-                0x000000000800270c                xTaskCheckForTimeOut
+                0x0000000008003618       0x88 ./FreeRTOS/source/tasks.o
+                0x0000000008003618                xTaskCheckForTimeOut
  .text.vTaskMissedYield
-                0x0000000008002764        0xc ./FreeRTOS/source/tasks.o
-                0x0000000008002764                vTaskMissedYield
+                0x00000000080036a0       0x18 ./FreeRTOS/source/tasks.o
+                0x00000000080036a0                vTaskMissedYield
+ .text.prvIdleTask
+                0x00000000080036b8       0x20 ./FreeRTOS/source/tasks.o
+ .text.prvInitialiseTCBVariables
+                0x00000000080036d8       0xa4 ./FreeRTOS/source/tasks.o
+ .text.prvInitialiseTaskLists
+                0x000000000800377c       0x7c ./FreeRTOS/source/tasks.o
+ .text.prvCheckTasksWaitingTermination
+                0x00000000080037f8       0x74 ./FreeRTOS/source/tasks.o
+ .text.prvAddCurrentTaskToDelayedList
+                0x000000000800386c       0x6c ./FreeRTOS/source/tasks.o
+ .text.prvAllocateTCBAndStack
+                0x00000000080038d8       0x70 ./FreeRTOS/source/tasks.o
+ .text.prvDeleteTCB
+                0x0000000008003948       0x20 ./FreeRTOS/source/tasks.o
+ .text.prvResetNextTaskUnblockTime
+                0x0000000008003968       0x48 ./FreeRTOS/source/tasks.o
  .text.vTaskPriorityInherit
-                0x0000000008002770       0xa8 ./FreeRTOS/source/tasks.o
-                0x0000000008002770                vTaskPriorityInherit
+                0x00000000080039b0       0xf0 ./FreeRTOS/source/tasks.o
+                0x00000000080039b0                vTaskPriorityInherit
  .text.xTaskPriorityDisinherit
-                0x0000000008002818       0x80 ./FreeRTOS/source/tasks.o
-                0x0000000008002818                xTaskPriorityDisinherit
+                0x0000000008003aa0       0xcc ./FreeRTOS/source/tasks.o
+                0x0000000008003aa0                xTaskPriorityDisinherit
  .text.pvTaskIncrementMutexHeldCount
-                0x0000000008002898       0x1c ./FreeRTOS/source/tasks.o
-                0x0000000008002898                pvTaskIncrementMutexHeldCount
- .text.mem_cpy  0x00000000080028b4       0x14 ./FATFs/ff.o
- .text.mem_set  0x00000000080028c8       0x10 ./FATFs/ff.o
- .text.mem_cmp  0x00000000080028d8       0x24 ./FATFs/ff.o
- .text.chk_chr  0x00000000080028fc       0x14 ./FATFs/ff.o
- .text.create_name
-                0x0000000008002910      0x108 ./FATFs/ff.o
- .text.get_fileinfo
-                0x0000000008002a18       0x88 ./FATFs/ff.o
+                0x0000000008003b6c       0x28 ./FreeRTOS/source/tasks.o
+                0x0000000008003b6c                pvTaskIncrementMutexHeldCount
+ .text.mem_cpy  0x0000000008003b94       0x3c ./FATFs/ff.o
+ .text.mem_set  0x0000000008003bd0       0x34 ./FATFs/ff.o
+ .text.mem_cmp  0x0000000008003c04       0x50 ./FATFs/ff.o
+ .text.chk_chr  0x0000000008003c54       0x38 ./FATFs/ff.o
  .text.move_window
-                0x0000000008002aa0       0x80 ./FATFs/ff.o
- .text.check_fs
-                0x0000000008002b20       0x90 ./FATFs/ff.o
- .text.validate
-                0x0000000008002bb0       0x30 ./FATFs/ff.o
- .text.chk_mounted
-                0x0000000008002be0      0x350 ./FATFs/ff.o
- .text.sync     0x0000000008002f30       0xbc ./FATFs/ff.o
+                0x0000000008003c8c       0xbc ./FATFs/ff.o
+ .text.sync     0x0000000008003d48      0x14c ./FATFs/ff.o
  .text.clust2sect
-                0x0000000008002fec       0x18 ./FATFs/ff.o
-                0x0000000008002fec                clust2sect
- .text.get_fat  0x0000000008003004       0xe8 ./FATFs/ff.o
-                0x0000000008003004                get_fat
- .text.dir_sdi  0x00000000080030ec       0x94 ./FATFs/ff.o
- .text.put_fat  0x0000000008003180      0x108 ./FATFs/ff.o
-                0x0000000008003180                put_fat
- .text.create_chain
-                0x0000000008003288       0xac ./FATFs/ff.o
- .text.dir_next
-                0x0000000008003334      0x124 ./FATFs/ff.o
- .text.dir_find
-                0x0000000008003458       0x48 ./FATFs/ff.o
- .text.follow_path
-                0x00000000080034a0       0x90 ./FATFs/ff.o
- .text.dir_register
-                0x0000000008003530       0x60 ./FATFs/ff.o
- .text.dir_read
-                0x0000000008003590       0x48 ./FATFs/ff.o
+                0x0000000008003e94       0x40 ./FATFs/ff.o
+                0x0000000008003e94                clust2sect
+ .text.get_fat  0x0000000008003ed4      0x158 ./FATFs/ff.o
+                0x0000000008003ed4                get_fat
+ .text.put_fat  0x000000000800402c      0x1f4 ./FATFs/ff.o
+                0x000000000800402c                put_fat
  .text.remove_chain
-                0x00000000080035d8       0x64 ./FATFs/ff.o
- .text.f_mount  0x000000000800363c       0x28 ./FATFs/ff.o
-                0x000000000800363c                f_mount
- .text.f_open   0x0000000008003664      0x158 ./FATFs/ff.o
-                0x0000000008003664                f_open
- .text.f_read   0x00000000080037bc      0x1ac ./FATFs/ff.o
-                0x00000000080037bc                f_read
- .text.f_sync   0x0000000008003968       0xac ./FATFs/ff.o
-                0x0000000008003968                f_sync
- .text.f_close  0x0000000008003a14       0x14 ./FATFs/ff.o
-                0x0000000008003a14                f_close
+                0x0000000008004220       0x9c ./FATFs/ff.o
+ .text.create_chain
+                0x00000000080042bc      0x118 ./FATFs/ff.o
+ .text.dir_sdi  0x00000000080043d4      0x104 ./FATFs/ff.o
+ .text.dir_next
+                0x00000000080044d8      0x1a8 ./FATFs/ff.o
+ .text.dir_find
+                0x0000000008004680       0x94 ./FATFs/ff.o
+ .text.dir_read
+                0x0000000008004714       0x90 ./FATFs/ff.o
+ .text.dir_register
+                0x00000000080047a4       0xac ./FATFs/ff.o
+ .text.create_name
+                0x0000000008004850      0x168 ./FATFs/ff.o
+ .text.get_fileinfo
+                0x00000000080049b8      0x11c ./FATFs/ff.o
+ .text.follow_path
+                0x0000000008004ad4       0xfc ./FATFs/ff.o
+ .text.check_fs
+                0x0000000008004bd0       0xc0 ./FATFs/ff.o
+ .text.chk_mounted
+                0x0000000008004c90      0x52c ./FATFs/ff.o
+ .text.validate
+                0x00000000080051bc       0x4c ./FATFs/ff.o
+ .text.f_mount  0x0000000008005208       0x54 ./FATFs/ff.o
+                0x0000000008005208                f_mount
+ .text.f_open   0x000000000800525c      0x2e0 ./FATFs/ff.o
+                0x000000000800525c                f_open
+ .text.f_read   0x000000000800553c      0x2bc ./FATFs/ff.o
+                0x000000000800553c                f_read
+ .text.f_sync   0x00000000080057f8      0x184 ./FATFs/ff.o
+                0x00000000080057f8                f_sync
+ .text.f_close  0x000000000800597c       0x28 ./FATFs/ff.o
+                0x000000000800597c                f_close
  .text.f_opendir
-                0x0000000008003a28       0x6c ./FATFs/ff.o
-                0x0000000008003a28                f_opendir
+                0x00000000080059a4       0xcc ./FATFs/ff.o
+                0x00000000080059a4                f_opendir
  .text.f_readdir
-                0x0000000008003a94       0x60 ./FATFs/ff.o
-                0x0000000008003a94                f_readdir
- .text.power_off
-                0x0000000008003af4        0xc ./FATFs/sd_stm32.o
- .text.chk_power
-                0x0000000008003b00        0xc ./FATFs/sd_stm32.o
- .text.xmit_spi
-                0x0000000008003b0c       0x20 ./FATFs/sd_stm32.o
- .text.SELECT   0x0000000008003b2c       0x10 ./FATFs/sd_stm32.o
+                0x0000000008005a70       0x90 ./FATFs/ff.o
+                0x0000000008005a70                f_readdir
+ .text.SELECT   0x0000000008005b00       0x14 ./FATFs/sd_stm32.o
  .text.DESELECT
-                0x0000000008003b3c       0x10 ./FATFs/sd_stm32.o
- .text.power_on
-                0x0000000008003b4c       0x24 ./FATFs/sd_stm32.o
+                0x0000000008005b14       0x14 ./FATFs/sd_stm32.o
+ .text.xmit_spi
+                0x0000000008005b28       0x30 ./FATFs/sd_stm32.o
  .text.rcvr_spi
-                0x0000000008003b70       0x30 ./FATFs/sd_stm32.o
- .text.wait_ready
-                0x0000000008003ba0       0x24 ./FATFs/sd_stm32.o
- .text.send_cmd
-                0x0000000008003bc4       0x68 ./FATFs/sd_stm32.o
+                0x0000000008005b58       0x4c ./FATFs/sd_stm32.o
  .text.rcvr_spi_m
-                0x0000000008003c2c        0xc ./FATFs/sd_stm32.o
+                0x0000000008005ba4       0x1c ./FATFs/sd_stm32.o
+ .text.wait_ready
+                0x0000000008005bc0       0x38 ./FATFs/sd_stm32.o
+ .text.power_on
+                0x0000000008005bf8       0x34 ./FATFs/sd_stm32.o
+ .text.power_off
+                0x0000000008005c2c       0x18 ./FATFs/sd_stm32.o
+ .text.chk_power
+                0x0000000008005c44       0x18 ./FATFs/sd_stm32.o
  .text.rcvr_datablock
-                0x0000000008003c38       0x4c ./FATFs/sd_stm32.o
+                0x0000000008005c5c       0x70 ./FATFs/sd_stm32.o
  .text.xmit_datablock
-                0x0000000008003c84       0x70 ./FATFs/sd_stm32.o
+                0x0000000008005ccc       0xa8 ./FATFs/sd_stm32.o
+ .text.send_cmd
+                0x0000000008005d74       0xa4 ./FATFs/sd_stm32.o
  .text.disk_initialize
-                0x0000000008003cf4      0x190 ./FATFs/sd_stm32.o
-                0x0000000008003cf4                disk_initialize
+                0x0000000008005e18      0x1d0 ./FATFs/sd_stm32.o
+                0x0000000008005e18                disk_initialize
  .text.disk_status
-                0x0000000008003e84       0x14 ./FATFs/sd_stm32.o
-                0x0000000008003e84                disk_status
+                0x0000000008005fe8       0x2c ./FATFs/sd_stm32.o
+                0x0000000008005fe8                disk_status
  .text.disk_read
-                0x0000000008003e98       0x98 ./FATFs/sd_stm32.o
-                0x0000000008003e98                disk_read
+                0x0000000008006014       0xd8 ./FATFs/sd_stm32.o
+                0x0000000008006014                disk_read
  .text.disk_write
-                0x0000000008003f30       0xc4 ./FATFs/sd_stm32.o
-                0x0000000008003f30                disk_write
+                0x00000000080060ec      0x10c ./FATFs/sd_stm32.o
+                0x00000000080060ec                disk_write
  .text.disk_ioctl
-                0x0000000008003ff4      0x19c ./FATFs/sd_stm32.o
-                0x0000000008003ff4                disk_ioctl
+                0x00000000080061f8      0x254 ./FATFs/sd_stm32.o
+                0x00000000080061f8                disk_ioctl
  .text.get_fattime
-                0x0000000008004190        0x8 ./FATFs/sd_stm32.o
-                0x0000000008004190                get_fattime
- .text.__errno  0x0000000008004198        0xc /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-errno.o)
-                0x0000000008004198                __errno
- .text.memcpy   0x00000000080041a4       0x16 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memcpy.o)
-                0x00000000080041a4                memcpy
- .text.memset   0x00000000080041ba       0x10 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memset.o)
-                0x00000000080041ba                memset
- *fill*         0x00000000080041ca        0x2 
- .text._free_r  0x00000000080041cc       0x88 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-freer.o)
-                0x00000000080041cc                _free_r
+                0x000000000800644c       0x14 ./FATFs/sd_stm32.o
+                0x000000000800644c                get_fattime
+ .text.__errno  0x0000000008006460        0xc /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-errno.o)
+                0x0000000008006460                __errno
+ .text.memcpy   0x000000000800646c       0x16 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memcpy.o)
+                0x000000000800646c                memcpy
+ .text.memset   0x0000000008006482       0x10 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memset.o)
+                0x0000000008006482                memset
+ *fill*         0x0000000008006492        0x2 
+ .text._free_r  0x0000000008006494       0x88 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-freer.o)
+                0x0000000008006494                _free_r
  .text._malloc_r
-                0x0000000008004254       0xac /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-mallocr.o)
-                0x0000000008004254                _malloc_r
- .text._sbrk_r  0x0000000008004300       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sbrkr.o)
-                0x0000000008004300                _sbrk_r
- .text.sprintf  0x0000000008004320       0x48 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sprintf.o)
-                0x0000000008004320                sprintf
-                0x0000000008004320                siprintf
- .text.strncpy  0x0000000008004368       0x24 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-strncpy.o)
-                0x0000000008004368                strncpy
+                0x000000000800651c       0xac /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-mallocr.o)
+                0x000000000800651c                _malloc_r
+ .text._sbrk_r  0x00000000080065c8       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sbrkr.o)
+                0x00000000080065c8                _sbrk_r
+ .text.sprintf  0x00000000080065e8       0x48 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sprintf.o)
+                0x00000000080065e8                sprintf
+                0x00000000080065e8                siprintf
+ .text.strncpy  0x0000000008006630       0x24 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-strncpy.o)
+                0x0000000008006630                strncpy
  .text.__ssputs_r
-                0x000000000800438c       0xb2 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
-                0x000000000800438c                __ssputs_r
- *fill*         0x000000000800443e        0x2 
+                0x0000000008006654       0xb2 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
+                0x0000000008006654                __ssputs_r
+ *fill*         0x0000000008006706        0x2 
  .text._svfprintf_r
-                0x0000000008004440      0x1e4 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
-                0x0000000008004440                _svfprintf_r
-                0x0000000008004440                _svfiprintf_r
+                0x0000000008006708      0x1e4 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
+                0x0000000008006708                _svfprintf_r
+                0x0000000008006708                _svfiprintf_r
  .text._printf_common
-                0x0000000008004624       0xea /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
-                0x0000000008004624                _printf_common
- *fill*         0x000000000800470e        0x2 
+                0x00000000080068ec       0xea /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
+                0x00000000080068ec                _printf_common
+ *fill*         0x00000000080069d6        0x2 
  .text._printf_i
-                0x0000000008004710      0x240 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
-                0x0000000008004710                _printf_i
- .text.memchr   0x0000000008004950       0x1c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memchr.o)
-                0x0000000008004950                memchr
- .text.memmove  0x000000000800496c       0x36 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memmove.o)
-                0x000000000800496c                memmove
+                0x00000000080069d8      0x240 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
+                0x00000000080069d8                _printf_i
+ .text.memchr   0x0000000008006c18       0x1c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memchr.o)
+                0x0000000008006c18                memchr
+ .text.memmove  0x0000000008006c34       0x36 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memmove.o)
+                0x0000000008006c34                memmove
  .text._realloc_r
-                0x00000000080049a2       0x4c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-reallocr.o)
-                0x00000000080049a2                _realloc_r
+                0x0000000008006c6a       0x4c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-reallocr.o)
+                0x0000000008006c6a                _realloc_r
  .text._malloc_usable_size_r
-                0x00000000080049ee       0x14 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-msizer.o)
-                0x00000000080049ee                _malloc_usable_size_r
+                0x0000000008006cb6       0x14 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-msizer.o)
+                0x0000000008006cb6                _malloc_usable_size_r
  *(.rodata .rodata.* .constdata .constdata.*)
- *fill*         0x0000000008004a02        0x2 
- .rodata.str1.4
-                0x0000000008004a04       0x27 ./system/src/stm32f1-stdperiph/misc.o
- *fill*         0x0000000008004a2b        0x1 
- .rodata.str1.4
-                0x0000000008004a2c       0x32 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- *fill*         0x0000000008004a5e        0x2 
- .rodata.str1.4
-                0x0000000008004a60       0x31 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
- *fill*         0x0000000008004a91        0x3 
- .rodata.str1.4
-                0x0000000008004a94       0x30 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .rodata.str1.4
-                0x0000000008004ac4       0x30 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ *fill*         0x0000000008006cca        0x2 
+ .rodata        0x0000000008006ccc       0x27 ./system/src/stm32f1-stdperiph/misc.o
+ *fill*         0x0000000008006cf3        0x1 
+ .rodata        0x0000000008006cf4       0x32 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ *fill*         0x0000000008006d26        0x2 
+ .rodata        0x0000000008006d28       0x31 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+ *fill*         0x0000000008006d59        0x3 
+ .rodata        0x0000000008006d5c       0x30 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .rodata        0x0000000008006d8c       0x30 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .rodata        0x0000000008006dbc       0x14 ./system/src/newlib/_exit.o
+ .rodata        0x0000000008006dd0       0x6f ./system/src/newlib/assert.o
+ *fill*         0x0000000008006e3f        0x1 
  .rodata.font5x8
-                0x0000000008004af4      0x1e0 ./src/ks0108.o
- .rodata.str1.4
-                0x0000000008004cd4       0xfe ./src/main.o
-                                        0x102 (size before relaxing)
- *fill*         0x0000000008004dd2        0x2 
- .rodata.str1.4
-                0x0000000008004dd4       0x1e ./my_initialize/initialize.o
- *fill*         0x0000000008004df2        0x2 
- .rodata.str1.4
-                0x0000000008004df4        0x5 ./FreeRTOS/source/tasks.o
- *fill*         0x0000000008004df9        0x3 
+                0x0000000008006e40      0x1e0 ./src/ks0108.o
+ .rodata        0x0000000008007020       0x66 ./src/main.o
+ *fill*         0x0000000008007086        0x2 
+ .rodata        0x0000000008007088       0x1e ./my_initialize/initialize.o
+ *fill*         0x00000000080070a6        0x2 
+ .rodata        0x00000000080070a8        0x5 ./FreeRTOS/source/tasks.o
+ *fill*         0x00000000080070ad        0x3 
+ .rodata        0x00000000080070b0        0xf ./FATFs/ff.o
+ *fill*         0x00000000080070bf        0x1 
  .rodata.excvt.3947
-                0x0000000008004dfc       0x80 ./FATFs/ff.o
- .rodata.str1.4
-                0x0000000008004e7c       0x10 ./FATFs/ff.o
-                                          0xf (size before relaxing)
+                0x00000000080070c0       0x80 ./FATFs/ff.o
  .rodata.str1.1
-                0x0000000008004e8c        0x2 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-impure.o)
+                0x0000000008007140        0x2 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-impure.o)
  .rodata.str1.1
-                0x0000000008004e8e       0x11 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
+                0x0000000008007142       0x11 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
  .rodata.str1.1
-                0x0000000008004e9f       0x22 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
+                0x0000000008007153       0x22 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
  *(vtable)
  *(.eh_frame*)
  *(.glue_7)
@@ -3183,37 +3188,37 @@ END GROUP
  *(.glue_7t)
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x0000000008004ec4        0x0
+.vfp11_veneer   0x0000000008007178        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x0000000008004ec4        0x0
+.v4_bx          0x0000000008007178        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
-.iplt           0x0000000008004ec4        0x0
+.iplt           0x0000000008007178        0x0
  .iplt          0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/misc.o
 
-.rel.dyn        0x0000000008004ec4        0x0
+.rel.dyn        0x0000000008007178        0x0
  .rel.iplt      0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/misc.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000008004ec4                . = ALIGN (0x4)
-                0x0000000008004ec4                __exidx_start = .
+                0x0000000008007178                . = ALIGN (0x4)
+                0x0000000008007178                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000008004ec4                __exidx_end = .
-                0x0000000008004ec4                . = ALIGN (0x4)
-                0x0000000008004ec4                _etext = .
-                0x0000000008004ec4                __etext = .
+                0x0000000008007178                __exidx_end = .
+                0x0000000008007178                . = ALIGN (0x4)
+                0x0000000008007178                _etext = .
+                0x0000000008007178                __etext = .
 
-.data_CCMRAM    0x0000000000000000        0x0 load address 0x0000000008004ec4
+.data_CCMRAM    0x0000000000000000        0x0 load address 0x0000000008007178
  FILL mask 0xff
  *(.data.CCMRAM .data.CCMRAM.*)
                 0x0000000000000000                . = ALIGN (0x4)
-                0x0000000008004ec4                _sidata = LOADADDR (.data)
+                0x0000000008007178                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000       0x98 load address 0x0000000008004ec4
+.data           0x0000000020000000       0x94 load address 0x0000000008007178
  FILL mask 0xff
                 0x0000000020000000                _sdata = .
                 0x0000000020000000                __data_start__ = .
@@ -3222,111 +3227,110 @@ END GROUP
  *(.data .data.*)
  .data.argv.4160
                 0x0000000020000004        0x8 ./system/src/newlib/_syscalls.o
- .data.AHBPrescTable
-                0x000000002000000c       0x10 ./system/src/cmsis/system_stm32f10x.o
-                0x000000002000000c                AHBPrescTable
  .data.SystemCoreClock
-                0x000000002000001c        0x4 ./system/src/cmsis/system_stm32f10x.o
-                0x000000002000001c                SystemCoreClock
- .data.taskKey  0x0000000020000020        0x4 ./src/main.o
-                0x0000000020000020                taskKey
+                0x000000002000000c        0x4 ./system/src/cmsis/system_stm32f10x.o
+                0x000000002000000c                SystemCoreClock
+ .data.AHBPrescTable
+                0x0000000020000010       0x10 ./system/src/cmsis/system_stm32f10x.o
+                0x0000000020000010                AHBPrescTable
  .data.uxCriticalNesting
-                0x0000000020000024        0x4 ./FreeRTOS/source/port.o
+                0x0000000020000020        0x4 ./FreeRTOS/source/port.o
  .data.xNextTaskUnblockTime
-                0x0000000020000028        0x4 ./FreeRTOS/source/tasks.o
- .data.Stat     0x000000002000002c        0x1 ./FATFs/sd_stm32.o
- *fill*         0x000000002000002d        0x3 
+                0x0000000020000024        0x4 ./FreeRTOS/source/tasks.o
+ .data.Stat     0x0000000020000028        0x1 ./FATFs/sd_stm32.o
+ *fill*         0x0000000020000029        0x3 
  .data.impure_data
-                0x0000000020000030       0x60 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-impure.o)
+                0x000000002000002c       0x60 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-impure.o)
  .data._impure_ptr
-                0x0000000020000090        0x4 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-impure.o)
-                0x0000000020000090                _impure_ptr
+                0x000000002000008c        0x4 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-impure.o)
+                0x000000002000008c                _impure_ptr
  *(.data_end .data_end.*)
- .data_end      0x0000000020000094        0x4 ./system/src/newlib/_startup.o
-                0x0000000020000098                . = ALIGN (0x4)
-                0x0000000020000098                _edata = .
-                0x0000000020000098                __data_end__ = .
+ .data_end      0x0000000020000090        0x4 ./system/src/newlib/_startup.o
+                0x0000000020000094                . = ALIGN (0x4)
+                0x0000000020000094                _edata = .
+                0x0000000020000094                __data_end__ = .
 
-.igot.plt       0x0000000020000098        0x0 load address 0x0000000008004f5c
+.igot.plt       0x0000000020000094        0x0 load address 0x000000000800720c
  .igot.plt      0x0000000000000000        0x0 ./system/src/stm32f1-stdperiph/misc.o
 
 .bss_CCMRAM     0x0000000000000000        0x0
  *(.bss.CCMRAM .bss.CCMRAM.*)
 
-.bss            0x0000000020000098     0x4bb0
-                0x0000000020000098                __bss_start__ = .
-                0x0000000020000098                _sbss = .
+.bss            0x0000000020000094     0x4bb4
+                0x0000000020000094                __bss_start__ = .
+                0x0000000020000094                _sbss = .
  *(.bss_begin .bss_begin.*)
- .bss_begin     0x0000000020000098        0x4 ./system/src/newlib/_startup.o
+ .bss_begin     0x0000000020000094        0x4 ./system/src/newlib/_startup.o
  *(.bss .bss.*)
  .bss.current_heap_end.3862
-                0x000000002000009c        0x4 ./system/src/newlib/_sbrk.o
+                0x0000000020000098        0x4 ./system/src/newlib/_sbrk.o
  .bss.name.4159
-                0x00000000200000a0        0x1 ./system/src/newlib/_syscalls.o
- .bss.screen_x  0x00000000200000a1        0x1 ./src/ks0108.o
-                0x00000000200000a1                screen_x
- .bss.screen_y  0x00000000200000a2        0x1 ./src/ks0108.o
-                0x00000000200000a2                screen_y
- *fill*         0x00000000200000a3        0x1 
+                0x000000002000009c        0x1 ./system/src/newlib/_syscalls.o
+ *fill*         0x000000002000009d        0x3 
  .bss.GPIO_InitStructure
-                0x00000000200000a4        0x4 ./src/ks0108.o
+                0x00000000200000a0        0x4 ./src/ks0108.o
+ .bss.screen_x  0x00000000200000a4        0x1 ./src/ks0108.o
+                0x00000000200000a4                screen_x
+ .bss.screen_y  0x00000000200000a5        0x1 ./src/ks0108.o
+                0x00000000200000a5                screen_y
+ *fill*         0x00000000200000a6        0x2 
  .bss.katalog.8345
                 0x00000000200000a8       0x1c ./src/main.o
  .bss.plik.8346
                 0x00000000200000c4       0x18 ./src/main.o
  .bss.g_sFatFs  0x00000000200000dc      0x230 ./src/sd_stm32.o
+ .bss.ucHeap    0x000000002000030c     0x4800 ./FreeRTOS/source/heap_3.o
  .bss.xNextFreeByte
-                0x000000002000030c        0x4 ./FreeRTOS/source/heap_3.o
+                0x0000000020004b0c        0x4 ./FreeRTOS/source/heap_3.o
  .bss.pucAlignedHeap.4518
-                0x0000000020000310        0x4 ./FreeRTOS/source/heap_3.o
- .bss.ucHeap    0x0000000020000314     0x4800 ./FreeRTOS/source/heap_3.o
- .bss.pxDelayedTaskList
-                0x0000000020004b14        0x4 ./FreeRTOS/source/tasks.o
- .bss.xSchedulerRunning
-                0x0000000020004b18        0x4 ./FreeRTOS/source/tasks.o
- .bss.uxTasksDeleted
-                0x0000000020004b1c        0x4 ./FreeRTOS/source/tasks.o
- .bss.xTasksWaitingTermination
-                0x0000000020004b20       0x14 ./FreeRTOS/source/tasks.o
- .bss.xDelayedTaskList2
-                0x0000000020004b34       0x14 ./FreeRTOS/source/tasks.o
- .bss.uxPendedTicks
-                0x0000000020004b48        0x4 ./FreeRTOS/source/tasks.o
- .bss.pxReadyTasksLists
-                0x0000000020004b4c       0x64 ./FreeRTOS/source/tasks.o
- .bss.uxSchedulerSuspended
-                0x0000000020004bb0        0x4 ./FreeRTOS/source/tasks.o
- .bss.uxCurrentNumberOfTasks
-                0x0000000020004bb4        0x4 ./FreeRTOS/source/tasks.o
+                0x0000000020004b10        0x4 ./FreeRTOS/source/heap_3.o
  .bss.pxCurrentTCB
-                0x0000000020004bb8        0x4 ./FreeRTOS/source/tasks.o
-                0x0000000020004bb8                pxCurrentTCB
- .bss.xPendingReadyList
-                0x0000000020004bbc       0x14 ./FreeRTOS/source/tasks.o
- .bss.xNumOfOverflows
-                0x0000000020004bd0        0x4 ./FreeRTOS/source/tasks.o
- .bss.xTickCount
-                0x0000000020004bd4        0x4 ./FreeRTOS/source/tasks.o
- .bss.pxOverflowDelayedTaskList
-                0x0000000020004bd8        0x4 ./FreeRTOS/source/tasks.o
- .bss.uxTaskNumber
-                0x0000000020004bdc        0x4 ./FreeRTOS/source/tasks.o
+                0x0000000020004b14        0x4 ./FreeRTOS/source/tasks.o
+                0x0000000020004b14                pxCurrentTCB
+ .bss.pxReadyTasksLists
+                0x0000000020004b18       0x64 ./FreeRTOS/source/tasks.o
  .bss.xDelayedTaskList1
-                0x0000000020004be0       0x14 ./FreeRTOS/source/tasks.o
+                0x0000000020004b7c       0x14 ./FreeRTOS/source/tasks.o
+ .bss.xDelayedTaskList2
+                0x0000000020004b90       0x14 ./FreeRTOS/source/tasks.o
+ .bss.pxDelayedTaskList
+                0x0000000020004ba4        0x4 ./FreeRTOS/source/tasks.o
+ .bss.pxOverflowDelayedTaskList
+                0x0000000020004ba8        0x4 ./FreeRTOS/source/tasks.o
+ .bss.xPendingReadyList
+                0x0000000020004bac       0x14 ./FreeRTOS/source/tasks.o
+ .bss.xTasksWaitingTermination
+                0x0000000020004bc0       0x14 ./FreeRTOS/source/tasks.o
+ .bss.uxTasksDeleted
+                0x0000000020004bd4        0x4 ./FreeRTOS/source/tasks.o
  .bss.xSuspendedTaskList
-                0x0000000020004bf4       0x14 ./FreeRTOS/source/tasks.o
+                0x0000000020004bd8       0x14 ./FreeRTOS/source/tasks.o
+ .bss.uxCurrentNumberOfTasks
+                0x0000000020004bec        0x4 ./FreeRTOS/source/tasks.o
+ .bss.xTickCount
+                0x0000000020004bf0        0x4 ./FreeRTOS/source/tasks.o
  .bss.uxTopReadyPriority
-                0x0000000020004c08        0x4 ./FreeRTOS/source/tasks.o
+                0x0000000020004bf4        0x4 ./FreeRTOS/source/tasks.o
+ .bss.xSchedulerRunning
+                0x0000000020004bf8        0x4 ./FreeRTOS/source/tasks.o
+ .bss.uxPendedTicks
+                0x0000000020004bfc        0x4 ./FreeRTOS/source/tasks.o
  .bss.xYieldPending
+                0x0000000020004c00        0x4 ./FreeRTOS/source/tasks.o
+ .bss.xNumOfOverflows
+                0x0000000020004c04        0x4 ./FreeRTOS/source/tasks.o
+ .bss.uxTaskNumber
+                0x0000000020004c08        0x4 ./FreeRTOS/source/tasks.o
+ .bss.uxSchedulerSuspended
                 0x0000000020004c0c        0x4 ./FreeRTOS/source/tasks.o
- .bss.Fsid      0x0000000020004c10        0x2 ./FATFs/ff.o
- *fill*         0x0000000020004c12        0x2 
- .bss.FatFs     0x0000000020004c14        0x4 ./FATFs/ff.o
- .bss.Timer1    0x0000000020004c18        0x1 ./FATFs/sd_stm32.o
- .bss.Timer2    0x0000000020004c19        0x1 ./FATFs/sd_stm32.o
- .bss.CardType  0x0000000020004c1a        0x1 ./FATFs/sd_stm32.o
+ .bss.FatFs     0x0000000020004c10        0x4 ./FATFs/ff.o
+ .bss.Fsid      0x0000000020004c14        0x2 ./FATFs/ff.o
+ .bss.Timer1    0x0000000020004c16        0x1 ./FATFs/sd_stm32.o
+ .bss.Timer2    0x0000000020004c17        0x1 ./FATFs/sd_stm32.o
+ .bss.CardType  0x0000000020004c18        0x1 ./FATFs/sd_stm32.o
  .bss.PowerFlag
-                0x0000000020004c1b        0x1 ./FATFs/sd_stm32.o
+                0x0000000020004c19        0x1 ./FATFs/sd_stm32.o
+ *fill*         0x0000000020004c1a        0x2 
  .bss.__malloc_sbrk_start
                 0x0000000020004c1c        0x4 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-mallocr.o)
                 0x0000000020004c1c                __malloc_sbrk_start
@@ -3534,7 +3538,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0xcb0
+.debug_aranges  0x0000000000000000      0xcb8
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x40 ./system/src/stm32f1-stdperiph/misc.o
@@ -3571,227 +3575,206 @@ END GROUP
  .debug_aranges
                 0x0000000000000690       0x40 ./src/sd_stm32.o
  .debug_aranges
-                0x00000000000006d0       0x48 ./my_initialize/initialize.o
+                0x00000000000006d0       0x50 ./my_initialize/initialize.o
  .debug_aranges
-                0x0000000000000718       0x38 ./FreeRTOS/source/heap_3.o
+                0x0000000000000720       0x38 ./FreeRTOS/source/heap_3.o
  .debug_aranges
-                0x0000000000000750       0x40 ./FreeRTOS/source/list.o
+                0x0000000000000758       0x40 ./FreeRTOS/source/list.o
  .debug_aranges
-                0x0000000000000790       0x88 ./FreeRTOS/source/port.o
+                0x0000000000000798       0x88 ./FreeRTOS/source/port.o
  .debug_aranges
-                0x0000000000000818       0xe8 ./FreeRTOS/source/queue.o
+                0x0000000000000820       0xe8 ./FreeRTOS/source/queue.o
  .debug_aranges
-                0x0000000000000900      0x1a8 ./FreeRTOS/source/tasks.o
+                0x0000000000000908      0x1a8 ./FreeRTOS/source/tasks.o
  .debug_aranges
-                0x0000000000000aa8      0x158 ./FATFs/ff.o
+                0x0000000000000ab0      0x158 ./FATFs/ff.o
  .debug_aranges
-                0x0000000000000c00       0xb0 ./FATFs/sd_stm32.o
+                0x0000000000000c08       0xb0 ./FATFs/sd_stm32.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0xeed6
+.debug_info     0x0000000000000000     0x96e1
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x0000000000000000      0x63b ./system/src/stm32f1-stdperiph/misc.o
- .debug_info    0x000000000000063b      0xbc4 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .debug_info    0x00000000000011ff      0xbd4 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
- .debug_info    0x0000000000001dd3      0xc6b ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .debug_info    0x0000000000002a3e      0xfc9 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .debug_info    0x0000000000003a07       0xee ./system/src/newlib/_exit.o
- .debug_info    0x0000000000003af5      0x125 ./system/src/newlib/_sbrk.o
- .debug_info    0x0000000000003c1a      0x474 ./system/src/newlib/_startup.o
- .debug_info    0x000000000000408e      0x1a9 ./system/src/newlib/_syscalls.o
- .debug_info    0x0000000000004237      0x168 ./system/src/newlib/assert.o
- .debug_info    0x000000000000439f      0x294 ./system/src/cortexm/_initialize_hardware.o
- .debug_info    0x0000000000004633      0x288 ./system/src/cortexm/exception_handlers.o
- .debug_info    0x00000000000048bb      0x474 ./system/src/cmsis/system_stm32f10x.o
- .debug_info    0x0000000000004d2f       0xd1 ./system/src/cmsis/vectors_stm32f10x.o
- .debug_info    0x0000000000004e00      0xd18 ./src/ks0108.o
- .debug_info    0x0000000000005b18     0x1222 ./src/main.o
- .debug_info    0x0000000000006d3a      0x92a ./src/sd_stm32.o
- .debug_info    0x0000000000007664      0xd1f ./my_initialize/initialize.o
- .debug_info    0x0000000000008383      0x1a3 ./FreeRTOS/source/heap_3.o
- .debug_info    0x0000000000008526      0x29a ./FreeRTOS/source/list.o
- .debug_info    0x00000000000087c0      0x2bb ./FreeRTOS/source/port.o
- .debug_info    0x0000000000008a7b     0x1289 ./FreeRTOS/source/queue.o
- .debug_info    0x0000000000009d04     0x2068 ./FreeRTOS/source/tasks.o
- .debug_info    0x000000000000bd6c     0x237d ./FATFs/ff.o
- .debug_info    0x000000000000e0e9      0xded ./FATFs/sd_stm32.o
+ .debug_info    0x0000000000000000      0x524 ./system/src/stm32f1-stdperiph/misc.o
+ .debug_info    0x0000000000000524      0x78d ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .debug_info    0x0000000000000cb1      0x6cf ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+ .debug_info    0x0000000000001380      0x869 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .debug_info    0x0000000000001be9      0x8cf ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .debug_info    0x00000000000024b8       0xdf ./system/src/newlib/_exit.o
+ .debug_info    0x0000000000002597      0x109 ./system/src/newlib/_sbrk.o
+ .debug_info    0x00000000000026a0      0x3d5 ./system/src/newlib/_startup.o
+ .debug_info    0x0000000000002a75      0x18b ./system/src/newlib/_syscalls.o
+ .debug_info    0x0000000000002c00      0x149 ./system/src/newlib/assert.o
+ .debug_info    0x0000000000002d49      0x26a ./system/src/cortexm/_initialize_hardware.o
+ .debug_info    0x0000000000002fb3      0x279 ./system/src/cortexm/exception_handlers.o
+ .debug_info    0x000000000000322c      0x455 ./system/src/cmsis/system_stm32f10x.o
+ .debug_info    0x0000000000003681       0xd1 ./system/src/cmsis/vectors_stm32f10x.o
+ .debug_info    0x0000000000003752      0x5a2 ./src/ks0108.o
+ .debug_info    0x0000000000003cf4      0x719 ./src/main.o
+ .debug_info    0x000000000000440d      0x646 ./src/sd_stm32.o
+ .debug_info    0x0000000000004a53      0x8e2 ./my_initialize/initialize.o
+ .debug_info    0x0000000000005335      0x171 ./FreeRTOS/source/heap_3.o
+ .debug_info    0x00000000000054a6      0x29d ./FreeRTOS/source/list.o
+ .debug_info    0x0000000000005743      0x238 ./FreeRTOS/source/port.o
+ .debug_info    0x000000000000597b      0xb09 ./FreeRTOS/source/queue.o
+ .debug_info    0x0000000000006484     0x14f9 ./FreeRTOS/source/tasks.o
+ .debug_info    0x000000000000797d     0x161e ./FATFs/ff.o
+ .debug_info    0x0000000000008f9b      0x746 ./FATFs/sd_stm32.o
 
-.debug_abbrev   0x0000000000000000     0x29a4
+.debug_abbrev   0x0000000000000000     0x21b4
  *(.debug_abbrev)
- .debug_abbrev  0x0000000000000000      0x188 ./system/src/stm32f1-stdperiph/misc.o
- .debug_abbrev  0x0000000000000188      0x1c6 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .debug_abbrev  0x000000000000034e      0x1f9 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
- .debug_abbrev  0x0000000000000547      0x1ff ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .debug_abbrev  0x0000000000000746      0x1d8 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .debug_abbrev  0x000000000000091e       0xb7 ./system/src/newlib/_exit.o
- .debug_abbrev  0x00000000000009d5       0xbb ./system/src/newlib/_sbrk.o
- .debug_abbrev  0x0000000000000a90      0x1e9 ./system/src/newlib/_startup.o
- .debug_abbrev  0x0000000000000c79       0xe7 ./system/src/newlib/_syscalls.o
- .debug_abbrev  0x0000000000000d60       0xb6 ./system/src/newlib/assert.o
- .debug_abbrev  0x0000000000000e16       0xea ./system/src/cortexm/_initialize_hardware.o
- .debug_abbrev  0x0000000000000f00      0x115 ./system/src/cortexm/exception_handlers.o
- .debug_abbrev  0x0000000000001015      0x157 ./system/src/cmsis/system_stm32f10x.o
- .debug_abbrev  0x000000000000116c       0x9d ./system/src/cmsis/vectors_stm32f10x.o
- .debug_abbrev  0x0000000000001209      0x25a ./src/ks0108.o
- .debug_abbrev  0x0000000000001463      0x2e7 ./src/main.o
- .debug_abbrev  0x000000000000174a      0x262 ./src/sd_stm32.o
- .debug_abbrev  0x00000000000019ac      0x278 ./my_initialize/initialize.o
- .debug_abbrev  0x0000000000001c24      0x12f ./FreeRTOS/source/heap_3.o
- .debug_abbrev  0x0000000000001d53       0xdf ./FreeRTOS/source/list.o
- .debug_abbrev  0x0000000000001e32      0x195 ./FreeRTOS/source/port.o
- .debug_abbrev  0x0000000000001fc7      0x227 ./FreeRTOS/source/queue.o
- .debug_abbrev  0x00000000000021ee      0x2d9 ./FreeRTOS/source/tasks.o
- .debug_abbrev  0x00000000000024c7      0x22b ./FATFs/ff.o
- .debug_abbrev  0x00000000000026f2      0x2b2 ./FATFs/sd_stm32.o
+ .debug_abbrev  0x0000000000000000      0x14a ./system/src/stm32f1-stdperiph/misc.o
+ .debug_abbrev  0x000000000000014a      0x190 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .debug_abbrev  0x00000000000002da      0x1cd ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+ .debug_abbrev  0x00000000000004a7      0x1bd ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .debug_abbrev  0x0000000000000664      0x183 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .debug_abbrev  0x00000000000007e7       0xa0 ./system/src/newlib/_exit.o
+ .debug_abbrev  0x0000000000000887       0x8e ./system/src/newlib/_sbrk.o
+ .debug_abbrev  0x0000000000000915      0x152 ./system/src/newlib/_startup.o
+ .debug_abbrev  0x0000000000000a67       0xc9 ./system/src/newlib/_syscalls.o
+ .debug_abbrev  0x0000000000000b30       0x9a ./system/src/newlib/assert.o
+ .debug_abbrev  0x0000000000000bca       0xcc ./system/src/cortexm/_initialize_hardware.o
+ .debug_abbrev  0x0000000000000c96       0xf7 ./system/src/cortexm/exception_handlers.o
+ .debug_abbrev  0x0000000000000d8d      0x151 ./system/src/cmsis/system_stm32f10x.o
+ .debug_abbrev  0x0000000000000ede       0x9d ./system/src/cmsis/vectors_stm32f10x.o
+ .debug_abbrev  0x0000000000000f7b      0x201 ./src/ks0108.o
+ .debug_abbrev  0x000000000000117c      0x199 ./src/main.o
+ .debug_abbrev  0x0000000000001315      0x1c3 ./src/sd_stm32.o
+ .debug_abbrev  0x00000000000014d8      0x1c1 ./my_initialize/initialize.o
+ .debug_abbrev  0x0000000000001699       0xf1 ./FreeRTOS/source/heap_3.o
+ .debug_abbrev  0x000000000000178a       0xc1 ./FreeRTOS/source/list.o
+ .debug_abbrev  0x000000000000184b      0x165 ./FreeRTOS/source/port.o
+ .debug_abbrev  0x00000000000019b0      0x17a ./FreeRTOS/source/queue.o
+ .debug_abbrev  0x0000000000001b2a      0x279 ./FreeRTOS/source/tasks.o
+ .debug_abbrev  0x0000000000001da3      0x1cb ./FATFs/ff.o
+ .debug_abbrev  0x0000000000001f6e      0x246 ./FATFs/sd_stm32.o
 
-.debug_line     0x0000000000000000     0x7aa2
+.debug_line     0x0000000000000000     0x7f26
  *(.debug_line)
- .debug_line    0x0000000000000000      0x3cc ./system/src/stm32f1-stdperiph/misc.o
- .debug_line    0x00000000000003cc      0x690 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .debug_line    0x0000000000000a5c      0x8a9 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
- .debug_line    0x0000000000001305      0x7f3 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .debug_line    0x0000000000001af8      0x846 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .debug_line    0x000000000000233e      0x1fd ./system/src/newlib/_exit.o
- .debug_line    0x000000000000253b      0x1ac ./system/src/newlib/_sbrk.o
- .debug_line    0x00000000000026e7      0x26a ./system/src/newlib/_startup.o
- .debug_line    0x0000000000002951      0x2a6 ./system/src/newlib/_syscalls.o
- .debug_line    0x0000000000002bf7      0x222 ./system/src/newlib/assert.o
- .debug_line    0x0000000000002e19      0x330 ./system/src/cortexm/_initialize_hardware.o
- .debug_line    0x0000000000003149      0x531 ./system/src/cortexm/exception_handlers.o
- .debug_line    0x000000000000367a      0x390 ./system/src/cmsis/system_stm32f10x.o
- .debug_line    0x0000000000003a0a       0xd4 ./system/src/cmsis/vectors_stm32f10x.o
- .debug_line    0x0000000000003ade      0x573 ./src/ks0108.o
- .debug_line    0x0000000000004051      0x72e ./src/main.o
- .debug_line    0x000000000000477f      0x571 ./src/sd_stm32.o
- .debug_line    0x0000000000004cf0      0x520 ./my_initialize/initialize.o
- .debug_line    0x0000000000005210      0x2bb ./FreeRTOS/source/heap_3.o
- .debug_line    0x00000000000054cb      0x2d1 ./FreeRTOS/source/list.o
- .debug_line    0x000000000000579c      0x26d ./FreeRTOS/source/port.o
- .debug_line    0x0000000000005a09      0x5d5 ./FreeRTOS/source/queue.o
- .debug_line    0x0000000000005fde      0xa1b ./FreeRTOS/source/tasks.o
- .debug_line    0x00000000000069f9      0xa00 ./FATFs/ff.o
- .debug_line    0x00000000000073f9      0x6a9 ./FATFs/sd_stm32.o
+ .debug_line    0x0000000000000000      0x3dc ./system/src/stm32f1-stdperiph/misc.o
+ .debug_line    0x00000000000003dc      0x6d6 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .debug_line    0x0000000000000ab2      0x9bd ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+ .debug_line    0x000000000000146f      0x882 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .debug_line    0x0000000000001cf1      0x8a0 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .debug_line    0x0000000000002591      0x1fd ./system/src/newlib/_exit.o
+ .debug_line    0x000000000000278e      0x1ac ./system/src/newlib/_sbrk.o
+ .debug_line    0x000000000000293a      0x26d ./system/src/newlib/_startup.o
+ .debug_line    0x0000000000002ba7      0x2aa ./system/src/newlib/_syscalls.o
+ .debug_line    0x0000000000002e51      0x223 ./system/src/newlib/assert.o
+ .debug_line    0x0000000000003074      0x334 ./system/src/cortexm/_initialize_hardware.o
+ .debug_line    0x00000000000033a8      0x532 ./system/src/cortexm/exception_handlers.o
+ .debug_line    0x00000000000038da      0x39c ./system/src/cmsis/system_stm32f10x.o
+ .debug_line    0x0000000000003c76       0xd4 ./system/src/cmsis/vectors_stm32f10x.o
+ .debug_line    0x0000000000003d4a      0x596 ./src/ks0108.o
+ .debug_line    0x00000000000042e0      0x71e ./src/main.o
+ .debug_line    0x00000000000049fe      0x57c ./src/sd_stm32.o
+ .debug_line    0x0000000000004f7a      0x542 ./my_initialize/initialize.o
+ .debug_line    0x00000000000054bc      0x2bd ./FreeRTOS/source/heap_3.o
+ .debug_line    0x0000000000005779      0x2da ./FreeRTOS/source/list.o
+ .debug_line    0x0000000000005a53      0x276 ./FreeRTOS/source/port.o
+ .debug_line    0x0000000000005cc9      0x5f8 ./FreeRTOS/source/queue.o
+ .debug_line    0x00000000000062c1      0xa62 ./FreeRTOS/source/tasks.o
+ .debug_line    0x0000000000006d23      0xb4c ./FATFs/ff.o
+ .debug_line    0x000000000000786f      0x6b7 ./FATFs/sd_stm32.o
 
-.debug_frame    0x0000000000000000     0x2540
+.debug_frame    0x0000000000000000     0x3250
  *(.debug_frame)
- .debug_frame   0x0000000000000000       0x90 ./system/src/stm32f1-stdperiph/misc.o
- .debug_frame   0x0000000000000090      0x284 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .debug_frame   0x0000000000000314      0x1e8 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
- .debug_frame   0x00000000000004fc      0x31c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .debug_frame   0x0000000000000818      0x278 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .debug_frame   0x0000000000000a90       0x38 ./system/src/newlib/_exit.o
- .debug_frame   0x0000000000000ac8       0x28 ./system/src/newlib/_sbrk.o
- .debug_frame   0x0000000000000af0       0x7c ./system/src/newlib/_startup.o
- .debug_frame   0x0000000000000b6c       0x50 ./system/src/newlib/_syscalls.o
- .debug_frame   0x0000000000000bbc       0x40 ./system/src/newlib/assert.o
- .debug_frame   0x0000000000000bfc       0x40 ./system/src/cortexm/_initialize_hardware.o
- .debug_frame   0x0000000000000c3c       0xe8 ./system/src/cortexm/exception_handlers.o
- .debug_frame   0x0000000000000d24       0x68 ./system/src/cmsis/system_stm32f10x.o
- .debug_frame   0x0000000000000d8c       0x20 ./system/src/cmsis/vectors_stm32f10x.o
- .debug_frame   0x0000000000000dac      0x1f0 ./src/ks0108.o
- .debug_frame   0x0000000000000f9c       0x9c ./src/main.o
- .debug_frame   0x0000000000001038       0x94 ./src/sd_stm32.o
- .debug_frame   0x00000000000010cc       0xb8 ./my_initialize/initialize.o
- .debug_frame   0x0000000000001184       0x5c ./FreeRTOS/source/heap_3.o
- .debug_frame   0x00000000000011e0       0x6c ./FreeRTOS/source/list.o
- .debug_frame   0x000000000000124c      0x118 ./FreeRTOS/source/port.o
- .debug_frame   0x0000000000001364      0x2a4 ./FreeRTOS/source/queue.o
- .debug_frame   0x0000000000001608      0x520 ./FreeRTOS/source/tasks.o
- .debug_frame   0x0000000000001b28      0x4e4 ./FATFs/ff.o
- .debug_frame   0x000000000000200c      0x220 ./FATFs/sd_stm32.o
- .debug_frame   0x000000000000222c       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-errno.o)
- .debug_frame   0x000000000000224c       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memcpy.o)
- .debug_frame   0x0000000000002274       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memset.o)
- .debug_frame   0x0000000000002294       0x2c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x00000000000022c0       0x2c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x00000000000022ec       0x2c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x0000000000002318       0x70 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sprintf.o)
- .debug_frame   0x0000000000002388       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-strncpy.o)
- .debug_frame   0x00000000000023b0       0x8c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
- .debug_frame   0x000000000000243c       0x58 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
- .debug_frame   0x0000000000002494       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memchr.o)
- .debug_frame   0x00000000000024bc       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memmove.o)
- .debug_frame   0x00000000000024e4       0x3c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-reallocr.o)
- .debug_frame   0x0000000000002520       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-msizer.o)
+ .debug_frame   0x0000000000000000       0xc4 ./system/src/stm32f1-stdperiph/misc.o
+ .debug_frame   0x00000000000000c4      0x3f8 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+ .debug_frame   0x00000000000004bc      0x2a0 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+ .debug_frame   0x000000000000075c      0x488 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+ .debug_frame   0x0000000000000be4      0x358 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+ .debug_frame   0x0000000000000f3c       0x4c ./system/src/newlib/_exit.o
+ .debug_frame   0x0000000000000f88       0x34 ./system/src/newlib/_sbrk.o
+ .debug_frame   0x0000000000000fbc       0xc8 ./system/src/newlib/_startup.o
+ .debug_frame   0x0000000000001084       0x80 ./system/src/newlib/_syscalls.o
+ .debug_frame   0x0000000000001104       0x50 ./system/src/newlib/assert.o
+ .debug_frame   0x0000000000001154       0x48 ./system/src/cortexm/_initialize_hardware.o
+ .debug_frame   0x000000000000119c      0x148 ./system/src/cortexm/exception_handlers.o
+ .debug_frame   0x00000000000012e4       0x98 ./system/src/cmsis/system_stm32f10x.o
+ .debug_frame   0x000000000000137c       0x28 ./system/src/cmsis/vectors_stm32f10x.o
+ .debug_frame   0x00000000000013a4      0x290 ./src/ks0108.o
+ .debug_frame   0x0000000000001634       0xb0 ./src/main.o
+ .debug_frame   0x00000000000016e4       0xcc ./src/sd_stm32.o
+ .debug_frame   0x00000000000017b0      0x100 ./my_initialize/initialize.o
+ .debug_frame   0x00000000000018b0       0x9c ./FreeRTOS/source/heap_3.o
+ .debug_frame   0x000000000000194c       0xd8 ./FreeRTOS/source/list.o
+ .debug_frame   0x0000000000001a24      0x174 ./FreeRTOS/source/port.o
+ .debug_frame   0x0000000000001b98      0x3d8 ./FreeRTOS/source/queue.o
+ .debug_frame   0x0000000000001f70      0x730 ./FreeRTOS/source/tasks.o
+ .debug_frame   0x00000000000026a0      0x5ec ./FATFs/ff.o
+ .debug_frame   0x0000000000002c8c      0x2b0 ./FATFs/sd_stm32.o
+ .debug_frame   0x0000000000002f3c       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-errno.o)
+ .debug_frame   0x0000000000002f5c       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memcpy.o)
+ .debug_frame   0x0000000000002f84       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000002fa4       0x2c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000002fd0       0x2c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000000000002ffc       0x2c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000003028       0x70 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-sprintf.o)
+ .debug_frame   0x0000000000003098       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-strncpy.o)
+ .debug_frame   0x00000000000030c0       0x8c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-svfprintf.o)
+ .debug_frame   0x000000000000314c       0x58 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x00000000000031a4       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memchr.o)
+ .debug_frame   0x00000000000031cc       0x28 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-memmove.o)
+ .debug_frame   0x00000000000031f4       0x3c /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x0000000000003230       0x20 /usr/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/libg_nano.a(lib_a-nano-msizer.o)
 
-.debug_str      0x0000000000000000    0x5e439
+.debug_str      0x0000000000000000    0x5e40c
  *(.debug_str)
- .debug_str     0x0000000000000000    0x4df9a ./system/src/stm32f1-stdperiph/misc.o
-                                      0x4e11d (size before relaxing)
- .debug_str     0x000000000004df9a      0x818 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
-                                      0x4e6f6 (size before relaxing)
- .debug_str     0x000000000004e7b2      0x5c3 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
-                                      0x4e49b (size before relaxing)
- .debug_str     0x000000000004ed75      0xb45 ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
-                                      0x4ea6a (size before relaxing)
- .debug_str     0x000000000004f8ba      0x5f7 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
-                                      0x4e5c4 (size before relaxing)
- .debug_str     0x000000000004feb1     0x398b ./system/src/newlib/_exit.o
-                                       0x5fc0 (size before relaxing)
- .debug_str     0x000000000005383c      0x4de ./system/src/newlib/_sbrk.o
-                                       0x53d1 (size before relaxing)
- .debug_str     0x0000000000053d1a      0x26c ./system/src/newlib/_startup.o
-                                       0x4fa9 (size before relaxing)
- .debug_str     0x0000000000053f86     0x11b1 ./system/src/newlib/_syscalls.o
-                                       0x65c4 (size before relaxing)
- .debug_str     0x0000000000055137       0xe1 ./system/src/newlib/assert.o
-                                       0x6ad0 (size before relaxing)
- .debug_str     0x0000000000055218       0x77 ./system/src/cortexm/_initialize_hardware.o
-                                      0x4df85 (size before relaxing)
- .debug_str     0x000000000005528f      0x1a3 ./system/src/cortexm/exception_handlers.o
-                                      0x519c5 (size before relaxing)
- .debug_str     0x0000000000055432       0x82 ./system/src/cmsis/system_stm32f10x.o
-                                      0x4e02f (size before relaxing)
- .debug_str     0x00000000000554b4       0x57 ./system/src/cmsis/vectors_stm32f10x.o
-                                       0x301f (size before relaxing)
- .debug_str     0x000000000005550b      0x3bb ./src/ks0108.o
-                                      0x4e3f2 (size before relaxing)
- .debug_str     0x00000000000558c6     0x5d31 ./src/main.o
-                                      0x569a6 (size before relaxing)
- .debug_str     0x000000000005b5f7      0x139 ./src/sd_stm32.o
-                                      0x51cda (size before relaxing)
- .debug_str     0x000000000005b730      0x36b ./my_initialize/initialize.o
-                                      0x51967 (size before relaxing)
- .debug_str     0x000000000005ba9b      0x13a ./FreeRTOS/source/heap_3.o
-                                       0x865d (size before relaxing)
- .debug_str     0x000000000005bbd5      0x130 ./FreeRTOS/source/list.o
-                                       0x80bc (size before relaxing)
- .debug_str     0x000000000005bd05      0x62b ./FreeRTOS/source/port.o
-                                       0x681a (size before relaxing)
- .debug_str     0x000000000005c330      0x6f8 ./FreeRTOS/source/queue.o
-                                       0x988f (size before relaxing)
- .debug_str     0x000000000005ca28      0xf44 ./FreeRTOS/source/tasks.o
-                                       0xa0c9 (size before relaxing)
- .debug_str     0x000000000005d96c      0x8fe ./FATFs/ff.o
-                                       0x3879 (size before relaxing)
- .debug_str     0x000000000005e26a      0x1cf ./FATFs/sd_stm32.o
-                                      0x4e389 (size before relaxing)
+ .debug_str     0x0000000000000000    0x4df8d ./system/src/stm32f1-stdperiph/misc.o
+                                      0x4e110 (size before relaxing)
+ .debug_str     0x000000000004df8d      0x818 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
+                                      0x4e6e9 (size before relaxing)
+ .debug_str     0x000000000004e7a5      0x5ac ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
+                                      0x4e477 (size before relaxing)
+ .debug_str     0x000000000004ed51      0xb5c ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
+                                      0x4ea5d (size before relaxing)
+ .debug_str     0x000000000004f8ad      0x5f7 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
+                                      0x4e577 (size before relaxing)
+ .debug_str     0x000000000004fea4     0x398b ./system/src/newlib/_exit.o
+                                       0x5fc1 (size before relaxing)
+ .debug_str     0x000000000005382f      0x4d6 ./system/src/newlib/_sbrk.o
+                                       0x53ca (size before relaxing)
+ .debug_str     0x0000000000053d05      0x228 ./system/src/newlib/_startup.o
+                                       0x4f5b (size before relaxing)
+ .debug_str     0x0000000000053f2d     0x11c9 ./system/src/newlib/_syscalls.o
+                                       0x65bd (size before relaxing)
+ .debug_str     0x00000000000550f6       0xef ./system/src/newlib/assert.o
+                                       0x6acb (size before relaxing)
+ .debug_str     0x00000000000551e5       0x88 ./system/src/cortexm/_initialize_hardware.o
+                                      0x4df65 (size before relaxing)
+ .debug_str     0x000000000005526d      0x1a3 ./system/src/cortexm/exception_handlers.o
+                                      0x519bf (size before relaxing)
+ .debug_str     0x0000000000055410       0xa3 ./system/src/cmsis/system_stm32f10x.o
+                                      0x4e030 (size before relaxing)
+ .debug_str     0x00000000000554b3       0x57 ./system/src/cmsis/vectors_stm32f10x.o
+                                       0x3020 (size before relaxing)
+ .debug_str     0x000000000005550a      0x3bb ./src/ks0108.o
+                                      0x4e378 (size before relaxing)
+ .debug_str     0x00000000000558c5     0x5af9 ./src/main.o
+                                      0x566cf (size before relaxing)
+ .debug_str     0x000000000005b3be      0x22c ./src/sd_stm32.o
+                                      0x51c8d (size before relaxing)
+ .debug_str     0x000000000005b5ea      0x370 ./my_initialize/initialize.o
+                                      0x51812 (size before relaxing)
+ .debug_str     0x000000000005b95a      0x128 ./FreeRTOS/source/heap_3.o
+                                       0x8634 (size before relaxing)
+ .debug_str     0x000000000005ba82      0x130 ./FreeRTOS/source/list.o
+                                       0x80bd (size before relaxing)
+ .debug_str     0x000000000005bbb2      0x624 ./FreeRTOS/source/port.o
+                                       0x6808 (size before relaxing)
+ .debug_str     0x000000000005c1d6      0x66f ./FreeRTOS/source/queue.o
+                                       0x9708 (size before relaxing)
+ .debug_str     0x000000000005c845     0x10c8 ./FreeRTOS/source/tasks.o
+                                       0x9fc5 (size before relaxing)
+ .debug_str     0x000000000005d90d      0x8e0 ./FATFs/ff.o
+                                       0x382a (size before relaxing)
+ .debug_str     0x000000000005e1ed      0x21f ./FATFs/sd_stm32.o
+                                      0x4e328 (size before relaxing)
 
-.debug_loc      0x0000000000000000     0x8c3b
+.debug_loc
  *(.debug_loc)
- .debug_loc     0x0000000000000000      0x1cc ./system/src/stm32f1-stdperiph/misc.o
- .debug_loc     0x00000000000001cc      0x77f ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
- .debug_loc     0x000000000000094b      0x773 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
- .debug_loc     0x00000000000010be      0x98f ./system/src/stm32f1-stdperiph/stm32f10x_rcc.o
- .debug_loc     0x0000000000001a4d      0x9b4 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
- .debug_loc     0x0000000000002401       0x82 ./system/src/newlib/_sbrk.o
- .debug_loc     0x0000000000002483      0x265 ./system/src/newlib/_startup.o
- .debug_loc     0x00000000000026e8       0x63 ./system/src/newlib/_syscalls.o
- .debug_loc     0x000000000000274b       0xc6 ./system/src/newlib/assert.o
- .debug_loc     0x0000000000002811       0xe4 ./system/src/cmsis/system_stm32f10x.o
- .debug_loc     0x00000000000028f5      0x541 ./src/ks0108.o
- .debug_loc     0x0000000000002e36      0x1a2 ./src/main.o
- .debug_loc     0x0000000000002fd8      0x161 ./src/sd_stm32.o
- .debug_loc     0x0000000000003139       0xcc ./my_initialize/initialize.o
- .debug_loc     0x0000000000003205       0x5f ./FreeRTOS/source/heap_3.o
- .debug_loc     0x0000000000003264       0x65 ./FreeRTOS/source/list.o
- .debug_loc     0x00000000000032c9       0x80 ./FreeRTOS/source/port.o
- .debug_loc     0x0000000000003349      0xed2 ./FreeRTOS/source/queue.o
- .debug_loc     0x000000000000421b     0x1518 ./FreeRTOS/source/tasks.o
- .debug_loc     0x0000000000005733     0x2b09 ./FATFs/ff.o
- .debug_loc     0x000000000000823c      0x9ff ./FATFs/sd_stm32.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -3809,7 +3792,7 @@ END GROUP
  *(.debug_varnames)
 OUTPUT(FreeRTOS_proj.elf elf32-littlearm)
 
-.debug_ranges   0x0000000000000000      0xb88
+.debug_ranges   0x0000000000000000      0xb28
  .debug_ranges  0x0000000000000000       0x30 ./system/src/stm32f1-stdperiph/misc.o
  .debug_ranges  0x0000000000000030       0xe8 ./system/src/stm32f1-stdperiph/stm32f10x_flash.o
  .debug_ranges  0x0000000000000118       0x98 ./system/src/stm32f1-stdperiph/stm32f10x_gpio.o
@@ -3817,24 +3800,24 @@ OUTPUT(FreeRTOS_proj.elf elf32-littlearm)
  .debug_ranges  0x00000000000002b8       0xc0 ./system/src/stm32f1-stdperiph/stm32f10x_spi.o
  .debug_ranges  0x0000000000000378       0x18 ./system/src/newlib/_exit.o
  .debug_ranges  0x0000000000000390       0x10 ./system/src/newlib/_sbrk.o
- .debug_ranges  0x00000000000003a0       0x48 ./system/src/newlib/_startup.o
- .debug_ranges  0x00000000000003e8       0x20 ./system/src/newlib/_syscalls.o
- .debug_ranges  0x0000000000000408       0x18 ./system/src/newlib/assert.o
- .debug_ranges  0x0000000000000420       0x18 ./system/src/cortexm/_initialize_hardware.o
- .debug_ranges  0x0000000000000438       0x70 ./system/src/cortexm/exception_handlers.o
- .debug_ranges  0x00000000000004a8       0x28 ./system/src/cmsis/system_stm32f10x.o
- .debug_ranges  0x00000000000004d0       0x10 ./system/src/cmsis/vectors_stm32f10x.o
- .debug_ranges  0x00000000000004e0       0x98 ./src/ks0108.o
- .debug_ranges  0x0000000000000578       0x30 ./src/main.o
- .debug_ranges  0x00000000000005a8       0x30 ./src/sd_stm32.o
- .debug_ranges  0x00000000000005d8       0x38 ./my_initialize/initialize.o
- .debug_ranges  0x0000000000000610       0x28 ./FreeRTOS/source/heap_3.o
- .debug_ranges  0x0000000000000638       0x30 ./FreeRTOS/source/list.o
- .debug_ranges  0x0000000000000668       0x78 ./FreeRTOS/source/port.o
- .debug_ranges  0x00000000000006e0       0xd8 ./FreeRTOS/source/queue.o
- .debug_ranges  0x00000000000007b8      0x1d0 ./FreeRTOS/source/tasks.o
- .debug_ranges  0x0000000000000988      0x160 ./FATFs/ff.o
- .debug_ranges  0x0000000000000ae8       0xa0 ./FATFs/sd_stm32.o
+ .debug_ranges  0x00000000000003a0       0x30 ./system/src/newlib/_startup.o
+ .debug_ranges  0x00000000000003d0       0x20 ./system/src/newlib/_syscalls.o
+ .debug_ranges  0x00000000000003f0       0x18 ./system/src/newlib/assert.o
+ .debug_ranges  0x0000000000000408       0x18 ./system/src/cortexm/_initialize_hardware.o
+ .debug_ranges  0x0000000000000420       0x70 ./system/src/cortexm/exception_handlers.o
+ .debug_ranges  0x0000000000000490       0x28 ./system/src/cmsis/system_stm32f10x.o
+ .debug_ranges  0x00000000000004b8       0x10 ./system/src/cmsis/vectors_stm32f10x.o
+ .debug_ranges  0x00000000000004c8       0x98 ./src/ks0108.o
+ .debug_ranges  0x0000000000000560       0x30 ./src/main.o
+ .debug_ranges  0x0000000000000590       0x30 ./src/sd_stm32.o
+ .debug_ranges  0x00000000000005c0       0x40 ./my_initialize/initialize.o
+ .debug_ranges  0x0000000000000600       0x28 ./FreeRTOS/source/heap_3.o
+ .debug_ranges  0x0000000000000628       0x30 ./FreeRTOS/source/list.o
+ .debug_ranges  0x0000000000000658       0x78 ./FreeRTOS/source/port.o
+ .debug_ranges  0x00000000000006d0       0xd8 ./FreeRTOS/source/queue.o
+ .debug_ranges  0x00000000000007a8      0x198 ./FreeRTOS/source/tasks.o
+ .debug_ranges  0x0000000000000940      0x148 ./FATFs/ff.o
+ .debug_ranges  0x0000000000000a88       0xa0 ./FATFs/sd_stm32.o
 
 .debug_macro    0x0000000000000000    0x11b41
  .debug_macro   0x0000000000000000      0x162 ./system/src/stm32f1-stdperiph/misc.o
@@ -3925,21 +3908,21 @@ OUTPUT(FreeRTOS_proj.elf elf32-littlearm)
  .debug_macro   0x000000000000fc63       0x16 ./src/main.o
  .debug_macro   0x000000000000fc79      0x197 ./src/main.o
  .debug_macro   0x000000000000fe10       0x16 ./src/main.o
- .debug_macro   0x000000000000fe26       0xf6 ./src/main.o
- .debug_macro   0x000000000000ff1c       0x19 ./src/main.o
- .debug_macro   0x000000000000ff35       0x5e ./src/main.o
- .debug_macro   0x000000000000ff93       0xd2 ./src/main.o
- .debug_macro   0x0000000000010065       0x10 ./src/main.o
- .debug_macro   0x0000000000010075       0x1f ./src/main.o
- .debug_macro   0x0000000000010094      0x3b5 ./src/main.o
- .debug_macro   0x0000000000010449       0xc0 ./src/main.o
- .debug_macro   0x0000000000010509       0x8c ./src/main.o
- .debug_macro   0x0000000000010595       0x91 ./src/main.o
- .debug_macro   0x0000000000010626       0xb0 ./src/main.o
- .debug_macro   0x00000000000106d6       0x7f ./src/main.o
- .debug_macro   0x0000000000010755       0x91 ./src/main.o
- .debug_macro   0x00000000000107e6       0xf9 ./src/main.o
- .debug_macro   0x00000000000108df       0x16 ./src/main.o
+ .debug_macro   0x000000000000fe26       0x91 ./src/main.o
+ .debug_macro   0x000000000000feb7       0xf9 ./src/main.o
+ .debug_macro   0x000000000000ffb0       0x16 ./src/main.o
+ .debug_macro   0x000000000000ffc6       0xf6 ./src/main.o
+ .debug_macro   0x00000000000100bc       0x19 ./src/main.o
+ .debug_macro   0x00000000000100d5       0x5e ./src/main.o
+ .debug_macro   0x0000000000010133       0xd2 ./src/main.o
+ .debug_macro   0x0000000000010205       0x10 ./src/main.o
+ .debug_macro   0x0000000000010215       0x1f ./src/main.o
+ .debug_macro   0x0000000000010234      0x3b5 ./src/main.o
+ .debug_macro   0x00000000000105e9       0xc0 ./src/main.o
+ .debug_macro   0x00000000000106a9       0x8c ./src/main.o
+ .debug_macro   0x0000000000010735       0x91 ./src/main.o
+ .debug_macro   0x00000000000107c6       0xb0 ./src/main.o
+ .debug_macro   0x0000000000010876       0x7f ./src/main.o
  .debug_macro   0x00000000000108f5      0x2ce ./src/sd_stm32.o
  .debug_macro   0x0000000000010bc3      0x28c ./my_initialize/initialize.o
  .debug_macro   0x0000000000010e4f      0x16f ./FreeRTOS/source/heap_3.o

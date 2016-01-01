@@ -29,7 +29,7 @@ src/sd_stm32.o: ../src/sd_stm32.c ../include/sd_stm32.h \
  /home/tomek/stm32workspace/FreeRTOS_proj/FATFs/ff.h \
  /home/tomek/stm32workspace/FreeRTOS_proj/FATFs/integer.h \
  /home/tomek/stm32workspace/FreeRTOS_proj/FATFs/ffconf.h \
- /home/tomek/stm32workspace/FreeRTOS_proj/helpers/file_system_helper.h
+ /home/tomek/stm32workspace/FreeRTOS_proj/helpers/fs_helper.h
 
 ../include/sd_stm32.h:
 
@@ -97,4 +97,4 @@ src/sd_stm32.o: ../src/sd_stm32.c ../include/sd_stm32.h \
 
 /home/tomek/stm32workspace/FreeRTOS_proj/FATFs/ffconf.h:
 
-/home/tomek/stm32workspace/FreeRTOS_proj/helpers/file_system_helper.h:
+/home/tomek/stm32workspace/FreeRTOS_proj/helpers/fs_helper.h:
