@@ -23,7 +23,6 @@ void init (void)
 void GPIO_Config(void)
 {
 
-  //konfigurowanie portow GPIO
   GPIO_InitTypeDef  GPIO_InitStructure;
 
  //PORTC - Wyświetlacz
@@ -40,7 +39,7 @@ void GPIO_Config(void)
 
 
   //PORTB - Input
-  GPIO_InitStructure.GPIO_Pin =GPIO_Pin_9;
+  GPIO_InitStructure.GPIO_Pin =GPIO_Pin_9 | GPIO_Pin_10;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
