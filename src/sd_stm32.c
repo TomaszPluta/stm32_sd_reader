@@ -77,7 +77,7 @@ readed_files_t* print_files (void)
 
 
 		char* temp_content;
-		temp_content = SD_open_file(plik.fname);
+		temp_content = SD_read_file(plik.fname, 0);
 		new_file->content =  (char*) malloc( sizeof(temp_content)+1);
 		strcpy (new_file->content, temp_content);
 
@@ -95,7 +95,7 @@ readed_files_t* print_files (void)
 
 
 
-char * SD_open_file (char *fileName)
+char * SD_read_file (char *fileName, UINT position)
 {
 	FRESULT fresult;
 	FIL     plik;
@@ -103,7 +103,11 @@ char * SD_open_file (char *fileName)
     UINT    odczytanychBajtow=0;
     UINT    bajtowDoOdczytu=0;
 
+
+
+
 	   fresult = f_open(&plik,fileName, FA_READ);
+       f_lseek(&plik, position);
 	   bajtowDoOdczytu=f_size(&plik);
 	   if (bajtowDoOdczytu>127) {bajtowDoOdczytu=127;}
 	   fresult = f_read(&plik, bufor, bajtowDoOdczytu, &odczytanychBajtow);

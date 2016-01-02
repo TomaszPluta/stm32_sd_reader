@@ -20,7 +20,7 @@
 
 xSemaphoreHandle xSemaphoreMuteks;
 xSemaphoreHandle xSemaphoreKeyPressed;
-
+xSemaphoreHandle xSemaphoreKeyScroll;
 QueueHandle_t xQuFirstLineLCD;
 QueueHandle_t xQueueLCD;
 QueueHandle_t xQuSecondLineLCD;
@@ -48,7 +48,7 @@ void vTaskLCD( )
 	for( ;; )
     {
 
-		if (xQueueReceive(xQueueLCD, &dataToDisplay, (portTickType) 5)){
+		while (xQueueReceive(xQueueLCD, &dataToDisplay, (portTickType) 0)){
 
 				int line = dataToDisplay->line;
 				GLCD_ClearLine(line);
@@ -57,7 +57,7 @@ void vTaskLCD( )
 
 		     }
 
-			vTaskDelayUntil( &xLastWakeTime, 300 );
+			vTaskDelayUntil( &xLastWakeTime, 400 );
     }
 }
 
@@ -89,6 +89,9 @@ void vTaskSD()
    static FILINFO plik;
 
    xSemaphoreGive(xSemaphoreKeyPressed);
+   xSemaphoreGive(xSemaphoreKeyScroll);
+
+	int laste_readed_line=0;
 
     for( ;; )
     {
@@ -104,23 +107,41 @@ void vTaskSD()
 
 
     				fileNameToLCD->line =1;
-	    			strncpy (fileNameToLCD->data, plik.fname,12);
+	    			strncpy (fileNameToLCD->data, plik.fname,127);
     				xQueueSend(xQueueLCD, (void *) &fileNameToLCD, (portTickType) 10);
 
-    				strncpy (file_content,  SD_open_file(plik.fname),128);
+    				strncpy (file_content,  SD_read_file(plik.fname, 0),128);
+//
+//    				for (i=0; i<numberOfLines; i++){
+//    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
+//    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
+//    					FileContentLinesToLCD[i]->line = startLineOffset + i;
+//    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
 
-    				for (i=0; i<numberOfLines; i++){
-    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
-    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
-    					FileContentLinesToLCD[i]->line = startLineOffset + i;
-    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
+
+    				laste_readed_line= 0;
+    				xSemaphoreGive(xSemaphoreKeyScroll);
+		}
 
 
 
-    				vTaskDelayUntil( &xLastWakeTime, 900 );
+		if  (xSemaphoreTake(xSemaphoreKeyScroll,0)){
+
+
+
+						strncpy (file_content,  SD_read_file(plik.fname, laste_readed_line * 127), 128);
+
+	    				for (i=0; i<numberOfLines; i++){
+	    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
+	    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
+	    					FileContentLinesToLCD[i]->line = startLineOffset + i;
+	    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
+	    					laste_readed_line++;
 			}
 		}
-	}
+
+		vTaskDelay(100 );
+    }
 }
 
 
@@ -156,16 +177,28 @@ void vTaskCheckKey (void)
 		else
 		{
 			GPIO_SetBits(GPIOB, GPIO_Pin_8);
-			xSemaphoreGive(xSemaphoreKeyPressed);
+			xSemaphoreGive(xSemaphoreKeyScroll);
 		}
 
 
-		 vTaskDelayUntil( &xLastWakeTime, 100 );
+		 vTaskDelayUntil( &xLastWakeTime, 300 );
 
 
     }
 }
 
+
+
+void vdummytask (void)
+{
+ portTickType xLastWakeTime;
+    xLastWakeTime = xTaskGetTickCount();
+		for( ;; )
+		{
+			vTaskDelayUntil( &xLastWakeTime, 800 );
+		    }
+
+}
 
 
 
@@ -233,7 +266,7 @@ void vSystemUpTime (void)
 
   		dataToSend->data = uptime;
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
-		vTaskDelayUntil( &xLastWakeTime, 800 );
+		vTaskDelayUntil( &xLastWakeTime, 1000 );
     }
 }
 
@@ -244,19 +277,21 @@ main()
 	init();
 
 
-    xTaskCreate( vTaskLCD, "LCD", 250, NULL, tskIDLE_PRIORITY + 4, NULL);
+    xTaskCreate( vTaskLCD, "LCD", 50, NULL, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate( vTaskSD, "SD", 500, NULL, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate( vTaskCheckKey, "vTaskCheckKey", 100, NULL,   tskIDLE_PRIORITY + 2, NULL);
+    xTaskCreate( vTaskCheckKey, "vTaskCheckKey", 100, NULL,   tskIDLE_PRIORITY + 4, NULL);
     xTaskCreate( vSystemUpTime, "vSystemUpTime", 200, NULL,   tskIDLE_PRIORITY + 3, NULL);
+
+
+    xTaskCreate( vdummytask, "vdummytask", 1000, NULL,   tskIDLE_PRIORITY + 7, NULL);
+
 
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
 	xSemaphoreKeyPressed = xSemaphoreCreateBinary();
-//	xSemaphoreKeyPressed = xSemaphoreCreateCounting(5,0);
+	xSemaphoreKeyScroll = xSemaphoreCreateBinary();
 	xQueueLCD = xQueueCreate(32, sizeof(dataToDisplay_t));
 
-
   vTaskStartScheduler();
-
 
   while (1)
   {}
