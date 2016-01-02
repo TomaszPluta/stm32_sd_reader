@@ -85,11 +85,26 @@ void vTaskSD()
 	   FileContentLinesToLCD[i]->data = pvPortMalloc(22*sizeof(char));
    }
 
+
+   dataToDisplay_t * FileNamesLinesToLCD[6];
+
+   for (i =0; i< 6; i++)
+   {
+	   FileNamesLinesToLCD[i]  =  pvPortMalloc(sizeof(dataToDisplay_t));
+	   FileNamesLinesToLCD[i]->data = pvPortMalloc(22*sizeof(char));
+   }
+
+
+
    static DIR katalog;
    static FILINFO plik;
 
    xSemaphoreGive(xSemaphoreKeyPressed);
    xSemaphoreGive(xSemaphoreKeyScroll);
+
+
+   f_opendir(&katalog,"");
+
 
 	int laste_readed_line=0;
 
@@ -97,26 +112,42 @@ void vTaskSD()
     {
 
 		if  (xSemaphoreTake(xSemaphoreKeyPressed,0)){
-			f_readdir(&katalog, &plik);
+//			f_readdir(&katalog, &plik);
 
 
-					if (plik.fname[0] == 0){
-					   	   f_opendir(&katalog,"");
-					   	   f_readdir(&katalog, &plik);
-					}
 
 
-    				fileNameToLCD->line =1;
-	    			strncpy (fileNameToLCD->data, plik.fname,127);
-    				xQueueSend(xQueueLCD, (void *) &fileNameToLCD, (portTickType) 10);
 
-    				strncpy (file_content,  SD_read_file(plik.fname, 0),128);
+			for (i=0; i<numberOfLines; i++){
+
+				   f_readdir(&katalog, &plik);
+				memset(FileNamesLinesToLCD[i]->data, 0 , 22*sizeof(char));
+				strncpy (FileNamesLinesToLCD[i]->data, plik.fname,21);
+				FileNamesLinesToLCD[i]->line = startLineOffset + i;
+				xQueueSend(xQueueLCD, (void *) &FileNamesLinesToLCD[i], (portTickType) 5);
+				laste_readed_line++;
+			}
+
+
+
 //
-//    				for (i=0; i<numberOfLines; i++){
-//    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
-//    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
-//    					FileContentLinesToLCD[i]->line = startLineOffset + i;
-//    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
+//					if (plik.fname[0] == 0){
+//					   	   f_opendir(&katalog,"");
+//					   	   f_readdir(&katalog, &plik);
+//					}
+//
+//
+//    				fileNameToLCD->line =1;
+//	    			strncpy (fileNameToLCD->data, plik.fname,127);
+//    				xQueueSend(xQueueLCD, (void *) &fileNameToLCD, (portTickType) 10);
+//
+//    				strncpy (file_content,  SD_read_file(plik.fname, 0),128);
+////
+////    				for (i=0; i<numberOfLines; i++){//
+////    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
+////    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
+////    					FileContentLinesToLCD[i]->line = startLineOffset + i;
+////    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
 
 
     				laste_readed_line= 0;
@@ -125,20 +156,20 @@ void vTaskSD()
 
 
 
-		if  (xSemaphoreTake(xSemaphoreKeyScroll,0)){
-
-
-
-						strncpy (file_content,  SD_read_file(plik.fname, laste_readed_line * 127), 128);
-
-	    				for (i=0; i<numberOfLines; i++){
-	    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
-	    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
-	    					FileContentLinesToLCD[i]->line = startLineOffset + i;
-	    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
-	    					laste_readed_line++;
-			}
-		}
+//		if  (xSemaphoreTake(xSemaphoreKeyScroll,0)){
+//
+//
+//
+//						strncpy (file_content,  SD_read_file(plik.fname, laste_readed_line * 127), 128);
+//
+//	    				for (i=0; i<numberOfLines; i++){
+//	    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
+//	    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
+//	    					FileContentLinesToLCD[i]->line = startLineOffset + i;
+//	    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
+//	    					laste_readed_line++;
+//			}
+//		}
 
 		vTaskDelay(100 );
     }
@@ -157,33 +188,22 @@ void vTaskCheckKey (void)
 
  	for( ;; )
     {
-		 if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9))
-		 {
-			 GPIO_ResetBits(GPIOB, GPIO_Pin_8);
-		 }
-
-		else
-		{
+		if (!(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9))) {
 			GPIO_SetBits(GPIOB, GPIO_Pin_8);
 			xSemaphoreGive(xSemaphoreKeyPressed);
 		}
 
-
-
-		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10))
-		{
-			GPIO_ResetBits(GPIOB, GPIO_Pin_8);
-		}
-		else
-		{
+		if (!(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10))) {
 			GPIO_SetBits(GPIOB, GPIO_Pin_8);
 			xSemaphoreGive(xSemaphoreKeyScroll);
 		}
 
+		if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9)
+		&&  GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) ) {
+			GPIO_ResetBits(GPIOB, GPIO_Pin_8);
+		}
 
 		 vTaskDelayUntil( &xLastWakeTime, 300 );
-
-
     }
 }
 
@@ -267,11 +287,21 @@ void vSystemUpTime (void)
   		dataToSend->data = uptime;
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
 		vTaskDelayUntil( &xLastWakeTime, 1000 );
+
+		int a;
+		a = get_fattime;
     }
 }
 
 
-int
+
+
+//i inne z elektrody
+//
+//
+//do tego ioctl
+//
+//int
 main()
 {
 	init();
