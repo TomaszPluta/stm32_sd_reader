@@ -69,7 +69,7 @@ void vTaskSD()
 	const int charsInLine = 21;
 	int laste_readed_line=0;
 	int i;
-	int active_line =1;
+	int active_line, next_line =0;
 
 
    dataToDisplay_t * fileNameToLCD  =  pvPortMalloc(sizeof(dataToDisplay_t));
@@ -93,7 +93,7 @@ void vTaskSD()
    static DIR katalog;
    static FILINFO plik;
 
-//   xSemaphoreGive(xSemaphoreKeyPressed);
+   xSemaphoreGive(xSemaphoreKeyPressed);
  //  xSemaphoreGive(xSemaphoreKeyScroll);
 
 
@@ -107,27 +107,31 @@ void vTaskSD()
 			strncpy (FileNamesLinesToLCD[i]->data, plik.fname,21);
 			FileNamesLinesToLCD[i]->line = startLineOffset + i;
 			xQueueSend(xQueueLCD, (void *) &FileNamesLinesToLCD[i], (portTickType) 5);
-			laste_readed_line++;
+	//		laste_readed_line++;
 		}
 
+
+
+
 enum line_values {l2=0, l3=1, l4=2, l5=3, l6=4, l7=5, l8=6}line;
+
+
 
 
 
     for( ;; )
     {
 
+
 		if  (xSemaphoreTake(xSemaphoreKeyPressed,0)){
 
+			next_line++;
+			active_line = next_line - 1;
 
-//			for (i =0; i<22; i++){
-//				file_name_buff[i] =  FileNamesLinesToLCD[active_line]->data[i+2];
-//			}
-//			strncpy (FileNamesLinesToLCD[active_line-1]->data, (char*) &file_name_buff[2],21);
-
+			if (active_line>0){
 			strncpy (FileNamesLinesToLCD[active_line-1]->data, (char*) &FileNamesLinesToLCD[active_line-1]->data[2],21);
 			xQueueSend(xQueueLCD, (void *) &FileNamesLinesToLCD[active_line-1], (portTickType) 5);
-
+			}
 
 
 			file_name_buff[0] = '>';
@@ -141,22 +145,23 @@ enum line_values {l2=0, l3=1, l4=2, l5=3, l6=4, l7=5, l8=6}line;
 			xQueueSend(xQueueLCD, (void *) &FileNamesLinesToLCD[active_line], (portTickType) 5);
 
 
-			active_line++;
+			laste_readed_line =0;
 		}
 
 
 
-//		if  (xSemaphoreTake(xSemaphoreKeyScroll,0)){
-//						strncpy (file_content,  SD_read_file(plik.fname, laste_readed_line * 127), 128);
-//	    				for (i=0; i<numberOfLines; i++){
-//	    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
-//	    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
-//	    					FileContentLinesToLCD[i]->line = startLineOffset + i;
-//	    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
-//	    					laste_readed_line++;
-//						}
-//
-//		}
+		if  (xSemaphoreTake(xSemaphoreKeyScroll,0)){
+
+						strncpy (file_content,  SD_read_file((char*) &FileNamesLinesToLCD[active_line]->data[2], laste_readed_line * 127), 128);
+	    				for (i=0; i<numberOfLines; i++){
+	    					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
+	    					strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
+	    					FileContentLinesToLCD[i]->line = startLineOffset + i;
+	    					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
+	    					laste_readed_line++;
+						}
+
+		}
 
 		vTaskDelay(100 );
     }
@@ -190,7 +195,7 @@ void vTaskCheckKey (void)
 			GPIO_ResetBits(GPIOB, GPIO_Pin_8);
 		}
 
-		 vTaskDelayUntil( &xLastWakeTime, 300 );
+		 vTaskDelayUntil( &xLastWakeTime, 220 );
     }
 }
 
