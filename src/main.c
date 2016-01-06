@@ -65,11 +65,12 @@ void vTaskSD()
    xLastWakeTime = xTaskGetTickCount();
 
 	const int startLineOffset = 2;
-	const int numberOfLines = 6;
 	const int charsInLine = 21;
+	const int numberOfLines =6;
+	int  numberOfFiles = 6;
 	int laste_readed_line=0;
 	int i;
-	int selected_line= -1;
+	int selected_line, line_to_read =  0;
 
 
    dataToDisplay_t * fileNameToLCD  =  pvPortMalloc(sizeof(dataToDisplay_t));
@@ -86,6 +87,7 @@ void vTaskSD()
    {
 	   FileNamesLinesToLCD[i]  =  pvPortMalloc(sizeof(dataToDisplay_t));
 	   FileNamesLinesToLCD[i]->data = pvPortMalloc(23*sizeof(char));
+	   FileNamesLinesToLCD[i]->line = startLineOffset + i;
    }
    char* file_name_buff =  pvPortMalloc(23* sizeof(char));
 	file_name_buff[0] = '>';
@@ -98,27 +100,23 @@ void vTaskSD()
  //  xSemaphoreGive(xSemaphoreKeyScroll);
 
 
-
-
-
-
-
-
-
-
-
-
     for( ;; )
     {
 		if  (xSemaphoreTake(xSemaphoreKeyPressed,0)){
-			selected_line++;
+			if (selected_line > numberOfFiles){
+				selected_line = 0;
+			}
 
 			f_opendir(&katalog,"");
-			for (i=0; i<numberOfLines; i++){
+			for (i=0; i<= numberOfLines; i++){
 			    f_readdir(&katalog, &plik);
 				memset(FileNamesLinesToLCD[i]->data, 0 , 23 * sizeof(char));
 				strncpy (FileNamesLinesToLCD[i]->data, plik.fname,21);
 				FileNamesLinesToLCD[i]->line = startLineOffset + i;
+				if (plik.fname[0] == 0){
+					numberOfFiles = i-1;
+					break;
+				}
 			}
 
 
@@ -132,14 +130,15 @@ void vTaskSD()
 			}
 
 			laste_readed_line =0;
+			selected_line++;
 
 		}
 
 
 
 		if  (xSemaphoreTake(xSemaphoreKeyScroll,0)){
-
-			strncpy (file_content,  SD_read_file((char*) &FileNamesLinesToLCD[selected_line]->data[2], laste_readed_line * 127), 128);
+			line_to_read = selected_line -1;
+			strncpy (file_content,  SD_read_file((char*) &FileNamesLinesToLCD[line_to_read]->data[2], laste_readed_line * 127), 128);
 			for (i=0; i<numberOfLines; i++){
 				memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
 				strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
@@ -264,8 +263,7 @@ void vSystemUpTime (void)
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
 		vTaskDelayUntil( &xLastWakeTime, 1000 );
 
-		int a;
-		a = get_fattime;
+
     }
 }
 
