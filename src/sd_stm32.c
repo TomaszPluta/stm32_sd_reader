@@ -97,26 +97,42 @@ readed_files_t* print_files (void)
 
 char * SD_read_file (char *fileName, UINT position)
 {
-	FRESULT fresult;
-	FIL     plik;
     char    bufor[128]={0};
     UINT    odczytanychBajtow=0;
-    UINT    bajtowDoOdczytu=0;
+    UINT    bajtowDoOdczytu=45;
 
+ //     f_lseek(&plik, position);
+	 //  bajtowDoOdczytu=f_size(&plik);//?
 
-
-
-	   fresult = f_open(&plik,fileName, FA_READ);
-       f_lseek(&plik, position);
-	   bajtowDoOdczytu=f_size(&plik);
-	   if (bajtowDoOdczytu>127) {bajtowDoOdczytu=127;}
-	   fresult = f_read(&plik, bufor, bajtowDoOdczytu, &odczytanychBajtow);
+	   if (bajtowDoOdczytu>127) {bajtowDoOdczytu=127;}//?
+//	    char    bufor[128]={0};
+//	   f_gets(bufor, bajtowDoOdczytu, &plik);
 	   bufor[bajtowDoOdczytu]=0;
-	   fresult = f_close (&plik);
+
 	//   char * content = NULL;
 	 //  strcpy(content, bufor);
-
 	   return bufor;
 }
+
+
+//char * SD_read_file (char *fileName, UINT position)
+//{
+//	FRESULT fresult;
+//	FIL     plik;
+//    char    bufor[128]={0};
+//    UINT    odczytanychBajtow=0;
+//    UINT    bajtowDoOdczytu=0;
+//
+//	   fresult = f_open(&plik,fileName, FA_READ);
+//       f_lseek(&plik, position);
+//	   bajtowDoOdczytu=f_size(&plik);
+//	   if (bajtowDoOdczytu>127) {bajtowDoOdczytu=127;}
+//	   fresult = f_read(&plik, bufor, bajtowDoOdczytu, &odczytanychBajtow);
+//	   bufor[bajtowDoOdczytu]=0;
+//	   fresult = f_close (&plik);
+//	//   char * content = NULL;
+//	 //  strcpy(content, bufor);
+//	   return bufor;
+//}
 
 

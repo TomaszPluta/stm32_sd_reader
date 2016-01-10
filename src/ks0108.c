@@ -309,12 +309,14 @@ void GLCD_WriteChar(char charToWrite)
 char i;
 if (charToWrite == 10){
 	screen_y++;
-	charToWrite = ' ';
+//	charToWrite = ' ';
 }
+else{
 charToWrite -= 32;
 for(i = 0; i < 5; i++)
   GLCD_WriteData(GLCD_ReadByteFromROMMemory((char *)(font5x8 + (5 * charToWrite) + i)));
 GLCD_WriteData(0);
+}
 }
 //-------------------------------------------------------------------------------------------------
 // Write null-terminated string to screen memory

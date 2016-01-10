@@ -70,7 +70,7 @@ void vTaskSD()
 	int  numberOfFiles = 6;
 	int laste_readed_line=0;
 	int i;
-	int selected_line, line_to_read =  0;
+	int selected_line =0, line_to_read =  0;
 
 
    dataToDisplay_t * fileNameToLCD  =  pvPortMalloc(sizeof(dataToDisplay_t));
@@ -95,7 +95,7 @@ void vTaskSD()
 
    static DIR katalog;
    static FILINFO plik;
-
+   char    bufor[128]={0};
    xSemaphoreGive(xSemaphoreKeyPressed);
  //  xSemaphoreGive(xSemaphoreKeyScroll);
 
@@ -138,15 +138,28 @@ void vTaskSD()
 
 		if  (xSemaphoreTake(xSemaphoreKeyScroll,0)){
 			line_to_read = selected_line -1;
-			strncpy (file_content,  SD_read_file((char*) &FileNamesLinesToLCD[line_to_read]->data[2], laste_readed_line * 127), 128);
-			for (i=0; i<numberOfLines; i++){
-				memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
-				strncpy (FileContentLinesToLCD[i]->data, (char *)&file_content[0+(charsInLine*i)],21);
-				FileContentLinesToLCD[i]->line = startLineOffset + i;
-				xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
-				laste_readed_line++;
-			}
 
+			FIL     plik;
+			f_open(&plik,(char*) &FileNamesLinesToLCD[line_to_read]->data[2], FA_READ);
+
+			for (i =0; i <numberOfLines; i++){
+
+
+			   f_gets(bufor, 128, &plik);
+			   bufor[128]=0;
+
+				strncpy (file_content,  bufor, 128);
+
+//				strncpy (file_content,  SD_read_file((char*) &FileNamesLinesToLCD[line_to_read]->data[2], laste_readed_line * 127), 128);
+					memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
+					strncpy (FileContentLinesToLCD[i]->data, file_content,21);
+					FileContentLinesToLCD[i]->line = startLineOffset + i;
+					xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
+
+
+
+			}
+			  f_close (&plik);
 		}
 
 		vTaskDelay(100 );
@@ -279,7 +292,7 @@ void main()
     xTaskCreate( vSystemUpTime, "vSystemUpTime", 200, NULL,   tskIDLE_PRIORITY + 3, NULL);
 
 
-    xTaskCreate( vdummytask, "vdummytask", 1000, NULL,   tskIDLE_PRIORITY + 7, NULL);
+  //  xTaskCreate( vdummytask, "vdummytask", 1000, NULL,   tskIDLE_PRIORITY + 7, NULL);
 
 
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
