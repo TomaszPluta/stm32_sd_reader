@@ -92,8 +92,6 @@ void vTaskSD()
 			if (selected_line > numberOfFiles){
 				selected_line = 0;
 			}
-
-//			f_close (&plik);
 			fileOpened = false;
 
 			f_opendir(&katalog,"");
@@ -129,10 +127,10 @@ void vTaskSD()
 			}
 			for (i =0; i <numberOfLines; i++){
 
-			f_gets(bufor, 128, &active_file);
-			bufor[128]=0;
+			f_gets(file_content, 127, &active_file);
+//			file_content[128]=0;
 
-			strncpy (file_content,  bufor, 128);
+	//		strncpy (file_content,  bufor, 128);
 			memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
 			strncpy (FileContentLinesToLCD[i]->data, file_content,21);
 			FileContentLinesToLCD[i]->line = startLineOffset + i;
