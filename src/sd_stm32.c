@@ -12,17 +12,7 @@ static FATFS g_sFatFs;
 
 void SD_mount ()
 {
-	FRESULT fresult;
-			fresult = f_mount(0, &g_sFatFs);
-			if (fresult==0) {
-
-//			   GLCD_GoTo(0,0);
-//			   GLCD_WriteString("SD OK      |    ok");
-			} else {
-
-//				   GLCD_GoTo(0,0);
-//			 GLCD_WriteString(" NIE Zamontowal");
-			}
+	f_mount(0, &g_sFatFs);
 }
 
 
@@ -36,7 +26,6 @@ void files_list_add (readed_files_t* list_head, readed_files_t* new_element)
 
 		current->next = new_element;
 		new_element->next = NULL;
-
 }
 
 
@@ -102,9 +91,9 @@ char * SD_read_file (char *fileName, UINT position)
     UINT    bajtowDoOdczytu=45;
 
  //     f_lseek(&plik, position);
-	 //  bajtowDoOdczytu=f_size(&plik);//?
+	 //  bajtowDoOdczytu=f_size(&plik);
 
-	   if (bajtowDoOdczytu>127) {bajtowDoOdczytu=127;}//?
+	   if (bajtowDoOdczytu>127) {bajtowDoOdczytu=127;}
 //	    char    bufor[128]={0};
 //	   f_gets(bufor, bajtowDoOdczytu, &plik);
 	   bufor[bajtowDoOdczytu]=0;

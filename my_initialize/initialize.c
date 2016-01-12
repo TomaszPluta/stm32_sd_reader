@@ -102,10 +102,8 @@ void RCC_Config(void)
 void NVIC_Config(void)
 {
 #ifdef  VECT_TAB_RAM
-  // Jezeli tablica wektorow w RAM, to ustaw jej adres na 0x20000000
   NVIC_SetVectorTable(NVIC_VectTab_RAM, 0x0);
 #else  // VECT_TAB_FLASH
-  // W przeciwnym wypadku ustaw na 0x08000000
   NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x0);
 #endif
 }
