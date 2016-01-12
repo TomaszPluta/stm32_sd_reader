@@ -97,7 +97,6 @@ void vTaskSD()
 			f_opendir(&katalog,"");
 			for (i=0; i<= numberOfLines; i++){
 			    f_readdir(&katalog, &plik);
-				memset(FileNamesLinesToLCD[i]->data, 0 , 23 * sizeof(char));
 				strncpy (FileNamesLinesToLCD[i]->data, plik.fname,21);
 				FileNamesLinesToLCD[i]->line = startLineOffset + i;
 				if (plik.fname[0] == 0){
@@ -128,10 +127,7 @@ void vTaskSD()
 			for (i =0; i <numberOfLines; i++){
 
 			f_gets(file_content, 127, &active_file);
-//			file_content[128]=0;
 
-	//		strncpy (file_content,  bufor, 128);
-			memset(FileContentLinesToLCD[i]->data, 0 , 22*sizeof(char));
 			strncpy (FileContentLinesToLCD[i]->data, file_content,21);
 			FileContentLinesToLCD[i]->line = startLineOffset + i;
 			xQueueSend(xQueueLCD, (void *) &FileContentLinesToLCD[i], (portTickType) 15);
