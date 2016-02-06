@@ -148,7 +148,7 @@ void vTaskSD()
 }
 
 
-void vTaskCheckKey (void)
+void vTaskKeys (void)
 {
     portTickType xLastWakeTime;
     xLastWakeTime = xTaskGetTickCount();
@@ -187,20 +187,16 @@ void vdummytask (void)
 
 
 
-void vSystemUpTime (void)
+void vTaskTime (void)
 {
     portTickType xLastWakeTime;
     xLastWakeTime = xTaskGetTickCount();
 
-    char *timeChar =  pvPortMalloc(9*sizeof(char));
-    int asciOffset =48;
-
 	char * uptime = pvPortMalloc(21*sizeof(char));
-	char * napis =  "UPTIME:     ";
+	char * napis =  "Uptime:     ";
 
     dataToDisplay_t * dataToSend  =  pvPortMalloc(sizeof(dataToDisplay_t));
     dataToSend->data = pvPortMalloc(40*sizeof(char));
-
 
     for( ;; )
     {
@@ -220,6 +216,36 @@ void vSystemUpTime (void)
 }
 
 
+
+void vTaskTemp (void)
+{
+    portTickType xLastWakeTime;
+    xLastWakeTime = xTaskGetTickCount();
+
+	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+
+
+    dataToDisplay_t* dataToSend  =  pvPortMalloc(sizeof(dataToDisplay_t));
+    dataToSend->data = pvPortMalloc(22*sizeof(char));
+	char * temp = pvPortMalloc(21*sizeof(char));
+	char* napis =  "Temp:     ";
+	int adc;
+
+
+    for( ;; )
+    {
+    	adc = ADC_GetConversionValue(ADC1);
+    	sprintf (temp, "%s %d", napis, adc);
+  		dataToSend->data = temp;
+  		dataToSend->line = 1;
+    	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
+		vTaskDelayUntil( &xLastWakeTime, 900 );
+    }
+}
+
+
+
+
 void main()
 {
    init();
@@ -228,16 +254,17 @@ void main()
 
 //   DMA_config(table_src, table_dst);
 
-
     xTaskCreate( vTaskLCD, "LCD", 50, NULL, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate( vTaskSD, "SD", 500, NULL, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate( vTaskCheckKey, "vTaskCheckKey", 100, NULL,   tskIDLE_PRIORITY + 4, NULL);
-    xTaskCreate( vSystemUpTime, "vSystemUpTime", 200, NULL,   tskIDLE_PRIORITY + 3, NULL);
+    xTaskCreate( vTaskTemp, "vTaskTemp", 200, NULL,   tskIDLE_PRIORITY + 5, NULL);
+    xTaskCreate( vTaskKeys, "vTaskKeys", 100, NULL,   tskIDLE_PRIORITY + 4, NULL);
+    xTaskCreate( vTaskTime, "vTaskTime", 200, NULL,   tskIDLE_PRIORITY + 3, NULL);
 
 	xSemaphoreMuteks = xSemaphoreCreateMutex();
 	xSemaphoreKeyPressed = xSemaphoreCreateBinary();
 	xSemaphoreKeyScroll = xSemaphoreCreateBinary();
 	xQueueLCD = xQueueCreate(32, sizeof(dataToDisplay_t));
+
 
   vTaskStartScheduler();
 
