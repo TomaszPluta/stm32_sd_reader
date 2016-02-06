@@ -176,24 +176,13 @@ void vTaskKeys (void)
 
 
 
-void vdummytask (void)
-{
- portTickType xLastWakeTime;
-    xLastWakeTime = xTaskGetTickCount();
-		for( ;; )	{
-			vTaskDelayUntil( &xLastWakeTime, 800 );
-		    }
-}
-
-
-
 void vTaskTime (void)
 {
     portTickType xLastWakeTime;
     xLastWakeTime = xTaskGetTickCount();
 
-	char * uptime = pvPortMalloc(21*sizeof(char));
-	char * napis =  "Uptime:     ";
+	char * time_formatted = pvPortMalloc(21*sizeof(char));
+	char * Uptime_str =  "Uptime:     ";
 
     dataToDisplay_t * dataToSend  =  pvPortMalloc(sizeof(dataToDisplay_t));
     dataToSend->data = pvPortMalloc(40*sizeof(char));
@@ -208,8 +197,8 @@ void vTaskTime (void)
     	hour = min / 60;
     	min =min % 60;
 
-    	sprintf (uptime, "%s %02i:%02i:%02i", napis, hour, min, sec);
-  		dataToSend->data = uptime;
+    	sprintf (time_formatted, "%s %02i:%02i:%02i", Uptime_str, hour, min, sec);
+  		dataToSend->data = time_formatted;
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
 		vTaskDelayUntil( &xLastWakeTime, 1000 );
     }
@@ -227,16 +216,18 @@ void vTaskTemp (void)
 
     dataToDisplay_t* dataToSend  =  pvPortMalloc(sizeof(dataToDisplay_t));
     dataToSend->data = pvPortMalloc(22*sizeof(char));
-	char * temp = pvPortMalloc(21*sizeof(char));
-	char* napis =  "Temp:     ";
-	int adc;
-
+	char * temp_formatted = pvPortMalloc(21*sizeof(char));
+	char* temp_str =  "Temp:            ";
+	int adc_raw;
+	int adc_value;
+	int lm35_voltage_multipler = 1000;
 
     for( ;; )
     {
-    	adc = ADC_GetConversionValue(ADC1);
-    	sprintf (temp, "%s %d", napis, adc);
-  		dataToSend->data = temp;
+    	adc_raw = ADC_GetConversionValue(ADC1);
+    	adc_value = adc_raw * 3.3 * lm35_voltage_multipler / 4096;
+    	sprintf (temp_formatted, "%s%d.%d", temp_str, adc_value/10, adc_value%10);
+  		dataToSend->data = temp_formatted;
   		dataToSend->line = 1;
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
 		vTaskDelayUntil( &xLastWakeTime, 900 );
