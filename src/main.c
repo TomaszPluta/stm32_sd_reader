@@ -204,9 +204,6 @@ void vSystemUpTime (void)
 
     for( ;; )
     {
-
-
-
     	int upTime = xLastWakeTime / 1000;
     	int sec, min, hour;
 
@@ -216,49 +213,6 @@ void vSystemUpTime (void)
     	min =min % 60;
 
     	sprintf (uptime, "%s %02i:%02i:%02i", napis, hour, min, sec);
-
-
-
-
-//    		int upTime = xLastWakeTime / 1000;
-//    		int secH, secL, minH, minL, hourH, hourL;
-//
-//    		hourH = ((upTime)/36000);
-//			hourL =((upTime)/3600);
-//			while (hourL > 9)
-//				hourL = hourL / 10;
-//
-//    		minH = ((upTime)/600);
-//    		minL = ((upTime)/60);
-//    		while (minH > 5)
-//    			minH = minH / 10;
-//
-//    		while (minL > 9)
-//    			minL = minL / 10;
-//
-//			secH = (((upTime)%60)/10);
-//    		while (secH > 6)
-//    			secH = secH / 10;
-//
-//			secL = ((upTime)%60);
-//    		while (secL > 9)
-//    			secL = secL % 10;
-//
-//    		timeChar[0] = hourH  + asciOffset;
-//    		timeChar[1] = hourL  + asciOffset;
-//    		timeChar[2] = ':' ;
-//    		timeChar[3] = minH + asciOffset;
-//    		timeChar[4] = minL + asciOffset;
-//    		timeChar[5] = ':' ;
-//    		timeChar[6] = secH  + asciOffset;
-//    		timeChar[7] = secL  + asciOffset;
-//    		timeChar[8] = 0;
-//
-//    		dataToSend->line = 0;
-//    		dataToSend->data = timeChar;
-//
-//   		sprintf(uptime, "%s %s", napis, timeChar);
-
   		dataToSend->data = uptime;
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
 		vTaskDelayUntil( &xLastWakeTime, 1000 );
