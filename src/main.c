@@ -270,18 +270,10 @@ void main()
 {
    init();
 
-   int i;
-   int table_src[3];
-   for (i=0; i<3; i++)
-	   table_src[i]=i;
-   table_src[0] =6;
 
-   int table_dst[3];
 
-//   char * napis_dst = pvPortMalloc(1*sizeof(char));
+//   DMA_config(table_src, table_dst);
 
-   DMA_config(table_src, table_dst);
-//   napis_dst_filled = napis_dst;
 
     xTaskCreate( vTaskLCD, "LCD", 50, NULL, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate( vTaskSD, "SD", 500, NULL, tskIDLE_PRIORITY + 1, NULL);
