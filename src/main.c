@@ -18,6 +18,8 @@
 #include "initialize.h"
 
 
+
+
 xSemaphoreHandle xSemaphoreMuteks;
 xSemaphoreHandle xSemaphoreKeyPressed;
 xSemaphoreHandle xSemaphoreKeyScroll;
@@ -25,6 +27,10 @@ QueueHandle_t xQuFirstLineLCD;
 QueueHandle_t xQueueLCD;
 QueueHandle_t xQuSecondLineLCD;
 QueueHandle_t xQuOtherLinesLCD;
+
+
+char * napis_src = "kobylka";
+char * napis_dst_filled;
 
 void vTaskLCD( )
 {
@@ -44,6 +50,7 @@ void vTaskLCD( )
 				GLCD_ClearLine(line);
 				GLCD_GoTo(0, line);
 				GLCD_WriteString(dataToDisplay->data);
+//				GLCD_WriteString(napis_dst_filled);
 		     }
 
 			vTaskDelayUntil( &xLastWakeTime, 400 );
@@ -121,7 +128,7 @@ void vTaskSD()
 
 			FIL    active_file;
 			if (fileOpened != true){
-			f_open(&active_file,(char*) &FileNamesLinesToLCD[line_to_read]->data[2], FA_READ);
+			f_open(&active_file,(char*) &FileNamesLinesToLCD[line_to_read]->data[2], FA_READ);// sprobowac bez & i rzuta
 			fileOpened = true;
 			}
 			for (i =0; i <numberOfLines; i++){
@@ -197,44 +204,60 @@ void vSystemUpTime (void)
 
     for( ;; )
     {
-    		int upTime = xLastWakeTime / 1000;
-    		int secH, secL, minH, minL, hourH, hourL;
 
-    		hourH = ((upTime)/36000);
-			hourL =((upTime)/3600);
-			while (hourL > 9)
-				hourL = hourL / 10;
 
-    		minH = ((upTime)/600);
-    		minL = ((upTime)/60);
-    		while (minH > 5)
-    			minH = minH / 10;
 
-    		while (minL > 9)
-    			minL = minL / 10;
+    	int upTime = xLastWakeTime / 1000;
+    	int sec, min, hour;
 
-			secH = (((upTime)%60)/10);
-    		while (secH > 6)
-    			secH = secH / 10;
+    	sec = upTime % 60;
+    	min = upTime / 60;
+    	hour = min / 60;
+    	min =min % 60;
 
-			secL = ((upTime)%60);
-    		while (secL > 9)
-    			secL = secL % 10;
+    	sprintf (uptime, "%s %02i:%02i:%02i", napis, hour, min, sec);
 
-    		timeChar[0] = hourH  + asciOffset;
-    		timeChar[1] = hourL  + asciOffset;
-    		timeChar[2] = ':' ;
-    		timeChar[3] = minH + asciOffset;
-    		timeChar[4] = minL + asciOffset;
-    		timeChar[5] = ':' ;
-    		timeChar[6] = secH  + asciOffset;
-    		timeChar[7] = secL  + asciOffset;
-    		timeChar[8] = 0;
 
-    		dataToSend->line = 0;
-    		dataToSend->data = timeChar;
 
-   		sprintf(uptime, "%s %s", napis, timeChar);
+
+//    		int upTime = xLastWakeTime / 1000;
+//    		int secH, secL, minH, minL, hourH, hourL;
+//
+//    		hourH = ((upTime)/36000);
+//			hourL =((upTime)/3600);
+//			while (hourL > 9)
+//				hourL = hourL / 10;
+//
+//    		minH = ((upTime)/600);
+//    		minL = ((upTime)/60);
+//    		while (minH > 5)
+//    			minH = minH / 10;
+//
+//    		while (minL > 9)
+//    			minL = minL / 10;
+//
+//			secH = (((upTime)%60)/10);
+//    		while (secH > 6)
+//    			secH = secH / 10;
+//
+//			secL = ((upTime)%60);
+//    		while (secL > 9)
+//    			secL = secL % 10;
+//
+//    		timeChar[0] = hourH  + asciOffset;
+//    		timeChar[1] = hourL  + asciOffset;
+//    		timeChar[2] = ':' ;
+//    		timeChar[3] = minH + asciOffset;
+//    		timeChar[4] = minL + asciOffset;
+//    		timeChar[5] = ':' ;
+//    		timeChar[6] = secH  + asciOffset;
+//    		timeChar[7] = secL  + asciOffset;
+//    		timeChar[8] = 0;
+//
+//    		dataToSend->line = 0;
+//    		dataToSend->data = timeChar;
+//
+//   		sprintf(uptime, "%s %s", napis, timeChar);
 
   		dataToSend->data = uptime;
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
@@ -246,6 +269,19 @@ void vSystemUpTime (void)
 void main()
 {
    init();
+
+   int i;
+   int table_src[3];
+   for (i=0; i<3; i++)
+	   table_src[i]=i;
+   table_src[0] =6;
+
+   int table_dst[3];
+
+//   char * napis_dst = pvPortMalloc(1*sizeof(char));
+
+   DMA_config(table_src, table_dst);
+//   napis_dst_filled = napis_dst;
 
     xTaskCreate( vTaskLCD, "LCD", 50, NULL, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate( vTaskSD, "SD", 500, NULL, tskIDLE_PRIORITY + 1, NULL);

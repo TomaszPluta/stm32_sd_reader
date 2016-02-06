@@ -15,6 +15,7 @@ void GPIO_Config(void);
 void RCC_Config(void);
 void NVIC_Config(void);
 void SPI_Config(void);
+void DMA_config (int* data_src, int * data_dst);
 unsigned long int SysTick_Config_Mod(unsigned long int SysTick_CLKSource, unsigned long int Ticks);
 
 

@@ -10,6 +10,9 @@
 //void init (void);
 //unsigned long int SysTick_Config_Mod(unsigned long int SysTick_CLKSource, unsigned long int Ticks);
 
+#define DMA_DIR_MemoryToMemory ((uint32_t)0x00000080)
+
+
 
 void init (void)
 {
@@ -151,3 +154,70 @@ unsigned long int SysTick_Config_Mod(unsigned long int SysTick_CLKSource, unsign
   SysTick->CTRL = Settings;                                     //Zapisz ustawienia do rejestru sterujacego SysTick (i wlacz licznik)
   return (0);
 }
+
+
+
+void DMA_config (int* data_src, int * data_dst)
+{
+//	DMA_InitTypeDef DMA_InitStructure;
+//
+//	DMA_DeInit(DMA1_Channel1);
+//
+//
+//
+//	DMA_InitStructure.DMA_BufferSize = 100;
+//	DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToMemory;
+//	DMA_InitStructure.DMA_M2M = DMA_M2M_Enable;
+//	DMA_InitStructure.DMA_PeripheralBaseAddr = data_src;
+//	DMA_InitStructure.DMA_MemoryBaseAddr = data_dst;
+//	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+//	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
+//	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+//	DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+//
+//	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+//	DMA_Cmd(DMA1_Channel1, ENABLE);
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+
+
+
+
+int i;
+
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+
+	DMA_InitTypeDef  DMA_InitStructure;
+	DMA_DeInit(DMA1_Channel1);
+	DMA_InitStructure.DMA_M2M = DMA_M2M_Enable;
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+	DMA_InitStructure.DMA_BufferSize = 4;
+	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)data_src;
+	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)data_dst;
+	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+	DMA_Cmd(DMA1_Channel1, ENABLE);
+//	DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
+//	NVIC_InitTypeDef NVIC_InitStructure;
+	//Enable DMA1 channel IRQ Channel */
+//	NVIC_InitStructure.NVIC_IRQChannel = DMA1_Channel1_IRQn;
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+//	NVIC_Init(&NVIC_InitStructure);
+
+	//Enable DMA1 Channel transfer
+
+
+
+
+}
+
+
+
+
+
