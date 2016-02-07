@@ -32,6 +32,8 @@ QueueHandle_t xQuOtherLinesLCD;
 char * napis_src = "kobylka";
 char * napis_dst_filled;
 
+
+
 void vTaskLCD( )
 {
 	GLCD_Initialize();
@@ -218,14 +220,16 @@ void vTaskTemp (void)
     dataToSend->data = pvPortMalloc(22*sizeof(char));
 	char * temp_formatted = pvPortMalloc(21*sizeof(char));
 	char* temp_str =  "Temp:            ";
-	int adc_raw;
+	int* adc_raw = pvPortMalloc(sizeof(int));
 	int adc_value;
 	int lm35_voltage_multipler = 1000;
 
+	DMA_for_ADC(adc_raw);
     for( ;; )
     {
-    	adc_raw = ADC_GetConversionValue(ADC1);
-    	adc_value = adc_raw * 3.3 * lm35_voltage_multipler / 4096;
+
+//    	adc_raw = ADC_GetConversionValue(ADC1);
+    	adc_value = *adc_raw * 3.3 * lm35_voltage_multipler / 4096;
     	sprintf (temp_formatted, "%s%d.%d", temp_str, adc_value/10, adc_value%10);
   		dataToSend->data = temp_formatted;
   		dataToSend->line = 1;

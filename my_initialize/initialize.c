@@ -67,6 +67,12 @@ void GPIO_Config(void)
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+
+//  GPIO_StructInit(&GPIO_InitStructure);
+//  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
+//  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+//  GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
 
@@ -158,30 +164,62 @@ unsigned long int SysTick_Config_Mod(unsigned long int SysTick_CLKSource, unsign
 
 
 
-void DMA_config (int* data_src, int * data_dst)
+void DMA_for_ADC(int* data_dst_addr)
 {
 
-int i;
+	const int ADC1_Address = 0x4001244C;
 
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
 	DMA_InitTypeDef  DMA_InitStructure;
 	DMA_DeInit(DMA1_Channel1);
-	DMA_InitStructure.DMA_M2M = DMA_M2M_Enable;
-	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
 	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
 	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	DMA_InitStructure.DMA_BufferSize = 4;
-	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)data_src;
-	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)data_dst;
+	DMA_InitStructure.DMA_BufferSize = 1;
+	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC1_Address;
+	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)data_dst_addr;
 	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
 	DMA_Cmd(DMA1_Channel1, ENABLE);
-
 }
+
+
+
+//
+//void DMA_config (int* data_src, int * data_dst)
+//{
+//
+//int i;
+//
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+//
+//	DMA_InitTypeDef  DMA_InitStructure;
+//	DMA_DeInit(DMA1_Channel1);
+//	DMA_InitStructure.DMA_M2M = DMA_M2M_Enable;
+//	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+//	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
+//	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
+//	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
+//	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
+//	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+//	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+//	DMA_InitStructure.DMA_BufferSize = 4;
+//	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)data_src;
+//	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)data_dst;
+//	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+//	DMA_Cmd(DMA1_Channel1, ENABLE);
+//
+
+
+
+
+
+
 
 
 void ADC_config ()
@@ -201,6 +239,8 @@ void ADC_config ()
 	ADC_Init(ADC1, &ADC_InitStructure);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_71Cycles5);
 	ADC_Cmd(ADC1, ENABLE);
+//	ADC_DMACmd(ADC1,ENABLE);
+	ADC1->CR2 |= 1<<8;
 
 	ADC_ResetCalibration(ADC1);
 	while(ADC_GetResetCalibrationStatus(ADC1));
