@@ -204,16 +204,16 @@ void DMA_Init(DMA_Channel_TypeDef* DMAy_Channelx, DMA_InitTypeDef* DMA_InitStruc
   uint32_t tmpreg = 0;
 
   /* Check the parameters */
-  assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
-  assert_param(IS_DMA_DIR(DMA_InitStruct->DMA_DIR));
-  assert_param(IS_DMA_BUFFER_SIZE(DMA_InitStruct->DMA_BufferSize));
-  assert_param(IS_DMA_PERIPHERAL_INC_STATE(DMA_InitStruct->DMA_PeripheralInc));
-  assert_param(IS_DMA_MEMORY_INC_STATE(DMA_InitStruct->DMA_MemoryInc));   
-  assert_param(IS_DMA_PERIPHERAL_DATA_SIZE(DMA_InitStruct->DMA_PeripheralDataSize));
-  assert_param(IS_DMA_MEMORY_DATA_SIZE(DMA_InitStruct->DMA_MemoryDataSize));
-  assert_param(IS_DMA_MODE(DMA_InitStruct->DMA_Mode));
-  assert_param(IS_DMA_PRIORITY(DMA_InitStruct->DMA_Priority));
-  assert_param(IS_DMA_M2M_STATE(DMA_InitStruct->DMA_M2M));
+//  assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
+//  assert_param(IS_DMA_DIR(DMA_InitStruct->DMA_DIR));
+//  assert_param(IS_DMA_BUFFER_SIZE(DMA_InitStruct->DMA_BufferSize));
+//  assert_param(IS_DMA_PERIPHERAL_INC_STATE(DMA_InitStruct->DMA_PeripheralInc));
+//  assert_param(IS_DMA_MEMORY_INC_STATE(DMA_InitStruct->DMA_MemoryInc));
+//  assert_param(IS_DMA_PERIPHERAL_DATA_SIZE(DMA_InitStruct->DMA_PeripheralDataSize));
+//  assert_param(IS_DMA_MEMORY_DATA_SIZE(DMA_InitStruct->DMA_MemoryDataSize));
+//  assert_param(IS_DMA_MODE(DMA_InitStruct->DMA_Mode));
+//  assert_param(IS_DMA_PRIORITY(DMA_InitStruct->DMA_Priority));
+//  assert_param(IS_DMA_M2M_STATE(DMA_InitStruct->DMA_M2M));
 
 /*--------------------------- DMAy Channelx CCR Configuration -----------------*/
   /* Get the DMAy_Channelx CCR value */
@@ -233,6 +233,8 @@ void DMA_Init(DMA_Channel_TypeDef* DMAy_Channelx, DMA_InitTypeDef* DMA_InitStruc
             DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
             DMA_InitStruct->DMA_PeripheralDataSize | DMA_InitStruct->DMA_MemoryDataSize |
             DMA_InitStruct->DMA_Priority | DMA_InitStruct->DMA_M2M;
+
+
 
   /* Write to DMAy Channelx CCR */
   DMAy_Channelx->CCR = tmpreg;

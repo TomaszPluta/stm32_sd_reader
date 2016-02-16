@@ -130,7 +130,7 @@ void vTaskSD()
 
 			FIL    active_file;
 			if (fileOpened != true){
-			f_open(&active_file,(char*) &FileNamesLinesToLCD[line_to_read]->data[2], FA_READ);// sprobowac bez & i rzuta
+			f_open(&active_file,(char*) &FileNamesLinesToLCD[line_to_read]->data[2], FA_READ);
 			fileOpened = true;
 			}
 			for (i =0; i <numberOfLines; i++){
@@ -155,8 +155,17 @@ void vTaskKeys (void)
     portTickType xLastWakeTime;
     xLastWakeTime = xTaskGetTickCount();
 
+
+    int * current_pot_value = pvPortMalloc(sizeof (int));
+    int prev_pot_value;
+    int delta_pot_value;
+
  	for( ;; )
     {
+
+ 		delta_pot_value =  current_pot_value - prev_pot_value;
+
+
 		if (!(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9))) {
 			GPIO_SetBits(GPIOB, GPIO_Pin_8);
 			xSemaphoreGive(xSemaphoreKeyPressed);
@@ -220,21 +229,27 @@ void vTaskTemp (void)
     dataToSend->data = pvPortMalloc(22*sizeof(char));
 	char * temp_formatted = pvPortMalloc(21*sizeof(char));
 	char* temp_str =  "Temp:            ";
-	int* adc_raw = pvPortMalloc(sizeof(int));
+	int* adc_raw = pvPortMalloc(2*sizeof(int));
 	int adc_value;
 	int lm35_voltage_multipler = 1000;
+
+	int a;
 
 	DMA_for_ADC(adc_raw);
     for( ;; )
     {
 
-//    	adc_raw = ADC_GetConversionValue(ADC1);
-    	adc_value = *adc_raw * 3.3 * lm35_voltage_multipler / 4096;
+
+    	if (adc_raw[0]> 1000){
+    		xSemaphoreGive(xSemaphoreKeyPressed);
+    	}
+
+    	adc_value = adc_raw[1] * 3.3 * lm35_voltage_multipler / 4096;
     	sprintf (temp_formatted, "%s%d.%d", temp_str, adc_value/10, adc_value%10);
   		dataToSend->data = temp_formatted;
   		dataToSend->line = 1;
     	xQueueSend(xQueueLCD, (void *) &dataToSend, (portTickType) 1);
-		vTaskDelayUntil( &xLastWakeTime, 900 );
+		vTaskDelayUntil( &xLastWakeTime, 500 );
     }
 }
 

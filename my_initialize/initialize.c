@@ -167,57 +167,81 @@ unsigned long int SysTick_Config_Mod(unsigned long int SysTick_CLKSource, unsign
 void DMA_for_ADC(int* data_dst_addr)
 {
 
-	const int ADC1_Address = 0x4001244C;
 
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
-	DMA_InitTypeDef  DMA_InitStructure;
-	DMA_DeInit(DMA1_Channel1);
-	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
-	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
-	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
-	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
-	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
-	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	DMA_InitStructure.DMA_BufferSize = 1;
-	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC1_Address;
-	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)data_dst_addr;
-	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-	DMA_Cmd(DMA1_Channel1, ENABLE);
+	// włączenie taktowania dla DMA
+	#define DMA1EN  1
+	RCC->AHBENR |=  DMA1EN;
+
+	DMA1_Channel1->CMAR = (uint32_t) data_dst_addr;
+
+	#define ADC1_Address 0x4001244C
+	DMA1_Channel1->CPAR = ADC1_Address;
+
+	// należy konfigurować przed aktywacją kanału
+	// patrz: RM str.287
+	#define BufferSize 2;
+	DMA1_Channel1->CNDTR = BufferSize;
+
+
+	#define MemoryToMemoryEnable (1<<14)
+	DMA1_Channel1->CCR |= MemoryToMemoryEnable;
+
+	#define PriorityHigh (1<<13)
+	DMA1_Channel1->CCR |= PriorityHigh;
+
+	#define MemDataSize (1<<11)
+	DMA1_Channel1->CCR |= MemDataSize;
+
+	#define PerDataSize (1<<9)
+	DMA1_Channel1->CCR |= PerDataSize;
+
+	#define MemInc (1<<7)
+	DMA1_Channel1->CCR |= MemInc ;
+
+	#define DataSize (1<<11)
+	DMA1_Channel1->CCR |= DataSize;
+
+	#define Circular (1<<5)
+	DMA1_Channel1->CCR |= Circular ;
+
+	#define ChannelEnable (1)
+	DMA1_Channel1->CCR |= ChannelEnable;
+
+
+
+
+
+
+//
+//
+//	RCC->AHBENR |=  1;
+//
+//	#define Circular (1<<5)
+//	DMA1_Channel1->CCR |= Circular ;
+//
+//	#define PriorityHigh (1<<13)
+//	DMA1_Channel1->CCR |= PriorityHigh;
+//
+//	#define PerDataSize (1<<9)
+//	DMA1_Channel1->CCR |= PerDataSize;
+//
+//	#define DataSize (1<<11)
+//	DMA1_Channel1->CCR |= DataSize;
+//
+//	#define MemInc (1<<7)
+//	DMA1_Channel1->CCR |= MemInc ;
+//
+//	DMA1_Channel1->CNDTR = 2; // konfigurować przed aktywacją kanału
+//	DMA1_Channel1->CPAR = ADC1_Address;
+//	DMA1_Channel1->CMAR = (uint32_t) data_dst_addr;
+//
+//
+//	//	DMA_Cmd(DMA1_Channel1, ENABLE);
+//	DMA1_Channel1->CCR |= 1;
+
+
 }
-
-
-
-//
-//void DMA_config (int* data_src, int * data_dst)
-//{
-//
-//int i;
-//
-//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
-//
-//	DMA_InitTypeDef  DMA_InitStructure;
-//	DMA_DeInit(DMA1_Channel1);
-//	DMA_InitStructure.DMA_M2M = DMA_M2M_Enable;
-//	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-//	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
-//	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
-//	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
-//	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
-//	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-//	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-//	DMA_InitStructure.DMA_BufferSize = 4;
-//	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)data_src;
-//	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)data_dst;
-//	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-//	DMA_Cmd(DMA1_Channel1, ENABLE);
-//
-
-
-
-
 
 
 
@@ -234,18 +258,56 @@ void ADC_config ()
 	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
 	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
 	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
-	ADC_InitStructure.ADC_NbrOfChannel = 1;
-	ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+	ADC_InitStructure.ADC_NbrOfChannel = 2;
+	ADC_InitStructure.ADC_ScanConvMode = ENABLE;
 	ADC_Init(ADC1, &ADC_InitStructure);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_71Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_239Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_239Cycles5);
 	ADC_Cmd(ADC1, ENABLE);
-//	ADC_DMACmd(ADC1,ENABLE);
-	ADC1->CR2 |= 1<<8;
+	ADC_DMACmd(ADC1,ENABLE);
 
 	ADC_ResetCalibration(ADC1);
 	while(ADC_GetResetCalibrationStatus(ADC1));
 	ADC_StartCalibration(ADC1);
 	while(ADC_GetCalibrationStatus(ADC1));
 }
+
+
+
+
+//
+//
+//
+//RCC->AHBENR |=  1;
+////	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+//
+//DMA_InitTypeDef  DMA_InitStructure;
+////	DMA_DeInit(DMA1_Channel1);
+//DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+//DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+//DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
+//DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
+//DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
+//DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+//DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+//	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+//DMA_InitStructure.DMA_BufferSize = 2;
+////	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC1_Address;
+////	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)data_dst_addr;
+//DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+//
+//
+////
+////	DMA1_Channel1->CNDTR = 2; // konfigurować przed aktywacją kanału
+//
+//
+//DMA1_Channel1->CPAR = ADC1_Address;
+//DMA1_Channel1->CMAR = (uint32_t) data_dst_addr;
+//
+//
+////	DMA_Cmd(DMA1_Channel1, ENABLE);
+//DMA1_Channel1->CCR |= 1;
+//
+//
 
 
